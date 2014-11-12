@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Projname:</strong>
+  <%= @project.ProjName %>
+</p>
+
+<p>
+  <strong>Contact:</strong>
+  <%= @project.Contact %>
+</p>
+
+<p>
+  <strong>Projstart:</strong>
+  <%= @project.ProjStart %>
+</p>
+
+<p>
+  <strong>Projend:</strong>
+  <%= @project.ProjEnd %>
+</p>
+
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>

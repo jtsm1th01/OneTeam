@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ProjName: MyString
+  Contact: 1
+  ProjStart: 2014-11-12
+  ProjEnd: 2014-11-12
+
+two:
+  ProjName: MyString
+  Contact: 1
+  ProjStart: 2014-11-12
+  ProjEnd: 2014-11-12
