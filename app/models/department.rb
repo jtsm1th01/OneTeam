@@ -1,4 +1,4 @@
 class Department < ActiveRecord::Base
-  belongs_to :users
-  belongs_to :projects
+  belongs_to :user
+  belongs_to :project
 end
