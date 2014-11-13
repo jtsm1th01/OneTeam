@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141112081428) do
+ActiveRecord::Schema.define(version: 20141113222709) do
 
   create_table "departments", force: true do |t|
     t.string   "DeptName"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20141112081428) do
     t.string   "UserEmail"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "CurrentSkills"
   end
 
 end
