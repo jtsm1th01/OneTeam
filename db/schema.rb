@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141117013021) do
+ActiveRecord::Schema.define(version: 20141117082636) do
 
   create_table "departments", force: true do |t|
     t.string   "department_name"
@@ -21,6 +21,18 @@ ActiveRecord::Schema.define(version: 20141117013021) do
 
   create_table "locations", force: true do |t|
     t.string   "location_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "project_requests", force: true do |t|
+    t.integer  "project_id"
+    t.integer  "contact_id"
+    t.integer  "department_id"
+    t.integer  "location_id"
+    t.date     "project_start"
+    t.date     "project_end"
+    t.integer  "skill_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

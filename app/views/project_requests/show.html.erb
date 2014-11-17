@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Project:</strong>
+  <%= @project_request.project_id %>
+</p>
+
+<p>
+  <strong>Contact:</strong>
+  <%= @project_request.contact_id %>
+</p>
+
+<p>
+  <strong>Department:</strong>
+  <%= @project_request.department_id %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @project_request.location_id %>
+</p>
+
+<p>
+  <strong>Project start:</strong>
+  <%= @project_request.project_start %>
+</p>
+
+<p>
+  <strong>Project end:</strong>
+  <%= @project_request.project_end %>
+</p>
+
+<p>
+  <strong>Skill:</strong>
+  <%= @project_request.skill_id %>
+</p>
+
+<%= link_to 'Edit', edit_project_request_path(@project_request) %> |
+<%= link_to 'Back', project_requests_path %>
