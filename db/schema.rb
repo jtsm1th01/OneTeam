@@ -11,47 +11,47 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141113222709) do
+ActiveRecord::Schema.define(version: 20141117013021) do
 
   create_table "departments", force: true do |t|
-    t.string   "DeptName"
+    t.string   "department_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "locations", force: true do |t|
-    t.string   "LocName"
+    t.string   "location_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "projects", force: true do |t|
-    t.string   "ProjName"
-    t.integer  "Contact"
-    t.date     "ProjStart"
-    t.date     "ProjEnd"
+    t.string   "project_name"
+    t.integer  "contact"
+    t.date     "project_start"
+    t.date     "project_end"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "skills", force: true do |t|
-    t.string   "SkillName"
+    t.string   "skill_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "titles", force: true do |t|
-    t.string   "Title"
+    t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
-    t.string   "UserName"
-    t.string   "UserEmail"
+    t.string   "user_name"
+    t.string   "user_email"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "CurrentSkills"
+    t.integer  "current_skills"
   end
 
 end
