@@ -3,10 +3,10 @@
 <table>
   <thead>
     <tr>
-      <th>Projname</th>
+      <th>Project Name</th>
       <th>Contact</th>
-      <th>Projstart</th>
-      <th>Projend</th>
+      <th>Project Start</th>
+      <th>Project End</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,10 +14,10 @@
   <tbody>
     <% @projects.each do |project| %>
       <tr>
-        <td><%= project.ProjName %></td>
-        <td><%= project.Contact %></td>
-        <td><%= project.ProjStart %></td>
-        <td><%= project.ProjEnd %></td>
+        <td><%= project.project_name %></td>
+        <td><%= project.contact %></td>
+        <td><%= project.project_start %></td>
+        <td><%= project.project_end %></td>
         <td><%= link_to 'Show', project %></td>
         <td><%= link_to 'Edit', edit_project_path(project) %></td>
         <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
