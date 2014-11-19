@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141119073605) do
+ActiveRecord::Schema.define(version: 20141119075245) do
 
   create_table "departments", force: true do |t|
     t.string   "department_name"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20141119073605) do
 
   create_table "project_requests", force: true do |t|
     t.integer  "project_id"
-    t.integer  "contact_id"
+    t.integer  "user_id"
     t.integer  "department_id"
     t.integer  "location_id"
     t.date     "project_start"
@@ -39,7 +39,6 @@ ActiveRecord::Schema.define(version: 20141119073605) do
 
   create_table "projects", force: true do |t|
     t.string   "project_name"
-    t.integer  "contact"
     t.date     "project_start"
     t.date     "project_end"
     t.datetime "created_at"
