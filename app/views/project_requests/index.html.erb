@@ -4,7 +4,7 @@
   <thead>
     <tr>
       <th>Project</th>
-      <th>Contact</th>
+      <th>User</th>
       <th>Department</th>
       <th>Location</th>
       <th>Project start</th>
@@ -18,7 +18,7 @@
     <% @project_requests.each do |project_request| %>
       <tr>
         <td><%= project_request.project_id %></td>
-        <td><%= project_request.contact_id %></td>
+        <td><%= project_request.user_id %></td>
         <td><%= project_request.department_id %></td>
         <td><%= project_request.location_id %></td>
         <td><%= project_request.project_start %></td>
