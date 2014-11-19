@@ -18,7 +18,7 @@ class TitlesControllerTest < ActionController::TestCase
 
   test "should create title" do
     assert_difference('Title.count') do
-      post :create, title: { Title: @title.Title }
+      post :create, title: { title: @title.title }
     end
 
     assert_redirected_to title_path(assigns(:title))
@@ -35,7 +35,7 @@ class TitlesControllerTest < ActionController::TestCase
   end
 
   test "should update title" do
-    patch :update, id: @title, title: { Title: @title.Title }
+    patch :update, id: @title, title: { title: @title.title }
     assert_redirected_to title_path(assigns(:title))
   end
 
