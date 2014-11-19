@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'user_profiles/index'
-
   resources :project_requests
   resources :users
   resources :projects
