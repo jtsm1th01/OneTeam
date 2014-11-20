@@ -5,4 +5,5 @@ class User < ActiveRecord::Base
   has_one :title
   has_one :group
   has_many :project_requests
+  has_one :user
 end
