@@ -10,5 +10,45 @@
   <%= @user.user_email %>
 </p>
 
+<p>
+  <strong>Years with Company:</strong>
+  <%= @user.years_with_company %>
+</p>
+
+<p>
+  <strong>Manager/Lead:</strong>
+  <%= @user.user_id %>
+</p>
+
+<p>
+  <strong>Position:</strong>
+  <%= @user.title_id %>
+</p>
+
+<p>
+  <strong>Department:</strong>
+  <%= @user.department_id %>
+</p>
+
+<p>
+  <strong>Group:</strong>
+  <%= @user.group_id %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @user.location_id %>
+</p>
+
+<p>
+  <strong>Current Skills:</strong>
+  <%= @user.skill_id %>
+</p>
+
+<p>
+  <strong>Desired Skills:</strong>
+  <%= @user.skill_id %>
+</p>
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
