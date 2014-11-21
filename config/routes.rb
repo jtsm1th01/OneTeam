@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   resources :groups
-
   resources :project_requests
   resources :users
   resources :projects

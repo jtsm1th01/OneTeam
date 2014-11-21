@@ -1,5 +1,5 @@
 class ProjectRequest < ActiveRecord::Base
-  belongs_to :department
+  has_one :department
   belongs_to :location
   belongs_to :group
   has_many :skills
