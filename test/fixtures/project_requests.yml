@@ -4,14 +4,10 @@ one:
   project_id: 1
   department_id: 1
   location_id: 1
-  project_start: 2014-11-17
-  project_end: 2014-11-17
   skill_id: 1
 
 two:
   project_id: 1
   department_id: 1
   location_id: 1
-  project_start: 2014-11-17
-  project_end: 2014-11-17
   skill_id: 1
