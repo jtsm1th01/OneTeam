@@ -16,12 +16,12 @@
   <tbody>
     <% @project_requests.each do |project_request| %>
       <tr>
-        <td><%= project_request.project_id %></td>
-        <td><%= project_request.user_id %></td>
-        <td><%= project_request.group_id %></td>
-        <td><%= project_request.department_id %></td>
-        <td><%= project_request.location_id %></td>
-        <td><%= project_request.skill_id %></td>
+        <td><%= project_request.project.project_name %></td>
+        <td><%= project_request.user.user_name %></td>
+        <td><%= project_request.department.department_name %></td>
+        <td><%= project_request.group.group_name %></td>
+        <td><%= project_request.location.location_name %></td>
+        <td><%= project_request.skill.skill_name %></td>
         <td><%= link_to 'Show', project_request %></td>
         <td><%= link_to 'Edit', edit_project_request_path(project_request) %></td>
         <td><%= link_to 'Destroy', project_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
