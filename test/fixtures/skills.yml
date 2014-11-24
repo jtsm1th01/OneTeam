@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  SkillName: MyString
+  skill_name: MyString
 
 two:
-  SkillName: MyString
+  skill_name: MyString

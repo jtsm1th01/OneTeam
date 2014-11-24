@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  DeptName: MyString
+  department_name: MyString
 
 two:
-  DeptName: MyString
+  department_name: MyString
