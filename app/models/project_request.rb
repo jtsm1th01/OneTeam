@@ -1,5 +1,5 @@
 class ProjectRequest < ActiveRecord::Base
-  belongs_to :department
+  belongs_to :department #test comment
   belongs_to :location
   belongs_to :group
   belongs_to :skill
