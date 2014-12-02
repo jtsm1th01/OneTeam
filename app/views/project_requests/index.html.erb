@@ -7,7 +7,6 @@
       <th>Manager/Lead</th>
       <th>Department</th>
       <th>Group</th>
-      <th>Location</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,7 +17,6 @@
         <td><%= project_request.project_id %></td>
         <td><%= project_request.user_id %></td>
         <td><%= project_request.group_id %></td>
-        <td><%= project_request.location_id %></td>
         <td><%= link_to 'Show', project_request %></td>
         <td><%= link_to 'Edit', edit_project_request_path(project_request) %></td>
         <td><%= link_to 'Destroy', project_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
