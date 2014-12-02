@@ -11,12 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141202180116) do
+ActiveRecord::Schema.define(version: 20141202184035) do
 
   create_table "departments", force: true do |t|
     t.string   "department_name"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "employees", force: true do |t|
+    t.string   "user_name"
+    t.string   "user_email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "years_with_company"
+    t.integer  "user_id"
+    t.integer  "title_id"
+    t.integer  "group_id"
+    t.integer  "location_id"
   end
 
   create_table "groups", force: true do |t|
@@ -68,18 +80,6 @@ ActiveRecord::Schema.define(version: 20141202180116) do
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "users", force: true do |t|
-    t.string   "user_name"
-    t.string   "user_email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "years_with_company"
-    t.integer  "user_id"
-    t.integer  "title_id"
-    t.integer  "group_id"
-    t.integer  "location_id"
   end
 
 end

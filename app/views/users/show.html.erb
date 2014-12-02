@@ -1,39 +1,39 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>User Name:</strong>
-  <%= @user.user_name %>
+  <strong>Employee Name:</strong>
+  <%= @employee.employee_name %>
 </p>
 
 <p>
-  <strong>User Email:</strong>
-  <%= @user.user_email %>
+  <strong>Employee Email:</strong>
+  <%= @employee.employee_email %>
 </p>
 
 <p>
   <strong>Years with Company:</strong>
-  <%= @user.years_with_company %>
+  <%= @employee.years_with_company %>
 </p>
 
 <p>
   <strong>Manager/Lead:</strong>
-  <%= @user.user_id %>
+  <%= @employee.employee_id %>
 </p>
 
 <p>
   <strong>Position:</strong>
-  <%= @user.title_id %>
+  <%= @employee.title_id %>
 </p>
 
 <p>
   <strong>Group:</strong>
-  <%= @user.group_id %>
+  <%= @employee.group_id %>
 </p>
 
 <p>
   <strong>Location:</strong>
-  <%= @user.location_id %>
+  <%= @employee.location_id %>
 </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<%= link_to 'Edit', edit_employee_path(@employee) %> |
+<%= link_to 'Back', employees_path %>

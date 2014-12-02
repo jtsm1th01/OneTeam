@@ -1,10 +1,10 @@
-<h1>Listing users</h1>
+<h1>Listing employees</h1>
 
 <table>
   <thead>
     <tr>
-      <th>User Name</th>
-      <th>User Email</th>
+      <th>Employee Name</th>
+      <th>Employee Email</th>
       <th>Years with Company</th>
       <th>Manager/Lead</th>
       <th>Position</th>
@@ -16,18 +16,18 @@
   </thead>
 
   <tbody>
-    <% @users.each do |user| %>
+    <% @employees.each do |employee| %>
       <tr>
-        <td><%= user.user_name %></td>
-        <td><%= user.user_email %></td>
-        <td><%= user.years_with_company %></td>
-        <td><%= user.user_id %></td>
-        <td><%= user.title_id %></td>
-        <td><%= user.group_id %></td>
-        <td><%= user.location_id %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= employee.employee_name %></td>
+        <td><%= employee.employee_email %></td>
+        <td><%= employee.years_with_company %></td>
+        <td><%= employee.employee_id %></td>
+        <td><%= employee.title_id %></td>
+        <td><%= employee.group_id %></td>
+        <td><%= employee.location_id %></td>
+        <td><%= link_to 'Show', employee %></td>
+        <td><%= link_to 'Edit', edit_employee_path(employee) %></td>
+        <td><%= link_to 'Destroy', employee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -35,4 +35,4 @@
 
 <br>
 
-<%= link_to 'New User', new_user_path %>
+<%= link_to 'New Employee', new_employee_path %>

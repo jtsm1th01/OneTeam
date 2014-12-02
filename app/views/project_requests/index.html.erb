@@ -15,7 +15,7 @@
     <% @project_requests.each do |project_request| %>
       <tr>
         <td><%= project_request.project_id %></td>
-        <td><%= project_request.user_id %></td>
+        <td><%= project_request.employee_id %></td>
         <td><%= project_request.group_id %></td>
         <td><%= link_to 'Show', project_request %></td>
         <td><%= link_to 'Edit', edit_project_request_path(project_request) %></td>
