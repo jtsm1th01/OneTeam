@@ -14,9 +14,9 @@
   <tbody>
     <% @project_requests.each do |project_request| %>
       <tr>
-        <td><%= project_request.project_id %></td>
-        <td><%= project_request.employee_id %></td>
-        <td><%= project_request.group_id %></td>
+        <td><%= project_request.project.project_name %></td>
+        <td><%= project_request.employee.employee_name %></td>
+        <td><%= project_request.group.group_name %></td>
         <td><%= project_request.department.department_name %></td>
         <td><%= link_to 'Show', project_request %></td>
         <td><%= link_to 'Edit', edit_project_request_path(project_request) %></td>
