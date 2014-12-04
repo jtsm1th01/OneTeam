@@ -6,13 +6,23 @@
 </p>
 
 <p>
-  <strong>Employee:</strong>
+  <strong>Manager/Lead:</strong>
   <%= @project_request.employee_id %>
 </p>
 
 <p>
   <strong>Group:</strong>
   <%= @project_request.group_id %>
+</p>
+
+<p>
+  <strong>Department:</strong>
+  <%= @project_request.department.department_name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @project_request.description %>
 </p>
 
 <%= link_to 'Edit', edit_project_request_path(@project_request) %> |
