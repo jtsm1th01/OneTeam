@@ -4,7 +4,7 @@
   <thead>
     <tr>
       <th>Project</th>
-      <th>Manager/Lead</th>
+      <th>Lead</th>
       <th>Department</th>
       <th>Group</th>
       <th colspan="3"></th>
@@ -17,6 +17,7 @@
         <td><%= project_request.project_id %></td>
         <td><%= project_request.employee_id %></td>
         <td><%= project_request.group_id %></td>
+        <td><%= project_request.department_id></td>
         <td><%= link_to 'Show', project_request %></td>
         <td><%= link_to 'Edit', edit_project_request_path(project_request) %></td>
         <td><%= link_to 'Destroy', project_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
