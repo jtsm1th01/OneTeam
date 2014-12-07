@@ -5,4 +5,5 @@ class Employee < ActiveRecord::Base
   has_one :title
   belongs_to :group
   has_many :project_requests
+  has_many :projects
 end

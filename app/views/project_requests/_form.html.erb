@@ -17,14 +17,6 @@
     </div>
   </div>
   <div class="field">
-    <%= f.label :employee_id %><br>
-    <%= f.collection_select(:employee_id, @employees, :id, :employee_name ) %>
-  </div>
-  <div class="field">
-    <%= f.label :group_id %><br>
-    <%= f.collection_select(:group_id, @groups, :id, :group_name ) %>
-  </div>
-  <div class="field">
     <%= f.label :description %><br>
     <%= f.text_field :description %>
   </div>
