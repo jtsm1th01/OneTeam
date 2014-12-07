@@ -5,6 +5,7 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     @projects = Project.all
+    @employees = Employee.all
   end
 
   # GET /projects/1
@@ -15,10 +16,12 @@ class ProjectsController < ApplicationController
   # GET /projects/new
   def new
     @project = Project.new
+    @employees = Employee.all
   end
 
   # GET /projects/1/edit
   def edit
+    @employees = Employee.all
   end
 
   # POST /projects
