@@ -2,17 +2,17 @@
 
 <p>
   <strong>Project:</strong>
-  <%= @project_request.project_id %>
+  <%= @project_request.project.project_name %>
 </p>
 
 <p>
   <strong>Manager/Lead:</strong>
-  <%= @project_request.employee_id %>
+  <%= @project_request.employee.employee_name %>
 </p>
 
 <p>
   <strong>Group:</strong>
-  <%= @project_request.group_id %>
+  <%= @project_request.group.group_name %>
 </p>
 
 <p>

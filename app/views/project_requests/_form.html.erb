@@ -13,16 +13,16 @@
 
   <div class="field">
     <%= f.label :project_id %><br>
-    <%= f.number_field :project_id %>
+    <%= f.collection_select(:project_id, @projects, :id, :project_name ) %>
     </div>
   </div>
   <div class="field">
     <%= f.label :employee_id %><br>
-    <%= f.number_field :employee_id %>
+    <%= f.collection_select(:employee_id, @employees, :id, :employee_name ) %>
   </div>
   <div class="field">
     <%= f.label :group_id %><br>
-    <%= f.number_field :group_id %>
+    <%= f.collection_select(:group_id, @groups, :id, :group_name ) %>
   </div>
   <div class="field">
     <%= f.label :description %><br>

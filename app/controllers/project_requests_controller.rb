@@ -15,10 +15,16 @@ class ProjectRequestsController < ApplicationController
   # GET /project_requests/new
   def new
     @project_request = ProjectRequest.new
+    @employees = Employee.all
+    @groups = Group.all
+    @projects = Project.all
   end
 
   # GET /project_requests/1/edit
   def edit
+   @employees = Employee.all
+   @groups = Group.all
+   @projects = Project.all
   end
 
   # POST /project_requests

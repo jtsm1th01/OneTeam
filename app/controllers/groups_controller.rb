@@ -19,6 +19,7 @@ class GroupsController < ApplicationController
 
   # GET /groups/1/edit
   def edit
+    @departments = Department.all
   end
 
   # POST /groups
