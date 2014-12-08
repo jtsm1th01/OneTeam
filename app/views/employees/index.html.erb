@@ -23,7 +23,7 @@
         <td><%= employee.years_with_company %></td>
         <td><%= employee.employee_id %></td>
         <td><%= employee.title_id %></td>
-        <td><%= employee.group_id %></td>
+        <td><%= employee.group.group_name %></td>
         <td><%= employee.location_id %></td>
         <td><%= link_to 'Show', employee %></td>
         <td><%= link_to 'Edit', edit_employee_path(employee) %></td>

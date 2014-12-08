@@ -25,15 +25,15 @@
   </div>
   <div class="field">
     <%= f.label :title_id %><br>
-    <%= f.number_field :title_id %>
+    <%= f.collection_select(:title_id, @titles, :id, :title ) %>
   </div>
   <div class="field">
     <%= f.label :group_id %><br>
-    <%= f.number_field :group_id %>
+    <%= f.collection_select(:group_id, @groups, :id, :group_name ) %>
   </div>
   <div class="field">
     <%= f.label :location_id %><br>
-    <%= f.number_field :location_id %>
+    <%= f.collection_select(:location_id, @locations, :id, :location_name ) %>
   </div>
   <div class="actions">
     <%= f.submit %>
