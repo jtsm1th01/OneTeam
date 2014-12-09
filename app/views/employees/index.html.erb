@@ -22,9 +22,10 @@
         <td><%= employee.employee_email %></td>
         <td><%= employee.years_with_company %></td>
         <td><%= employee.employee_id %></td>
-        <td><%= employee.title_id %></td>
+        <td><%= employee.title.title_name %></td>
+        <td><%= employee.group.department.department_name %></td>
         <td><%= employee.group.group_name %></td>
-        <td><%= employee.location_id %></td>
+        <td><%= employee.location.location_name %></td>
         <td><%= link_to 'Show', employee %></td>
         <td><%= link_to 'Edit', edit_employee_path(employee) %></td>
         <td><%= link_to 'Destroy', employee, method: :delete, data: { confirm: 'Are you sure?' } %></td>

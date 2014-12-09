@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<h1>Employee Profile</h1>
+
 <p>
   <strong>Employee Name:</strong>
   <%= @employee.employee_name %>
@@ -22,17 +24,22 @@
 
 <p>
   <strong>Position:</strong>
-  <%= @employee.title_id %>
+  <%= @employee.title.title_name %>
+</p>
+
+<p>
+  <strong>Department:</strong>
+  <%= @employee.group.department.department_name %>
 </p>
 
 <p>
   <strong>Group:</strong>
-  <%= @employee.group_id %>
+  <%= @employee.group.group_name %>
 </p>
 
 <p>
   <strong>Location:</strong>
-  <%= @employee.location_id %>
+  <%= @employee.location.location_name %>
 </p>
 
 <%= link_to 'Edit', edit_employee_path(@employee) %> |

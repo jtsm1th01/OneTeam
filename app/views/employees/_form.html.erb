@@ -12,27 +12,27 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :employee_name %><br>
+    <%= f.label :employee_name, 'Employee Name:' %><br>
     <%= f.text_field :employee_name %>
   </div>
   <div class="field">
-    <%= f.label :employee_email %><br>
+    <%= f.label :employee_email, 'Email:' %><br>
     <%= f.text_field :employee_email %>
   </div>
   <div class="field">
-    <%= f.label :years_with_company %><br>
+    <%= f.label :years_with_company, 'Years with Company:' %><br>
     <%= f.number_field :years_with_company %>
   </div>
   <div class="field">
-    <%= f.label :title_id %><br>
-    <%= f.collection_select(:title_id, @titles, :id, :title ) %>
+    <%= f.label :title_id, 'Title:' %><br>
+    <%= f.collection_select(:title_id, @titles, :id, :title_name ) %>
   </div>
   <div class="field">
-    <%= f.label :group_id %><br>
+    <%= f.label :group_id, 'Group:' %><br>
     <%= f.collection_select(:group_id, @groups, :id, :group_name ) %>
   </div>
   <div class="field">
-    <%= f.label :location_id %><br>
+    <%= f.label :location_id, 'Location:'%><br>
     <%= f.collection_select(:location_id, @locations, :id, :location_name ) %>
   </div>
   <div class="actions">
