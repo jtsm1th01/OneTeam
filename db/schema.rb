@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141208232020) do
+ActiveRecord::Schema.define(version: 20141213020448) do
 
   create_table "departments", force: true do |t|
     t.string   "department_name"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20141208232020) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "years_with_company"
-    t.integer  "employee_id"
+    t.integer  "manager_id"
     t.integer  "title_id"
     t.integer  "group_id"
     t.integer  "location_id"
