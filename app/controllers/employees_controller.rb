@@ -23,6 +23,7 @@ class EmployeesController < ApplicationController
 
   # GET /employees/1/edit
   def edit
+    @employees = Employee.all
     @titles = Title.all
     @groups = Group.all
     @locations = Location.all
