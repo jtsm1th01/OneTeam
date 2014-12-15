@@ -15,6 +15,7 @@ class EmployeesController < ApplicationController
   # GET /employees/new
   def new
     @employee = Employee.new
+    @employees = Employee.all
     @titles = Title.all
     @groups = Group.all
     @locations = Location.all

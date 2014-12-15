@@ -23,6 +23,10 @@
     <%= f.label :years_with_company, 'Years with Company:' %><br>
     <%= f.number_field :years_with_company %>
   </div>
+   <div class="field">
+     <%= f.label :manager_id, 'Manager/Lead:' %><br>
+     <%= f.collection_select(:manager_id, @employees, :id, :employee_name ) %>
+  </div>
   <div class="field">
     <%= f.label :title_id, 'Title:' %><br>
     <%= f.collection_select(:title_id, @titles, :id, :title_name ) %>
