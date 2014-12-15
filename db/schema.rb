@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141215181954) do
+ActiveRecord::Schema.define(version: 20141215215142) do
+
+  create_table "current_skills", force: true do |t|
+    t.integer  "employee_id"
+    t.integer  "skill_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "departments", force: true do |t|
     t.string   "department_name"
