@@ -9,6 +9,8 @@ class Employee < ActiveRecord::Base
     :foreign_key => "manager_id"
   belongs_to :manager, :class_name => "Employee",
     :foreign_key => "manager_id"
-  has_many :current_skills, :through => :skills
-  has_many :desired_skills, :through => :skills
+  has_many :current_skills
+  has_many :desired_skills
+  has_many :skills, :through => :current_skills
+  has_many :goals, :through => :desired_skills, source: :skills
 end
