@@ -2,43 +2,43 @@
 
 <h1>Employee Profile</h1>
 
-<p>
-  <strong>Employee Name:</strong>
+<p><span class="entry_title">
+  Employee Name:</span>
   <%= @employee.employee_name %>
 </p>
 
 <p>
-  <strong>Employee Email:</strong>
+  <span class="entry_title">Employee Email:</span>
   <%= @employee.employee_email %>
 </p>
 
 <p>
-  <strong>Years with Company:</strong>
+  <span class="entry_title">Years with Company:</span>
   <%= @employee.years_with_company %>
 </p>
 
 <p>
-  <strong>Manager/Lead:</strong>
+  <span class="entry_title">Manager/Lead:</span>
   <%= @employee.manager.employee_name %>
 </p>
 
 <p>
-  <strong>Position:</strong>
+  <span class="entry_title">Position:</span>
   <%= @employee.title.title_name %>
 </p>
 
 <p>
-  <strong>Department:</strong>
+  <span class="entry_title">Department:</span>
   <%= @employee.group.department.department_name %>
 </p>
 
 <p>
-  <strong>Group:</strong>
+  <span class="entry_title">Group:</span>
   <%= @employee.group.group_name %>
 </p>
 
 <p>
-  <strong>Location:</strong>
+  <span class="entry_title">Location:</span>
   <%= @employee.location.location_name %>
 </p>
 

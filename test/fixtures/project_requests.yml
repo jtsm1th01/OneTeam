@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  project_id: 1
+  project_id: 2
 
 two:
-  project_id: 1
+  project_id: 2

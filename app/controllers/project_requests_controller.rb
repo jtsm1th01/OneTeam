@@ -1,5 +1,6 @@
 class ProjectRequestsController < ApplicationController
   before_action :set_project_request, only: [:show, :edit, :update, :destroy]
+  
 
   # GET /project_requests
   # GET /project_requests.json
@@ -14,10 +15,8 @@ class ProjectRequestsController < ApplicationController
 
   # GET /project_requests/new
   def new
-    @project_request = ProjectRequest.new
-    @employees = Employee.all
-    @groups = Group.all
     @projects = Project.all
+    @project_request = ProjectRequest.new
   end
 
   # GET /project_requests/1/edit
@@ -37,7 +36,7 @@ class ProjectRequestsController < ApplicationController
         format.html { redirect_to @project_request, notice: 'Project request was successfully created.' }
         format.json { render :show, status: :created, location: @project_request }
       else
-        format.html { render :new }
+        format.html { redirect_to new_project_request_path(@project_request), notice: 'Please fill out entire form.' }
         format.json { render json: @project_request.errors, status: :unprocessable_entity }
       end
     end
