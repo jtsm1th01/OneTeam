@@ -58,7 +58,7 @@ class EmployeesController < ApplicationController
         format.html { redirect_to @employee, notice: 'Employee was successfully updated.' }
         format.json { render :show, status: :ok, location: @employee }
       else
-        format.html { render :edit }
+        format.html { redirect_to edit_employee_path(@employee), notice: 'Employee could not be updated.' }
         format.json { render json: @employee.errors, status: :unprocessable_entity }
       end
     end
@@ -82,6 +82,6 @@ class EmployeesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def employee_params
-      params.require(:employee).permit(:employee_name, :employee_email, :years_with_company, :location_id, :group_id, :title_id, :manager_id, :skill_ids => [])
+      params.require(:employee).permit(:employee_name, :employee_email, :years_with_company, :location_id, :group_id, :title_id, :manager_id, :skill_ids => [], :goal_ids => [])
     end
 end

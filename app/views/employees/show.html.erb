@@ -49,6 +49,13 @@
   <% end %>
 </p>
 
+<p>
+  <span class="entry_title">Desired Skills:</span>
+  <% @employee.goals.each do |skill| %>
+  <li><%= skill.skill_name %></li>
+  <% end %>
+</p>
+
 
 <%= link_to 'Edit', edit_employee_path(@employee) %> |
 <%= link_to 'Back', employees_path %>
