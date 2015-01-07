@@ -42,6 +42,10 @@ gem 'spring',        group: :development
 gem 'sqlite3',   group: :development
 gem 'pg',       group: :production
 gem 'rails_12factor',   group: :production
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0.0'
+end
    
 ruby '2.1.3'
 
