@@ -44,7 +44,9 @@
 
 <p>
   <span class="entry_title">Current Skills:</span>
-  <%= @employee.skills %>
+  <% @employee.skills.each do |skill| %>
+  <li><%= skill.skill_name %></li>
+  <% end %>
 </p>
 
 
