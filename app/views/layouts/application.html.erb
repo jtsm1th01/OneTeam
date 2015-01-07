@@ -1,21 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>One Team</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  
 </head>
 <body>
   
-<%= link_to "Project Requests", project_requests_path %>
-<%= link_to "Employees", employees_path %>
-<%= link_to "Projects", projects_path %>
-<%= link_to "Groups", groups_path %>
-<%= link_to "Departments", departments_path %>
-<%= link_to "Locations", locations_path %>
-<%= link_to "Titles", titles_path %>
-<%= link_to "Skills", skills_path %>
+<%= debug(params) if Rails.env.development? %>
+  
+<header class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container">
+       <nav>
+          <ul class="nav navbar-nav navbar-right">
+            <li><%= link_to "Project Requests", project_requests_path %></li>
+            <li><%= link_to "Employees", employees_path %></li>
+            <li><%= link_to "Projects", projects_path %></li>
+            <li><%= link_to "Groups", groups_path %></li>
+            <li><%= link_to "Departments", departments_path %></li>
+            <li><%= link_to "Locations", locations_path %></li>
+            <li><%= link_to "Titles", titles_path %></li>
+            <li><%= link_to "Skills", skills_path %></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="container">
 
 <%= yield %>
 
