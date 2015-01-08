@@ -47,5 +47,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'
 end
    
+gem 'bcrypt',               '3.1.7'
+
 ruby '2.1.3'
 

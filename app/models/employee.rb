@@ -15,4 +15,6 @@ class Employee < ActiveRecord::Base
   has_many :desired_skills
   has_many :skills, :through => :current_skills
   has_many :goals, :through => :desired_skills, :source => :skill
+  has_secure_password
+  validates :password, length: { minimum: 6 }
 end
