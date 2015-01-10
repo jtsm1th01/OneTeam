@@ -1,3 +1,5 @@
+<p id="notice"><%= notice %></p>
+
 <h1>OneTeam Employees</h1>
 
 <table>
@@ -20,12 +22,12 @@
       <tr>
         <td><%= employee.employee_name %></td>
         <td><%= employee.employee_email %></td>
-        <td><%= employee.years_with_company %></td>
-        <td><%= employee.manager.employee_name %></td>
-        <td><%= employee.title.title_name %></td>
-        <td><%= employee.group.department.department_name %></td>
-        <td><%= employee.group.group_name %></td>
-        <td><%= employee.location.location_name %></td>
+        <td><%= employee.try(:years_with_company) %></td>
+        <td><%= employee.try(:manager).try(:employee_name) %></td>
+        <td><%= employee.try(:title).try(:title_name) %></td>
+        <td><%= employee.try(:group).try(:department).try(:department_name) %></td>
+        <td><%= employee.try(:group).try(:group_name) %></td>
+        <td><%= employee.try(:location).try(:location_name) %></td>
         <td><%= link_to 'Show', employee %></td>
         <td><%= link_to 'Edit', edit_employee_path(employee) %></td>
         <td><%= link_to 'Destroy', employee, method: :delete, data: { confirm: 'Are you sure?' } %></td>

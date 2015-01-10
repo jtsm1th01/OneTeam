@@ -20,6 +20,14 @@
     <%= f.text_field :employee_email %>
   </div>
   <div class="field">
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :password_confirmation, "Confirmation" %>
+    <%= f.password_field :password_confirmation %>
+  </div>
+  <div class="field">
     <%= f.label :years_with_company, 'Years with Company:' %><br>
     <%= f.number_field :years_with_company %>
   </div>
@@ -39,6 +47,7 @@
     <%= f.label :location_id, 'Location:'%><br>
     <%= f.collection_select(:location_id, @locations, :id, :location_name ) %>
   </div>
+
 <p>Current Skills:</p>
   <div class="field">
     <% @skills.each do |skill| %>

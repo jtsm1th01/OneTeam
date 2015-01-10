@@ -1,6 +1,4 @@
 class Employee < ActiveRecord::Base
-  validates :employee_name, presence: true
-  validates :years_with_company, presence: true
   belongs_to :location
   belongs_to :department
   belongs_to :title
@@ -17,4 +15,6 @@ class Employee < ActiveRecord::Base
   has_many :goals, :through => :desired_skills, :source => :skill
   has_secure_password
   validates :password, length: { minimum: 6 }
+  validates :employee_name, presence: true
+  validates :employee_email, presence: true
 end

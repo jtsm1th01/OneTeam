@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Employee Profile</h1>
+<h1><%= @employee.employee_name %> Profile</h1>
 
 <p><span class="entry_title">
   Employee Name:</span>
@@ -14,32 +14,32 @@
 
 <p>
   <span class="entry_title">Years with Company:</span>
-  <%= @employee.years_with_company %>
+  <%= @employee.try(:years_with_company) %>
 </p>
 
 <p>
   <span class="entry_title">Manager/Lead:</span>
-  <%= @employee.manager.employee_name %>
+  <%= @employee.try(:manager).try(:employee_name) %>
 </p>
 
 <p>
   <span class="entry_title">Position:</span>
-  <%= @employee.title.title_name %>
+  <%= @employee.try(:title).try(:title_name) %>
 </p>
 
 <p>
   <span class="entry_title">Department:</span>
-  <%= @employee.group.department.department_name %>
+  <%= @employee.try(:group).try(:department).try(:department_name) %>
 </p>
 
 <p>
   <span class="entry_title">Group:</span>
-  <%= @employee.group.group_name %>
+  <%= @employee.try(:group).try(:group_name) %>
 </p>
 
 <p>
   <span class="entry_title">Location:</span>
-  <%= @employee.location.location_name %>
+  <%= @employee.try(:location).try(:location_name) %>
 </p>
 
 <p>
