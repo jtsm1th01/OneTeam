@@ -1,65 +1,57 @@
 <%= form_for(@employee) do |f| %>
-  <% if @employee.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
-
-      <ul>
-      <% @employee.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render 'shared/error_messages' %>
 
   <div class="field">
     <%= f.label :employee_name, 'Employee Name:' %><br>
-    <%= f.text_field :employee_name %>
+    <%= f.text_field :employee_name, class: 'form-control', :placeholder => 'Enter your name...' %>
   </div>
   <div class="field">
     <%= f.label :employee_email, 'Email:' %><br>
-    <%= f.text_field :employee_email %>
+    <%= f.text_field :employee_email, class: 'form-control' %>
   </div>
   <div class="field">
     <%= f.label :password %>
-    <%= f.password_field :password %>
+    <%= f.password_field :password, class: 'form-control', :placeholder => 'Enter your password...' %>
   </div>
   <div class="field">
     <%= f.label :password_confirmation, "Confirmation" %>
-    <%= f.password_field :password_confirmation %>
+    <%= f.password_field :password_confirmation, class: 'form-control', :placeholder => 'Re-enter your password...' %>
   </div>
   <div class="field">
     <%= f.label :years_with_company, 'Years with Company:' %><br>
-    <%= f.number_field :years_with_company %>
+    <%= f.number_field :years_with_company, class: 'form-control' %>
   </div>
    <div class="field">
      <%= f.label :manager_id, 'Manager/Lead:' %><br>
-     <%= f.collection_select(:manager_id, @employees, :id, :employee_name ) %>
+     <%= f.collection_select(:manager_id, @employees, :id, :employee_name, {prompt: 'Select Manager'}) %>
   </div>
   <div class="field">
     <%= f.label :title_id, 'Title:' %><br>
-    <%= f.collection_select(:title_id, @titles, :id, :title_name ) %>
+    <%= f.collection_select(:title_id, @titles, :id, :title_name, {prompt: 'Select Title'} ) %>
   </div>
   <div class="field">
     <%= f.label :group_id, 'Group:' %><br>
-    <%= f.collection_select(:group_id, @groups, :id, :group_name ) %>
+    <%= f.collection_select(:group_id, @groups, :id, :group_name, {prompt: 'Select Group'}) %>
   </div>
   <div class="field">
     <%= f.label :location_id, 'Location:'%><br>
-    <%= f.collection_select(:location_id, @locations, :id, :location_name ) %>
+    <%= f.collection_select(:location_id, @locations, :id, :location_name, {prompt: 'Select Location'}) %>
   </div>
 
-<p>Current Skills:</p>
+  <p>Current Skills:</p>
   <div class="field">
     <% @skills.each do |skill| %>
     <%= skill.skill_name %>
     <%= check_box_tag "employee[skill_ids][]", skill.id, @employee.skill_ids.include?(skill.id) %><br>
     <% end %>
-<p>Desired Skills:</p>
+  </div>
+  <p>Desired Skills:</p>
   <div class="field">
     <% @skills.each do |skill| %>
     <%= skill.skill_name %>
     <%= check_box_tag "employee[goal_ids][]", skill.id, @employee.goal_ids.include?(skill.id) %><br>
     <% end %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

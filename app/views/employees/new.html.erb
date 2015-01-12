@@ -1,24 +1,23 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Create Your OneTeam Account</h1>
 
  <%= form_for(@employee) do |f| %>
+  <%= render 'shared/error_messages' %>
 
   <div class="field">
     <%= f.label :employee_name, 'Employee Name:' %><br>
-    <%= f.text_field :employee_name %>
+    <%= f.text_field :employee_name, class: 'form-control', :placeholder => 'Enter your name...' %>
   </div>
   <div class="field">
     <%= f.label :employee_email, 'Email:' %><br>
-    <%= f.text_field :employee_email %>
+    <%= f.text_field :employee_email, class: 'form-control', :placeholder => 'Enter your email...' %>
   </div>
   <div class="field">
     <%= f.label :password %>
-    <%= f.password_field :password %>
+    <%= f.password_field :password, class: 'form-control', :placeholder => 'Password must be 6 digits long...' %>
   </div>
   <div class="field">
     <%= f.label :password_confirmation, "Confirmation" %>
-    <%= f.password_field :password_confirmation %>
+    <%= f.password_field :password_confirmation, class: 'form-control', :placeholder => 'Re-enter your password...' %>
   </div>
   <div class="actions">
     <%= f.submit %>

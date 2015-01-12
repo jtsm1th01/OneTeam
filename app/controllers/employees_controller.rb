@@ -39,10 +39,10 @@ class EmployeesController < ApplicationController
     @employee = Employee.new(employee_params)
     respond_to do |format|
       if @employee.save
-        format.html { redirect_to @employee, notice: 'Employee has been successfully created.' }
+        format.html { redirect_to edit_employee_path(@employee), notice: 'Employee has been successfully created.' }
         format.json { render :show, status: :created, location: @employee }
       else
-        format.html { redirect_to new_employee_path(@employee), notice: 'There was a problem.' }
+        format.html { render new_employee_path(@employee) }
         format.json { render json: @employee.errors, status: :unprocessable_entity }
       end
     end

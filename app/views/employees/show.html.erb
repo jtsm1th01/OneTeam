@@ -1,60 +1,64 @@
-<p id="notice"><%= notice %></p>
+<div id="notice"><%= notice %></div>
 
 <h1><%= @employee.employee_name %> Profile</h1>
 
-<p><span class="entry_title">
+<div><span class="entry_title">
   Employee Name:</span>
   <%= @employee.employee_name %>
-</p>
+</div>
 
-<p>
+<div>
   <span class="entry_title">Employee Email:</span>
   <%= @employee.employee_email %>
-</p>
+</div>
 
-<p>
+<div>
   <span class="entry_title">Years with Company:</span>
   <%= @employee.try(:years_with_company) %>
-</p>
+</div>
 
-<p>
+<div>
   <span class="entry_title">Manager/Lead:</span>
   <%= @employee.try(:manager).try(:employee_name) %>
-</p>
+</div>
 
-<p>
+<div>
   <span class="entry_title">Position:</span>
   <%= @employee.try(:title).try(:title_name) %>
-</p>
+</div>
 
-<p>
+<div>
   <span class="entry_title">Department:</span>
   <%= @employee.try(:group).try(:department).try(:department_name) %>
-</p>
+</div>
 
-<p>
+<div>
   <span class="entry_title">Group:</span>
   <%= @employee.try(:group).try(:group_name) %>
-</p>
+</div>
 
-<p>
+<div>
   <span class="entry_title">Location:</span>
   <%= @employee.try(:location).try(:location_name) %>
-</p>
+</div>
 
-<p>
+<div>
   <span class="entry_title">Current Skills:</span>
   <% @employee.skills.each do |skill| %>
-  <li><%= skill.skill_name %></li>
+  <ul>
+    <li><%= skill.skill_name %></li>
+  </ul>
   <% end %>
-</p>
+</div>
 
-<p>
+<div>
   <span class="entry_title">Desired Skills:</span>
   <% @employee.goals.each do |skill| %>
-  <li><%= skill.skill_name %></li>
+  <ul>
+    <li><%= skill.skill_name %></li>
+  </ul>
   <% end %>
-</p>
+</div>
 
 
 <%= link_to 'Edit', edit_employee_path(@employee) %> |
