@@ -19,15 +19,15 @@
       <nav>
         <ul class="nav navbar-nav navbar-right">
            <li><%= link_to "Home", home_path %></li>
-           <li><%= link_to "Project Requests", project_requests_path %></li>
-           <li><%= link_to "Employees", employees_path %></li>
-           <li><%= link_to "Projects", projects_path %></li>
-           <li><%= link_to "Groups", groups_path %></li>
-           <li><%= link_to "Departments", departments_path %></li>
-           <li><%= link_to "Locations", locations_path %></li>
-           <li><%= link_to "Titles", titles_path %></li>
-           <li><%= link_to "Skills", skills_path %></li>
            <% if logged_in? %>
+             <li><%= link_to "Project Requests", project_requests_path %></li>
+             <li><%= link_to "Employees", employees_path %></li>
+             <li><%= link_to "Projects", projects_path %></li>
+             <li><%= link_to "Groups", groups_path %></li>
+             <li><%= link_to "Departments", departments_path %></li>
+             <li><%= link_to "Locations", locations_path %></li>
+             <li><%= link_to "Titles", titles_path %></li>
+             <li><%= link_to "Skills", skills_path %></li>
              <li><%= link_to "Logout", logout_path, method: "delete" %></li>
            <% else %>
              <li><%= link_to "Log in", login_path %></li>
