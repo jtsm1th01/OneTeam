@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
+
   get 'home' => 'static_pages#home'
   # might just have signup on the home page instead
   get 'signup'  => 'employees#new'
+  
+  get    'login'   => 'sessions#new'
+  post   'login'   => 'sessions#create'
+  delete 'logout'  => 'sessions#destroy'
 
   resources :groups
   resources :project_requests

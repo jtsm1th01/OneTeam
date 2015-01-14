@@ -39,11 +39,9 @@ class EmployeesController < ApplicationController
     @employee = Employee.new(employee_params)
     respond_to do |format|
       if @employee.save
-        format.html { redirect_to edit_employee_path(@employee), notice: 'Employee has been successfully created.' }
-        format.json { render :show, status: :created, location: @employee }
+        format.html { redirect_to edit_employee_url(@employee), notice: 'Employee has been successfully created.' }
       else
         format.html { render new_employee_path(@employee) }
-        format.json { render json: @employee.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -55,10 +53,8 @@ class EmployeesController < ApplicationController
     respond_to do |format|
       if @employee.update(employee_params)
         format.html { redirect_to @employee, notice: 'Employee was successfully updated.' }
-        format.json { render :show, status: :ok, location: @employee }
       else
-        format.html { redirect_to edit_employee_path(@employee) }
-        format.json { render json: @employee.errors, status: :unprocessable_entity }
+        format.html { render edit_employee_path(@employee), notice: 'Complete all fields.' }
       end
     end
   end
@@ -69,7 +65,6 @@ class EmployeesController < ApplicationController
     @employee.destroy
     respond_to do |format|
       format.html { redirect_to employees_url, notice: 'Employee was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
