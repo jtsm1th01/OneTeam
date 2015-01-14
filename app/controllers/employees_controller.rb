@@ -54,7 +54,7 @@ class EmployeesController < ApplicationController
       if @employee.update(employee_params)
         format.html { redirect_to @employee, notice: 'Employee was successfully updated.' }
       else
-        format.html { render edit_employee_path(@employee), notice: 'Complete all fields.' }
+        format.html { redirect_to edit_employee_path(@employee), notice: 'Please complete all fields.'}
       end
     end
   end
