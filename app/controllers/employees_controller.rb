@@ -39,6 +39,7 @@ class EmployeesController < ApplicationController
     @employee = Employee.new(employee_params)
     respond_to do |format|
       if @employee.save
+        log_in @employee
         format.html { redirect_to edit_employee_url(@employee), notice: 'Employee has been successfully created.' }
       else
         format.html { render new_employee_path(@employee) }
