@@ -7,34 +7,31 @@
   
 </head>
 <body>
-    <div class="container">
-      <% flash.each do |message_type, message| %>
-        <div class="alert alert-<%= message_type %>"><%= message %></div>
-      <% end %>
+  <div class="container">
+    <% flash.each do |message_type, message| %>
+  <div class="alert alert-<%= message_type %>"><%= message %></div>
+    <% end %>
       
+    <%= debug(params) if Rails.env.development? %>
   
-<%= debug(params) if Rails.env.development? %>
-  
-<header class="navbar navbar-fixed-top navbar-inverse">
-      <div class="container">
-       <nav>
-          <ul class="nav navbar-nav navbar-right">
-            <li><%= link_to "Home", home_path %></li>
-            <li><%= link_to "Project Requests", project_requests_path %></li>
-            <li><%= link_to "Employees", employees_path %></li>
-            <li><%= link_to "Projects", projects_path %></li>
-            <li><%= link_to "Groups", groups_path %></li>
-            <li><%= link_to "Departments", departments_path %></li>
-            <li><%= link_to "Locations", locations_path %></li>
-            <li><%= link_to "Titles", titles_path %></li>
-            <li><%= link_to "Skills", skills_path %></li>
-          </ul>
-        </nav>
-      </div>
-    </header>
+  <header class="navbar navbar-fixed-top navbar-inverse">
     <div class="container">
-
-<%= yield %>
-
+      <nav>
+        <ul class="nav navbar-nav navbar-right">
+           <li><%= link_to "Home", home_path %></li>
+           <li><%= link_to "Project Requests", project_requests_path %></li>
+           <li><%= link_to "Employees", employees_path %></li>
+           <li><%= link_to "Projects", projects_path %></li>
+           <li><%= link_to "Groups", groups_path %></li>
+           <li><%= link_to "Departments", departments_path %></li>
+           <li><%= link_to "Locations", locations_path %></li>
+           <li><%= link_to "Titles", titles_path %></li>
+           <li><%= link_to "Skills", skills_path %></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+    <div class="container">
+      <%= yield %>
 </body>
 </html>
