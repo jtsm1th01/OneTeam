@@ -11,8 +11,8 @@ module SessionsHelper
     elsif (employee_id = cookies.signed[:employee_id])
       employee = Employee.find_by(id: employee_id)
       if employee && employee.authenticated?(cookies[:remember_token])
-        log_in user
-        @current_user = user
+        log_in employee
+        @current_employee = employee
       end
     end
    end
