@@ -1,4 +1,6 @@
 class Employee < ActiveRecord::Base
+  attr_accessor :remember_token
+  
   belongs_to :location
   belongs_to :department
   belongs_to :title
@@ -17,4 +19,22 @@ class Employee < ActiveRecord::Base
   validates :password, length: { minimum: 6 }
   validates :employee_name, presence: true
   validates :employee_email, presence: true
+  
+  # Returns the hash digest of the given string.
+  def Employee.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+                                                  BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
+  end
+
+  # Returns a random token.
+  def Employee.new_token
+    SecureRandom.urlsafe_base64
+  end
+  
+  def remember
+    self.remember_token = Employee.new_token
+    update_attribute(:remember_digest, Employee.digest(remember_token))
+  end
+
 end

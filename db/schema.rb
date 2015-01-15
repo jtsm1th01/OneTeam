@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150108075924) do
+ActiveRecord::Schema.define(version: 20150114230533) do
 
   create_table "current_skills", force: true do |t|
     t.integer  "employee_id"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20150108075924) do
     t.integer  "group_id"
     t.integer  "location_id"
     t.string   "password_digest"
+    t.string   "remember_digest"
   end
 
   create_table "groups", force: true do |t|
