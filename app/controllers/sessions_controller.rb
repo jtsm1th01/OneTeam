@@ -6,6 +6,7 @@ class SessionsController < ApplicationController
     employee = Employee.find_by(employee_email: params[:session][:email].downcase)
     if employee && employee.authenticate(params[:session][:password])
       log_in employee
+      params[:session][:remember_me] == '1' ? remember(employee) : forget(employee)
       remember employee
       redirect_to employee
     else
