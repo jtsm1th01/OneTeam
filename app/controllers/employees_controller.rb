@@ -1,5 +1,7 @@
 class EmployeesController < ApplicationController
   before_action :set_employee, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in_employee, only: [:edit, :update]
+  before_action :correct_employee,   only: [:edit, :update]
 
   # GET /employees
   # GET /employees.json
@@ -52,10 +54,10 @@ class EmployeesController < ApplicationController
   def update
     params[:employee][:skill_ids] ||=[]
     respond_to do |format|
-      if @employee.update(employee_params)
+      if @employee.update_attributes(employee_params)
         format.html { redirect_to @employee, notice: 'Employee was successfully updated.' }
       else
-        format.html { redirect_to edit_employee_path(@employee), notice: 'Please complete all fields.'}
+        format.html { redirect_to edit_employee_url(@employee), notice: 'Please complete all fields.'}
       end
     end
   end
@@ -71,12 +73,30 @@ class EmployeesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    
+    # Before filters
+  
     def set_employee
       @employee = Employee.find(params[:id])
     end
 
+    # Confirms a logged-in employee.
+    def logged_in_employee
+      unless logged_in?
+        store_location
+        flash[:danger] = "Please log in."
+        redirect_to login_url
+      end
+    end
+  
+    # Confirms the correct employee.
+    def correct_employee
+      @employee = Employee.find(params[:id])
+      redirect_to(root_url) unless current_employee?(@employee)
+    end
+  
     # Never trust parameters from the scary internet, only allow the white list through.
     def employee_params
-      params.require(:employee).permit(:employee_name, :employee_email, :years_with_company, :location_id, :group_id, :title_id, :manager_id, :password, :password_confirmation, :skill_ids => [], :goal_ids => [])
+      params.require(:employee).permit(:employee_name, :employee_email, :years_with_company, :location_id, :group_id, :title_id, :manager_id, :password,             :password_confirmation, :skill_ids => [], :goal_ids => [])
     end
 end

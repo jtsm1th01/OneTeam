@@ -16,7 +16,7 @@ class Employee < ActiveRecord::Base
   has_many :skills, :through => :current_skills
   has_many :goals, :through => :desired_skills, :source => :skill
   has_secure_password
-  validates :password, length: { minimum: 6 }
+  validates :password, length: { minimum: 6 }, allow_blank: true
   validates :employee_name, presence: true
   validates :employee_email, presence: true
   

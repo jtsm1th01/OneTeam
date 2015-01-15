@@ -17,16 +17,14 @@ module SessionsHelper
     end
    end
   
+  # Returns true if the given employee is the current employee.
+  def current_employee?(employee)
+    employee == current_employee
+  end
+  
   # Returns true if the employee is logged in, false otherwise.
   def logged_in?
     !current_employee.nil?
-  end
-  
-  # Remembers a employee in a persistent session.
-  def remember(employee)
-    employee.remember
-    cookies.permanent.signed[:employee_id] = employee.id
-    cookies.permanent[:remember_token] = employee.remember_token
   end
   
   # Logs out the current employee.
@@ -41,6 +39,17 @@ module SessionsHelper
     employee.forget
     cookies.delete(:employee_id)
     cookies.delete(:remember_token)
+  end
+  
+  # Redirects to stored location (or to the default).
+  def redirect_back_or(default)
+    redirect_to(session[:forwarding_url] || default)
+    session.delete(:forwarding_url)
+  end
+
+  # Stores the URL trying to be accessed.
+  def store_location
+    session[:forwarding_url] = request.url if request.get?
   end
   
 end
