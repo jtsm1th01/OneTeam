@@ -4,7 +4,7 @@ module SessionsHelper
     session[:employee_id] = employee.id
   end
   
-  # Returns the user corresponding to the remember token cookie.
+  # Returns the employee corresponding to the remember token cookie.
   def current_employee
     if (employee_id = session[:employee_id])
       @current_employee ||= Employee.find_by(id: employee_id)
@@ -17,22 +17,30 @@ module SessionsHelper
     end
    end
   
-  # Returns true if the user is logged in, false otherwise.
+  # Returns true if the employee is logged in, false otherwise.
   def logged_in?
     !current_employee.nil?
   end
   
-  # Remembers a user in a persistent session.
-  def remember(user)
-    user.remember
-    cookies.permanent.signed[:user_id] = user.id
-    cookies.permanent[:remember_token] = user.remember_token
+  # Remembers a employee in a persistent session.
+  def remember(employee)
+    employee.remember
+    cookies.permanent.signed[:employee_id] = employee.id
+    cookies.permanent[:remember_token] = employee.remember_token
   end
   
-  # Logs out the current user.
+  # Logs out the current employee.
   def log_out
+    forget(current_employee)
     session.delete(:employee_id)
     @current_employee = nil
+  end
+  
+  # Forgets a persistent session.
+  def forget(employee)
+    employee.forget
+    cookies.delete(:employee_id)
+    cookies.delete(:remember_token)
   end
   
 end
