@@ -34,6 +34,13 @@ module SessionsHelper
     @current_employee = nil
   end
   
+  # Remembers a employee in a persistent session.
+  def remember(employee)
+    employee.remember
+    cookies.permanent.signed[:employee_id] = employee.id
+    cookies.permanent[:remember_token] = employee.remember_token
+  end
+  
   # Forgets a persistent session.
   def forget(employee)
     employee.forget

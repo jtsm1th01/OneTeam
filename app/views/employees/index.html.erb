@@ -30,7 +30,10 @@
         <td><%= employee.try(:location).try(:location_name) %></td>
         <td><%= link_to 'Show', employee %></td>
         <td><%= link_to 'Edit', edit_employee_path(employee) %></td>
-        <td><%= link_to 'Destroy', employee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if current_employee.admin? && !current_employee?(employee) %>
+          | <%= link_to "delete", employee, method: :delete,
+                                  data: { confirm: "You sure?" } %>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
