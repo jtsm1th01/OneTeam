@@ -31,8 +31,8 @@
         <td><%= link_to 'Show', employee %></td>
         <td><%= link_to 'Edit', edit_employee_path(employee) %></td>
         <% if current_employee.admin? && !current_employee?(employee) %>
-          | <%= link_to "delete", employee, method: :delete,
-                                  data: { confirm: "You sure?" } %>
+          <td><%= link_to "Delete", employee, method: :delete,
+                                            data: { confirm: "You sure?" } %></td>
         <% end %>
       </tr>
     <% end %>
