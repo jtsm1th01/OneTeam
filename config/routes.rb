@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :locations
   resources :skills
   resources :titles
+  resources :responses
   
  
   # The priority is based upon order of creation: first created -> highest priority.
