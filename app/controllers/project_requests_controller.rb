@@ -16,7 +16,7 @@ class ProjectRequestsController < ApplicationController
   # GET /project_requests/new
   def new
     @projects = Project.all
-    @project_request = ProjectRequest.new
+    @project_request = ProjectRequest.new(employee_id: session[:employee_id])
   end
 
   # GET /project_requests/1/edit
@@ -69,6 +69,6 @@ class ProjectRequestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_request_params
-      params.require(:project_request).permit(:project_id, :description) #test update
+      params.require(:project_request).permit(:project_id, :description, :employee_id)
     end
 end

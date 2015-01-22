@@ -15,8 +15,8 @@ class Employee < ActiveRecord::Base
   has_many :skills, :through => :current_skills
   has_many :goals, :through => :desired_skills, :source => :skill
   has_many :responses
-  has_many :project_requests, through: :responses
-  # has_many :project_requests # for leads creating requests?
+  has_many :applications, through: :responses, :source => :project_request
+  has_many :project_requests
   has_secure_password
   validates :password, length: { minimum: 6 }, allow_blank: true
   validates :employee_name, presence: true
