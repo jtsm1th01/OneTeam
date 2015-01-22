@@ -8,15 +8,11 @@ Rails.application.routes.draw do
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
 
-  resources :groups
-  resources :project_requests
-  resources :employees
-  resources :projects
-  resources :departments
-  resources :locations
-  resources :skills
-  resources :titles
-  resources :responses
+  resources :groups, :employees, :projects, :departments, :locations, :skills, :titles
+  
+  resources :project_requests do
+    resources :responses
+  end
   
  
   # The priority is based upon order of creation: first created -> highest priority.

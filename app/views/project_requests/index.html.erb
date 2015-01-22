@@ -16,6 +16,7 @@
       <tr>
         <td><%= project_request.project.project_name %></td>
         <td><%= project_request.description %></td>
+        <td><%= link_to 'Respond', new_project_request_response_path(project_request) %>
         <td><%= link_to 'Show', project_request %></td>
         <td><%= link_to 'Edit', edit_project_request_path(project_request) %></td>
         <td><%= link_to 'Destroy', project_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
