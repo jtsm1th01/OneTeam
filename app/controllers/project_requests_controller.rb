@@ -34,10 +34,8 @@ class ProjectRequestsController < ApplicationController
     respond_to do |format|
       if @project_request.save
         format.html { redirect_to @project_request, notice: 'Project request was successfully created.' }
-        format.json { render :show, status: :created, location: @project_request }
       else
         format.html { redirect_to new_project_request_path(@project_request), notice: 'Please fill out entire form.' }
-        format.json { render json: @project_request.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -48,10 +46,8 @@ class ProjectRequestsController < ApplicationController
     respond_to do |format|
       if @project_request.update(project_request_params)
         format.html { redirect_to @project_request, notice: 'Project request was successfully updated.' }
-        format.json { render :show, status: :ok, location: @project_request }
       else
         format.html { render :edit }
-        format.json { render json: @project_request.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -62,7 +58,6 @@ class ProjectRequestsController < ApplicationController
     @project_request.destroy
     respond_to do |format|
       format.html { redirect_to project_requests_url, notice: 'Project request was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

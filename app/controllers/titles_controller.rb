@@ -29,10 +29,8 @@ class TitlesController < ApplicationController
     respond_to do |format|
       if @title.save
         format.html { redirect_to @title, notice: 'Title was successfully created.' }
-        format.json { render :show, status: :created, location: @title }
       else
         format.html { render :new }
-        format.json { render json: @title.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -43,10 +41,8 @@ class TitlesController < ApplicationController
     respond_to do |format|
       if @title.update(title_params)
         format.html { redirect_to @title, notice: 'Title was successfully updated.' }
-        format.json { render :show, status: :ok, location: @title }
       else
         format.html { render :edit }
-        format.json { render json: @title.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -57,7 +53,6 @@ class TitlesController < ApplicationController
     @title.destroy
     respond_to do |format|
       format.html { redirect_to titles_url, notice: 'Title was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

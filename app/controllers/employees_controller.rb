@@ -4,20 +4,13 @@ class EmployeesController < ApplicationController
   before_action :correct_employee,   only: [:edit, :update]
   before_action :admin_employee,     only: :destroy
 
-  # GET /employees
-  # GET /employees.json
   def index
     @employees = Employee.all
   end
 
-  # GET /employees/1
-  # GET /employees/1.json
-  def show
-   
-     
+  def show  
   end
 
-  # GET /employees/new
   def new
     @employee = Employee.new
     @employees = Employee.all
@@ -27,7 +20,6 @@ class EmployeesController < ApplicationController
     @skills = Skill.all
   end
 
-  # GET /employees/1/edit
   def edit
     @employees = Employee.all
     @titles = Title.all
@@ -36,8 +28,6 @@ class EmployeesController < ApplicationController
     @skills = Skill.all
   end
 
-  # POST /employees
-  # POST /employees.json
   def create
     @employee = Employee.new(employee_params)
     respond_to do |format|
@@ -50,8 +40,6 @@ class EmployeesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /employees/1
-  # PATCH/PUT /employees/1.json
   def update
     params[:employee][:skill_ids] ||=[]
     respond_to do |format|
@@ -63,8 +51,6 @@ class EmployeesController < ApplicationController
     end
   end
 
-  # DELETE /employees/1
-  # DELETE /employees/1.json
   def destroy
     @employee.destroy
     respond_to do |format|
@@ -76,7 +62,6 @@ class EmployeesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     
     # Before filters
-  
     def set_employee
       @employee = Employee.find(params[:id])
     end
