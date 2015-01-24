@@ -6,7 +6,12 @@ class ProjectRequestsController < ApplicationController
   # GET /project_requests
   # GET /project_requests.json
   def index
-    @project_requests = ProjectRequest.all
+    if params.include?(:employee_id)
+      @project_requests = ProjectRequest.where(employee_id: params[:employee_id])
+      
+    else
+      @project_requests = ProjectRequest.all
+    end
   end
 
   # GET /project_requests/1

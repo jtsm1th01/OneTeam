@@ -28,3 +28,4 @@
 <br>
 
 <%= link_to 'New Project Request', new_project_request_path %>
+<%= link_to 'My Project Requests', my_project_requests_path(employee_id: session[:employee_id]) %>

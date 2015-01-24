@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'employees/:employee_id/responses' => 'project_requests#index', as: :my_project_requests
   get 'home' => 'static_pages#home'
   # might just have signup on the home page instead
   get 'signup'  => 'employees#new'
