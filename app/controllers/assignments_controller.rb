@@ -8,7 +8,7 @@ class AssignmentsController < ApplicationController
   end
 
   def new
-    @assignment = Assignment.new
+    @assignment = Assignment.new(employee_id: params[:respondent_id], project_request_id: params[:project_request_id])
   end
 
   def edit
