@@ -2,30 +2,35 @@
 
 <h1>OneTeam Project Requests</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Project</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<% @project_requests.each do |project_request| %>
 
-  <tbody>
-    <% @project_requests.each do |project_request| %>
-      <tr>
-        <td><%= project_request.project.project_name %></td>
-        <td><%= project_request.description %></td>
-        <td><%= link_to 'Respond', new_project_request_response_path(project_request) %>
-        <td><%= link_to 'Show', project_request %></td>
-        <td><%= link_to 'Edit', edit_project_request_path(project_request) %></td>
-        <td><%= link_to 'Destroy', project_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+  <div><span class="entry_title">
+    Project:</span>
+      <%= project_request.project.project_name %>
+  </div>
+
+  <div><span class="entry_title">
+    Description:</span>
+      <%= project_request.description %>
+  </div>
+
+  <div>
+    <%= link_to 'Respond', new_project_request_response_path(project_request) %>
+    <%= link_to 'Show', project_request %>
+    <%= link_to 'Edit', edit_project_request_path(project_request) %>
+    <%= link_to 'Destroy', project_request, method: :delete, data: { confirm: 'Are you sure?' } %>
+
+    <% if params.include?(:employee_id) %>
+      <div><span class="entry_title">
+        Respondents:</span>
+      </div>
+      <% project_request.respondents.each do |respondent| %>
+        <%= respondent.employee_name %>
+        <%= link_to 'Profile', employee_path(respondent) %>
+        <%= link_to 'Assign', new_assignment_path(project_request_id: project_request, respondent_id: respondent) %>
+      <% end %>
     <% end %>
-  </tbody>
-</table>
-
-<br>
+<% end %><br>
 
 <%= link_to 'New Project Request', new_project_request_path %>
 <%= link_to 'My Project Requests', my_project_requests_path(employee_id: session[:employee_id]) %>

@@ -2,38 +2,28 @@ class ProjectRequestsController < ApplicationController
   before_action :set_project_request, only: [:show, :edit, :update, :destroy]
   before_action :logged_in_employee, only: [:new, :edit]
   
-
-  # GET /project_requests
-  # GET /project_requests.json
   def index
     if params.include?(:employee_id)
       @project_requests = ProjectRequest.where(employee_id: params[:employee_id])
-      
     else
       @project_requests = ProjectRequest.all
     end
   end
 
-  # GET /project_requests/1
-  # GET /project_requests/1.json
   def show
   end
 
-  # GET /project_requests/new
   def new
     @projects = Project.all
     @project_request = ProjectRequest.new(employee_id: session[:employee_id])
   end
 
-  # GET /project_requests/1/edit
   def edit
    @employees = Employee.all
    @groups = Group.all
    @projects = Project.all
   end
 
-  # POST /project_requests
-  # POST /project_requests.json
   def create
     @project_request = ProjectRequest.new(project_request_params)
 
@@ -46,8 +36,6 @@ class ProjectRequestsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /project_requests/1
-  # PATCH/PUT /project_requests/1.json
   def update
     respond_to do |format|
       if @project_request.update(project_request_params)
@@ -58,8 +46,6 @@ class ProjectRequestsController < ApplicationController
     end
   end
 
-  # DELETE /project_requests/1
-  # DELETE /project_requests/1.json
   def destroy
     @project_request.destroy
     respond_to do |format|
@@ -73,7 +59,7 @@ class ProjectRequestsController < ApplicationController
       @project_request = ProjectRequest.find(params[:id])
     end
   
-  # Confirms a logged-in employee.
+    # Confirms a logged-in employee.
     def logged_in_employee
       unless logged_in?
         store_location

@@ -17,6 +17,7 @@ class Employee < ActiveRecord::Base
   has_many :responses
   has_many :applications, through: :responses, :source => :project_request
   has_many :project_requests
+  has_many :assignments
   has_secure_password
   validates :password, length: { minimum: 6 }, allow_blank: true
   validates :employee_name, presence: true

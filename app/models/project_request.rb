@@ -6,5 +6,6 @@ class ProjectRequest < ActiveRecord::Base
   has_one :department, through: :group
   has_many :responses
   has_many :respondents, through: :responses, :source => :employee
+  has_many :assignments 
   accepts_nested_attributes_for :responses
 end
