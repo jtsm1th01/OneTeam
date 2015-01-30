@@ -6,7 +6,7 @@ class ProjectRequestsController < ApplicationController
     if params.include?(:employee_id)
       @project_requests = ProjectRequest.where(employee_id: params[:employee_id])
     else
-      @project_requests = ProjectRequest.all
+      @project_requests = ProjectRequest.current
     end
   end
 
@@ -70,6 +70,6 @@ class ProjectRequestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_request_params
-      params.require(:project_request).permit(:project_id, :description, :employee_id)
+      params.require(:project_request).permit(:project_id, :description, :employee_id, :start_date, :end_date)
     end
 end
