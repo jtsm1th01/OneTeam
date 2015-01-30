@@ -17,6 +17,7 @@
   <div><span class="entry_title">
     Request Start Date:</span>
       <%= project_request.start_date %>
+      <%= in_progress(project_request) %>
   </div>
 
   <div><span class="entry_title">
@@ -24,9 +25,15 @@
       <%= project_request.end_date %>
   </div>
 
+  <% if params.include?(:employee_id) %>
+    <div><span class="entry_title">
+      Request is Filled:</span>
+      <%= project_request.filled %>
+    </div>
+  <% end %>
+  
   <div>
     <%= link_to 'Respond', new_project_request_response_path(project_request) %>
-    <%= link_to 'Show', project_request %>
     <%= link_to 'Edit', edit_project_request_path(project_request) %>
     <%= link_to 'Destroy', project_request, method: :delete, data: { confirm: 'Are you sure?' } %>
 

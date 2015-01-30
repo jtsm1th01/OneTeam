@@ -9,6 +9,8 @@ class ProjectRequest < ActiveRecord::Base
   has_many :assignments 
   accepts_nested_attributes_for :responses
   
-  scope :current, -> { where('end_date>?', Date.today) }
+  scope :current, -> { where('end_date>?', Date.today-1) }
+  scope :open, -> { where('filled=?', false) }
+  scope :started, -> { where('start_date<?', Date.today+1) }
  
 end

@@ -31,6 +31,10 @@
     <%= f.label :end_date %><br>
     <%= f.date_select :end_date %>
   </div>
+  <div class="field">
+    <%= f.label :filled, "Check if Filled" %><br>
+    <%= f.check_box :filled %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
