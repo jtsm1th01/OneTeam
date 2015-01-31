@@ -1,5 +1,4 @@
 class ProjectRequestsController < ApplicationController
-  before_action :set_project_request, only: [:edit, :update, :destroy]
   before_action :logged_in_employee, only: [:new, :edit]
   
   def index
@@ -16,6 +15,7 @@ class ProjectRequestsController < ApplicationController
   end
 
   def edit
+   @project_request = ProjectRequest.find(params[:id])
    @employees = Employee.all
    @groups = Group.all
    @projects = Project.all
@@ -34,6 +34,7 @@ class ProjectRequestsController < ApplicationController
   end
 
   def update
+    @project_request = ProjectRequest.find(params[:id])
     respond_to do |format|
       if @project_request.update(project_request_params)
         format.html { redirect_to project_requests_path, notice: 'Project request was successfully updated.' }
@@ -44,6 +45,7 @@ class ProjectRequestsController < ApplicationController
   end
 
   def destroy
+    @project_request = ProjectRequest.find(params[:id])
     @project_request.destroy
     respond_to do |format|
       format.html { redirect_to project_requests_url, notice: 'Project request was successfully destroyed.' }
@@ -52,9 +54,6 @@ class ProjectRequestsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_project_request
-      @project_request = ProjectRequest.find(params[:id])
-    end
   
     # Confirms a logged-in employee.
     def logged_in_employee

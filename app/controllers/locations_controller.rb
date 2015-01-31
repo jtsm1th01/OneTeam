@@ -1,11 +1,11 @@
 class LocationsController < ApplicationController
-  before_action :set_location, only: [:show, :edit, :update, :destroy]
 
   def index
     @locations = Location.all
   end
 
   def show
+    @location = Location.find(params[:id])
   end
 
   def new
@@ -13,6 +13,7 @@ class LocationsController < ApplicationController
   end
 
   def edit
+    @location = Location.find(params[:id])
   end
 
   def create
@@ -28,6 +29,7 @@ class LocationsController < ApplicationController
   end
 
   def update
+    @location = Location.find(params[:id])
     respond_to do |format|
       if @location.update(location_params)
         format.html { redirect_to @location, notice: 'Location was successfully updated.' }
@@ -38,6 +40,7 @@ class LocationsController < ApplicationController
   end
 
   def destroy
+    @location = Location.find(params[:id])
     @location.destroy
     respond_to do |format|
       format.html { redirect_to locations_url, notice: 'Location was successfully destroyed.' }

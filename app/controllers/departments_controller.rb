@@ -1,5 +1,4 @@
 class DepartmentsController < ApplicationController
-  before_action :set_department, only: [:show, :edit, :update, :destroy]
   before_action :admin_employee
 
   def index
@@ -7,6 +6,7 @@ class DepartmentsController < ApplicationController
   end
 
   def show
+    @department = Department.find(params[:id])
   end
 
   def new
@@ -14,6 +14,7 @@ class DepartmentsController < ApplicationController
   end
 
   def edit
+    @department = Department.find(params[:id])
   end
 
   def create
@@ -29,6 +30,7 @@ class DepartmentsController < ApplicationController
   end
 
   def update
+    @department = Department.find(params[:id])
     respond_to do |format|
       if @department.update(department_params)
         format.html { redirect_to @department, notice: 'Department was successfully updated.' }
@@ -39,6 +41,7 @@ class DepartmentsController < ApplicationController
   end
 
   def destroy
+    @department = Department.find(params[:id])
     @department.destroy
     respond_to do |format|
       format.html { redirect_to departments_url, notice: 'Department was successfully destroyed.' }

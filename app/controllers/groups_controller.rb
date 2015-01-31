@@ -1,11 +1,11 @@
 class GroupsController < ApplicationController
-  before_action :set_group, only: [:show, :edit, :update, :destroy]
 
   def index
     @groups = Group.all
   end
 
   def show
+    @group = Group.find(params[:id])
   end
 
   def new
@@ -13,6 +13,7 @@ class GroupsController < ApplicationController
   end
 
   def edit
+    @group = Group.find(params[:id])
     @departments = Department.all
   end
 
@@ -29,6 +30,7 @@ class GroupsController < ApplicationController
   end
 
   def update
+    @group = Group.find(params[:id])
     respond_to do |format|
       if @group.update(group_params)
         format.html { redirect_to @group, notice: 'Group was successfully updated.' }
@@ -39,6 +41,7 @@ class GroupsController < ApplicationController
   end
 
   def destroy
+    @group = Group.find(params[:id])
     @group.destroy
     respond_to do |format|
       format.html { redirect_to groups_url, notice: 'Group was successfully destroyed.' }
@@ -47,9 +50,6 @@ class GroupsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_group
-      @group = Group.find(params[:id])
-    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def group_params

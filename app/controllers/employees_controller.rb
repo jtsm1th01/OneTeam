@@ -1,5 +1,4 @@
 class EmployeesController < ApplicationController
-  before_action :set_employee, only: [:show, :edit, :update, :destroy]
   before_action :logged_in_employee, only: [:index, :edit, :update]
   before_action :correct_employee,   only: [:edit, :update]
   before_action :admin_employee,     only: :destroy
@@ -8,7 +7,8 @@ class EmployeesController < ApplicationController
     @employees = Employee.all
   end
 
-  def show  
+  def show
+    @employee = Employee.find(params[:id])
   end
 
   def new
@@ -21,6 +21,7 @@ class EmployeesController < ApplicationController
   end
 
   def edit
+    @employee = Employee.find(params[:id])
     @employees = Employee.all
     @titles = Title.all
     @groups = Group.all
@@ -41,6 +42,7 @@ class EmployeesController < ApplicationController
   end
 
   def update
+    @employee = Employee.find(params[:id])
     params[:employee][:skill_ids] ||=[]
     respond_to do |format|
       if @employee.update_attributes(employee_params)
@@ -52,6 +54,7 @@ class EmployeesController < ApplicationController
   end
 
   def destroy
+    @employee = Employee.find(params[:id])
     @employee.destroy
     respond_to do |format|
       format.html { redirect_to employees_url, notice: 'Employee was successfully destroyed.' }
@@ -62,10 +65,7 @@ class EmployeesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     
     # Before filters
-    def set_employee
-      @employee = Employee.find(params[:id])
-    end
-
+  
     # Confirms a logged-in employee.
     def logged_in_employee
       unless logged_in?

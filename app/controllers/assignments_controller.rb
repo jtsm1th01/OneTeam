@@ -1,12 +1,5 @@
 class AssignmentsController < ApplicationController
 
-  def index
-    @assignments = Assignment.all
-  end
-
-  def show
-  end
-
   def new
     @assignment = Assignment.new(employee_id: params[:respondent_id], project_request_id: params[:project_request_id])
   end
