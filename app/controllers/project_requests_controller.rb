@@ -12,6 +12,7 @@ class ProjectRequestsController < ApplicationController
   def new
     @projects = Project.all
     @project_request = ProjectRequest.new(employee_id: session[:employee_id])
+    @skills = Skill.all
   end
 
   def edit

@@ -31,6 +31,13 @@
     <%= f.label :end_date %><br>
     <%= f.date_select :end_date %>
   </div>
+  <p>Skills:</p>
+  <div class="field">
+    <% @skills.each do |skill| %>
+    <%= skill.skill_name %>
+    <%= check_box_tag "project_request[required_skill_ids][]", skill.id, @project_request.required_skill_ids.include?(skill.id) %><br>
+    <% end %>
+  </div>
   <div class="field">
     <%= f.label :filled, "Check if Filled" %><br>
     <%= f.check_box :filled %>
