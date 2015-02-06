@@ -1,7 +1,7 @@
 class ProjectRequest < ActiveRecord::Base
   validates :description, presence: true
-  has_many :required_skills
-  has_many :skills, through: :required_skills
+  has_many :skills, :through => :required_skills
+  has_many :required_skills, :dependent => :destroy
   belongs_to :project
   belongs_to :employee
   has_many :responses

@@ -20,11 +20,12 @@ class ProjectRequestsController < ApplicationController
    @employees = Employee.all
    @groups = Group.all
    @projects = Project.all
+   @skills = Skill.all
   end
 
   def create
     @project_request = ProjectRequest.new(project_request_params)
-
+    params[:project_request][:skill_ids] ||=[]
     respond_to do |format|
       if @project_request.save
         format.html { redirect_to project_requests_path, notice: 'Project request was successfully created.' }
@@ -36,6 +37,7 @@ class ProjectRequestsController < ApplicationController
 
   def update
     @project_request = ProjectRequest.find(params[:id])
+    params[:project_request][:skill_ids] ||=[]
     respond_to do |format|
       if @project_request.update(project_request_params)
         format.html { redirect_to project_requests_path, notice: 'Project request was successfully updated.' }
@@ -67,6 +69,6 @@ class ProjectRequestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_request_params
-      params.require(:project_request).permit(:project_id, :description, :employee_id, :start_date, :end_date, :filled)
+      params.require(:project_request).permit(:project_id, :description, :employee_id, :start_date, :end_date, :filled, :skill_ids => [])
     end
 end

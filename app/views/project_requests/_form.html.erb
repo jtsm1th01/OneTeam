@@ -35,7 +35,7 @@
   <div class="field">
     <% @skills.each do |skill| %>
     <%= skill.skill_name %>
-    <%= check_box_tag "project_request[required_skill_ids][]", skill.id, @project_request.required_skill_ids.include?(skill.id) %><br>
+    <%= check_box_tag "project_request[skill_ids][]", skill.id, @project_request.skill_ids.include?(skill.id) %><br>
     <% end %>
   </div>
   <div class="field">
