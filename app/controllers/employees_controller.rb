@@ -44,6 +44,7 @@ class EmployeesController < ApplicationController
   def update
     @employee = Employee.find(params[:id])
     params[:employee][:skill_ids] ||=[]
+    params[:employee][:goal_ids] ||=[]
     respond_to do |format|
       if @employee.update_attributes(employee_params)
         format.html { redirect_to @employee, notice: 'Employee was successfully updated.' }

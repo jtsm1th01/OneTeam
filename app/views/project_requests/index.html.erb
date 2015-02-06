@@ -25,14 +25,14 @@
       <%= project_request.end_date %>
   </div>
 
-  <%# comment out <div><span class="entry_title">
-    <%#Required Skills:</span>
-      <%#<% @project_request.skills.each do |skill| %>
-        <%#<ul>
-          <%#<li><%= skill.skill_name %></li>
-        <%#</ul>
-     <%# <% end %>
-   <%#</div>%>
+  <div><span class="entry_title">
+    Required Skills:</span>
+      <% project_request.skills.each do |skill| %>
+        <ul>
+          <li><%= skill.skill_name %></li>
+        </ul>
+      <% end %>
+  </div>
 
   <% if params.include?(:employee_id) %>
     <div><span class="entry_title">
