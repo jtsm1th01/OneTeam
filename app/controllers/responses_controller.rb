@@ -12,7 +12,7 @@ class ResponsesController < ApplicationController
     @response = current_employee.responses.build(response_params)
     respond_to do |format|
       if @response.save
-        format.html { redirect_to project_requests_path, notice: 'Response was sent.' }
+        format.html { redirect_to project_requests_path, notice: 'Response was sent. Thank you for your interest.' }
       else
         format.html { render :new }
       end

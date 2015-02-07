@@ -10,6 +10,11 @@
   </div>
 
   <div><span class="entry_title">
+    Project Lead:</span>
+    <%= project_request.project.lead.employee_name %>
+  </div>
+
+  <div><span class="entry_title">
     Description:</span>
       <%= project_request.description %>
   </div>
@@ -43,20 +48,33 @@
   
   <div>
     <%= link_to 'Respond', new_project_request_response_path(project_request) %>
-    <%= link_to 'Edit', edit_project_request_path(project_request) %>
-    <%= link_to 'Destroy', project_request, method: :delete, data: { confirm: 'Are you sure?' } %>
-
+  </div>
+  
+  <div>
     <% if params.include?(:employee_id) %>
-      <div><span class="entry_title">
-        Respondents:</span>
-      </div>
-      <% project_request.respondents.each do |respondent| %>
-        <%= respondent.employee_name %>
-        <%= link_to 'Profile', employee_path(respondent) %>
-        <%= link_to 'Assign', new_assignment_path(project_request_id: project_request, respondent_id: respondent) %>
-      <% end %>
-    <% end %>
-<% end %><br>
+      <%= link_to 'Edit', edit_project_request_path(project_request) %>
+      <%= link_to 'Destroy', project_request, method: :delete, data: { confirm: 'Are you sure?' } %>
+  </div>
 
-<%= link_to 'New Project Request', new_project_request_path %>
-<%= link_to 'My Project Requests', my_project_requests_path(employee_id: session[:employee_id]) %>
+  <div><span class="entry_title">
+    Respondents:</span>
+  </div>
+
+  <div>
+    <% project_request.respondents.each do |respondent| %>
+      <%= respondent.employee_name %>
+      <%= link_to 'Profile', employee_path(respondent) %>
+      <%= link_to 'Assign', new_assignment_path(project_request_id: project_request, respondent_id: respondent) %>
+    <% end %>
+    <% end %>  
+  </div>
+
+  <div>
+    <%= link_to 'My Project Requests', my_project_requests_path(employee_id: session[:employee_id]) %>
+    
+  </div>
+
+  <%= link_to 'New Project Request', new_project_request_path %>
+  
+<% end %>
+    
