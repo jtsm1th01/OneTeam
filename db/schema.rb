@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150204091717) do
+ActiveRecord::Schema.define(version: 20150207191355) do
 
   create_table "assignments", force: true do |t|
     t.integer  "employee_id"
@@ -89,8 +89,8 @@ ActiveRecord::Schema.define(version: 20150204091717) do
   end
 
   create_table "required_skills", force: true do |t|
-    t.integer "project_request_id", null: false
-    t.integer "skill_id",           null: false
+    t.integer "project_request_id"
+    t.integer "skill_id"
   end
 
   create_table "responses", force: true do |t|

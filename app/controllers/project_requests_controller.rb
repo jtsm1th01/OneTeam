@@ -26,24 +26,20 @@ class ProjectRequestsController < ApplicationController
   def create
     @project_request = ProjectRequest.new(project_request_params)
     params[:project_request][:skill_ids] ||=[]
-    respond_to do |format|
-      if @project_request.save
-        format.html { redirect_to project_requests_path, notice: 'Project request was successfully created.' }
-      else
-        format.html { redirect_to new_project_request_path(@project_request), notice: 'Please fill out entire form.' }
-      end
+    if @project_request.save
+      redirect_to project_requests_path, notice: 'Project request was successfully created.'
+    else
+      redirect_to new_project_request_path(@project_request), notice: 'Please fill out entire form.'
     end
   end
 
   def update
     @project_request = ProjectRequest.find(params[:id])
     params[:project_request][:skill_ids] ||=[]
-    respond_to do |format|
-      if @project_request.update(project_request_params)
-        format.html { redirect_to project_requests_path, notice: 'Project request was successfully updated.' }
-      else
-        format.html { render :edit }
-      end
+    if @project_request.update(project_request_params)
+      redirect_to project_requests_path, notice: 'Project request was successfully updated.'
+    else
+      render :edit
     end
   end
 

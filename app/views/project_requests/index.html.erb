@@ -57,17 +57,18 @@
   </div>
 
   <div><span class="entry_title">
-    Respondents:</span>
+      Respondents:</span>
   </div>
 
   <div>
-    <% project_request.respondents.each do |respondent| %>
-      <%= respondent.employee_name %>
-      <%= link_to 'Profile', employee_path(respondent) %>
-      <%= link_to 'Assign', new_assignment_path(project_request_id: project_request, respondent_id: respondent) %>
-    <% end %>
+      <% project_request.respondents.each do |respondent| %>
+        <%= respondent.employee_name %>
+        <%= link_to 'Profile', employee_path(respondent) %>
+        <%= link_to 'Assign', new_assignment_path(project_request_id: project_request, respondent_id: respondent) %>
+      <% end %>
     <% end %>  
   </div>
+<% end %>
 
   <div>
     <%= link_to 'My Project Requests', my_project_requests_path(employee_id: session[:employee_id]) %>
@@ -75,6 +76,7 @@
   </div>
 
   <%= link_to 'New Project Request', new_project_request_path %>
+
   
-<% end %>
+
     
