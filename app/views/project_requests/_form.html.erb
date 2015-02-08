@@ -12,13 +12,35 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :employee_id %><br>
+    <%= f.number_field(:employee_id) %>
+  </div>
+  <div class="field">
     <%= f.label :project_id %><br>
     <%= f.collection_select(:project_id, @projects, :id, :project_name ) %>
-    </div>
   </div>
   <div class="field">
     <%= f.label :description %><br>
-    <%= f.text_field :description %>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :start_date %><br>
+    <%= f.date_select :start_date %>
+  </div>
+  <div class="field">
+    <%= f.label :end_date %><br>
+    <%= f.date_select :end_date %>
+  </div>
+  <p>Skills:</p>
+  <div class="field">
+    <% @skills.each do |skill| %>
+    <%= skill.skill_name %>
+    <%= check_box_tag "project_request[skill_ids][]", skill.id, @project_request.skill_ids.include?(skill.id) %><br>
+    <% end %>
+  </div>
+  <div class="field">
+    <%= f.label :filled, "Check if Filled" %><br>
+    <%= f.check_box :filled %>
   </div>
   <div class="actions">
     <%= f.submit %>

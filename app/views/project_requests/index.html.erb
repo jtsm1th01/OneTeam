@@ -2,29 +2,81 @@
 
 <h1>OneTeam Project Requests</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Project</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<% @project_requests.each do |project_request| %>
 
-  <tbody>
-    <% @project_requests.each do |project_request| %>
-      <tr>
-        <td><%= project_request.project.project_name %></td>
-        <td><%= project_request.description %></td>
-        <td><%= link_to 'Respond', new_project_request_response_path(project_request) %>
-        <td><%= link_to 'Show', project_request %></td>
-        <td><%= link_to 'Edit', edit_project_request_path(project_request) %></td>
-        <td><%= link_to 'Destroy', project_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <div><span class="entry_title">
+    Project:</span>
+      <%= project_request.project.project_name %>
+  </div>
 
-<br>
+  <div><span class="entry_title">
+    Project Lead:</span>
+    <%= project_request.project.lead.employee_name %>
+  </div>
 
-<%= link_to 'New Project Request', new_project_request_path %>
+  <div><span class="entry_title">
+    Description:</span>
+      <%= project_request.description %>
+  </div>
+
+  <div><span class="entry_title">
+    Request Start Date:</span>
+      <%= project_request.start_date %>
+      <%= in_progress(project_request) %>
+  </div>
+
+  <div><span class="entry_title">
+    Request End Date:</span>
+      <%= project_request.end_date %>
+  </div>
+
+  <div><span class="entry_title">
+    Required Skills:</span>
+      <% project_request.skills.each do |skill| %>
+        <ul>
+          <li><%= skill.skill_name %></li>
+        </ul>
+      <% end %>
+  </div>
+
+  <% if params.include?(:employee_id) %>
+    <div><span class="entry_title">
+      Request is Filled:</span>
+      <%= project_request.filled %>
+    </div>
+  <% end %>
+  
+  <div>
+    <%= link_to 'Respond', new_project_request_response_path(project_request) %>
+  </div>
+  
+  <div>
+    <% if params.include?(:employee_id) %>
+      <%= link_to 'Edit', edit_project_request_path(project_request) %>
+      <%= link_to 'Destroy', project_request, method: :delete, data: { confirm: 'Are you sure?' } %>
+  </div>
+
+  <div><span class="entry_title">
+      Respondents:</span>
+  </div>
+
+  <div>
+      <% project_request.respondents.each do |respondent| %>
+        <%= respondent.employee_name %>
+        <%= link_to 'Profile', employee_path(respondent) %>
+        <%= link_to 'Assign', new_assignment_path(project_request_id: project_request, respondent_id: respondent) %>
+      <% end %>
+    <% end %>  
+  </div>
+<% end %>
+
+  <div>
+    <%= link_to 'My Project Requests', my_project_requests_path(employee_id: session[:employee_id]) %>
+    
+  </div>
+
+  <%= link_to 'New Project Request', new_project_request_path %>
+
+  
+
+    

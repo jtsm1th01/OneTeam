@@ -1,5 +1,4 @@
 class EmployeesController < ApplicationController
-  before_action :set_employee, only: [:show, :edit, :update, :destroy]
   before_action :logged_in_employee, only: [:index, :edit, :update]
   before_action :correct_employee,   only: [:edit, :update]
   before_action :admin_employee,     only: :destroy
@@ -8,7 +7,8 @@ class EmployeesController < ApplicationController
     @employees = Employee.all
   end
 
-  def show  
+  def show
+    @employee = Employee.find(params[:id])
   end
 
   def new
@@ -21,6 +21,7 @@ class EmployeesController < ApplicationController
   end
 
   def edit
+    @employee = Employee.find(params[:id])
     @employees = Employee.all
     @titles = Title.all
     @groups = Group.all
@@ -30,42 +31,36 @@ class EmployeesController < ApplicationController
 
   def create
     @employee = Employee.new(employee_params)
-    respond_to do |format|
-      if @employee.save
-        log_in @employee
-        format.html { redirect_to edit_employee_url(@employee), notice: 'Employee has been successfully created.' }
-      else
-        format.html { render new_employee_path(@employee) }
-      end
+    if @employee.save
+      log_in @employee
+      redirect_to edit_employee_url(@employee), notice: 'Employee has been successfully created.'
+    else
+      render new_employee_path(@employee) 
     end
   end
 
   def update
+    @employee = Employee.find(params[:id])
     params[:employee][:skill_ids] ||=[]
-    respond_to do |format|
-      if @employee.update_attributes(employee_params)
-        format.html { redirect_to @employee, notice: 'Employee was successfully updated.' }
-      else
-        format.html { redirect_to edit_employee_url(@employee), notice: 'Please complete all fields.'}
-      end
+    params[:employee][:goal_ids] ||=[]
+    if @employee.update_attributes(employee_params)
+      redirect_to @employee, notice: 'Employee was successfully updated.' 
+    else
+      redirect_to edit_employee_url(@employee), notice: 'Please complete all fields.'
     end
   end
 
   def destroy
+    @employee = Employee.find(params[:id])
     @employee.destroy
-    respond_to do |format|
-      format.html { redirect_to employees_url, notice: 'Employee was successfully destroyed.' }
-    end
+    redirect_to employees_url, notice: 'Employee was successfully destroyed.' 
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     
     # Before filters
-    def set_employee
-      @employee = Employee.find(params[:id])
-    end
-
+  
     # Confirms a logged-in employee.
     def logged_in_employee
       unless logged_in?
@@ -88,6 +83,6 @@ class EmployeesController < ApplicationController
   
     # Never trust parameters from the scary internet, only allow the white list through.
     def employee_params
-      params.require(:employee).permit(:employee_name, :employee_email, :years_with_company, :location_id, :group_id, :title_id, :manager_id, :password,             :password_confirmation, :skill_ids => [], :goal_ids => [])
+      params.require(:employee).permit(:employee_name, :employee_email, :years_with_company, :location_id, :group_id, :title_id, :manager_id, :password, :password_confirmation, :skill_ids => [], :goal_ids => [])
     end
 end

@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150117015704) do
+ActiveRecord::Schema.define(version: 20150207191355) do
+
+  create_table "assignments", force: true do |t|
+    t.integer  "employee_id"
+    t.integer  "project_request_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "current_skills", force: true do |t|
     t.integer  "employee_id"
@@ -66,11 +73,10 @@ ActiveRecord::Schema.define(version: 20150117015704) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "description"
-  end
-
-  create_table "project_requests_skills", id: false, force: true do |t|
-    t.integer "project_request_id", null: false
-    t.integer "skill_id",           null: false
+    t.integer  "employee_id"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.boolean  "filled",      default: false
   end
 
   create_table "projects", force: true do |t|
@@ -80,6 +86,11 @@ ActiveRecord::Schema.define(version: 20150117015704) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "employee_id"
+  end
+
+  create_table "required_skills", force: true do |t|
+    t.integer "project_request_id"
+    t.integer "skill_id"
   end
 
   create_table "responses", force: true do |t|
