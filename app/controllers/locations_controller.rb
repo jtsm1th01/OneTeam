@@ -18,33 +18,26 @@ class LocationsController < ApplicationController
 
   def create
     @location = Location.new(location_params)
-
-    respond_to do |format|
-      if @location.save
-        format.html { redirect_to @location, notice: 'Location was successfully created.' }
-      else
-        format.html { render :new }
-      end
+    if @location.save
+      redirect_to @location, notice: 'Location was successfully created.' 
+    else
+      render :new
     end
   end
 
   def update
     @location = Location.find(params[:id])
-    respond_to do |format|
-      if @location.update(location_params)
-        format.html { redirect_to @location, notice: 'Location was successfully updated.' }
-      else
-        format.html { render :edit }
-      end
+    if @location.update(location_params)
+      redirect_to @location, notice: 'Location was successfully updated.'
+    else
+      render :edit 
     end
   end
 
   def destroy
     @location = Location.find(params[:id])
     @location.destroy
-    respond_to do |format|
-      format.html { redirect_to locations_url, notice: 'Location was successfully destroyed.' }
-    end
+    redirect_to locations_url, notice: 'Location was successfully destroyed.' 
   end
 
   private
