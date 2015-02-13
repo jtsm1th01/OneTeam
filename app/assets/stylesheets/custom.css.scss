@@ -1,18 +1,18 @@
-table, td, th {
-  border: 1px black solid;
-}
-
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
 /* universal */
+
+.jumbotron {
+  text-align: center;
+}
 
 html {
   overflow-y: scroll;
 }
 
 body {
-  padding-top: 60px;
+  padding-top: 70px;
 }
 
 section {
@@ -23,16 +23,16 @@ textarea {
   resize: vertical;
 }
 
-.center {
+/*.center {
   text-align: center;
-}
+}*/
 
 .center h1 {
   margin-bottom: 10px;
 }
 
 .entry_title {
-  font-weight: bold
+  font-weight: bold;
 }
 
 
