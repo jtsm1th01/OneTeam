@@ -13,6 +13,7 @@ html {
 
 body {
   padding-top: 70px;
+  /*background-color: #2BBAC4;*/
 }
 
 section {
@@ -21,14 +22,6 @@ section {
 
 textarea {
   resize: vertical;
-}
-
-/*.center {
-  text-align: center;
-}*/
-
-.center h1 {
-  margin-bottom: 10px;
 }
 
 .entry_title {
@@ -68,6 +61,11 @@ h1 {
   letter-spacing: -2px;
   margin-bottom: 30px;
   text-align: center;
+}
+
+h1 .body_title {
+  text-align: left;
+  text-decoration: underline;
 }
 
 h2 {
@@ -130,7 +128,16 @@ field {
   margin-left: 0;
 }
 
+.skill-group {
+  padding-top: 15px;
+  }
 
+.description {
+  padding-top: 15px;
+}
 
+.form-group {
+  width: 50%;
+}
 
 

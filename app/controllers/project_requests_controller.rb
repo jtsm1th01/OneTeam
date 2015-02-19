@@ -27,7 +27,7 @@ class ProjectRequestsController < ApplicationController
     @project_request = ProjectRequest.new(project_request_params)
     params[:project_request][:skill_ids] ||=[]
     if @project_request.save
-      redirect_to project_requests_path, notice: 'Project request was successfully created.'
+      redirect_to my_project_requests_path(current_employee), notice: 'Project request was successfully created.'
     else
       redirect_to new_project_request_path(@project_request), notice: 'Please fill out entire form.'
     end
@@ -46,9 +46,7 @@ class ProjectRequestsController < ApplicationController
   def destroy
     @project_request = ProjectRequest.find(params[:id])
     @project_request.destroy
-    respond_to do |format|
-      format.html { redirect_to project_requests_url, notice: 'Project request was successfully destroyed.' }
-    end
+    redirect_to my_project_requests_url(current_employee), notice: 'Project request was successfully destroyed.'
   end
 
   private

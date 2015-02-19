@@ -1,16 +1,16 @@
-<%= form_for(@employee) do |f| %>
+  <%= form_for(@employee) do |f| %>
   <%= render 'shared/error_messages' %>
 
   <div class="field">
-    <%= f.label :employee_name, 'Employee Name:' %><br>
+    <%= f.label :employee_name, 'Employee Name' %><br>
     <%= f.text_field :employee_name, class: 'form-control', :placeholder => 'Enter your name...' %>
   </div>
   <div class="field">
-    <%= f.label :employee_email, 'Email:' %><br>
+    <%= f.label :employee_email, 'Email' %><br>
     <%= f.text_field :employee_email, class: 'form-control' %>
   </div>
   <div class="field">
-    <%= f.label :password %>
+    <%= f.label :password, 'Password' %>
     <%= f.password_field :password, class: 'form-control', :placeholder => 'Enter new password if desired...' %>
   </div>
   <div class="field">
@@ -18,23 +18,23 @@
     <%= f.password_field :password_confirmation, class: 'form-control', :placeholder => 'Re-enter your new password...' %>
   </div>
   <div class="field">
-    <%= f.label :years_with_company, 'Years with Company:' %><br>
+    <%= f.label :years_with_company, 'Years with Company' %><br>
     <%= f.number_field :years_with_company, class: 'form-control' %>
   </div>
    <div class="field">
-     <%= f.label :manager_id, 'Manager/Lead:' %><br>
+     <%= f.label :manager_id, 'Manager/Lead' %><br>
      <%= f.collection_select(:manager_id, @employees, :id, :employee_name, {prompt: 'Select Manager'}) %>
   </div>
   <div class="field">
-    <%= f.label :title_id, 'Title:' %><br>
+    <%= f.label :title_id, 'Title' %><br>
     <%= f.collection_select(:title_id, @titles, :id, :title_name, {prompt: 'Select Title'} ) %>
   </div>
   <div class="field">
-    <%= f.label :group_id, 'Group:' %><br>
+    <%= f.label :group_id, 'Group' %><br>
     <%= f.collection_select(:group_id, @groups, :id, :group_name, {prompt: 'Select Group'}) %>
   </div>
   <div class="field">
-    <%= f.label :location_id, 'Location:'%><br>
+    <%= f.label :location_id, 'Location'%><br>
     <%= f.collection_select(:location_id, @locations, :id, :location_name, {prompt: 'Select Location'}) %>
   </div>
 
