@@ -4,101 +4,103 @@
     <li role="presentation" class="active"><%= link_to 'My Profile', employee_path(current_employee)%></li>
     <li role="presentation"><%= link_to 'My Requests', my_project_requests_path(current_employee)%></li>
   </ul>
-</div>
-  
-<p id="notice"><%= notice %></p>
 
-<div class="container">
+  
+  <div>
+    <p id="notice"><%= notice %></p>
+  </div>
 
   <div class="row">
-    <div class="col-12">
+    <div class="col-md-12">
       <h1 class="text-left"><u>Employee Profile</u></h1>
     </div>
-  </div>
-  
-</div>
-  
-<div class="container">
+  </div> 
   
   <div class="row">
-    <div class="col-12 lead"><u>
+    <div class="col-md-12 lead"><u>
       <%= link_to 'Edit Profile', edit_employee_path(@employee) %></u>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-sm-3">
-      <img src="/assets/user.png" class="img-responsive" alt="user silhouette">
-    </div>
+  <div class="panel panel-info">
+    
+    <div class="row panel-body">
 
-    <div class="col-sm-9">
-      <div>
-        <span class="entry_title">Employee Name:</span>
-        <%= @employee.employee_name %>
+      <div class="col-md-3 panel-body">
+        <img src="/assets/user.png" class="img-responsive" alt="user silhouette">
       </div>
 
-      <div>
-        <span class="entry_title">Employee Email:</span>
-        <%= @employee.employee_email %>
-      </div>
-
-      <div>
-      <span class="entry_title">Years with Company:</span>
-      <%= @employee.try(:years_with_company) %>
-      </div>
-
-      <div>
-      <span class="entry_title">Manager/Lead:</span>
-      <%= @employee.try(:manager).try(:employee_name) %>
-      </div>
-
-      <div>
-      <span class="entry_title">Position:</span>
-      <%= @employee.try(:title).try(:title_name) %>
-      </div>
-
-      <div>
-      <span class="entry_title">Department:</span>
-      <%= @employee.try(:group).try(:department).try(:department_name) %>
-      </div>
-
-      <div>
-      <span class="entry_title">Group:</span>
-      <%= @employee.try(:group).try(:group_name) %>
-      </div>
-
-      <div>
-      <span class="entry_title">Location:</span>
-      <%= @employee.try(:location).try(:location_name) %>
-      </div>
-
-      <div class="row skill-group">
-
-        <div class="col-xs-1">
-          <span class="entry_title">Current Skills:</span>
+      <div class="col-md-9 panel-body">
+        <div class="panel-body">
+          <span class="entry_title">Employee Name:</span>
+          <%= @employee.employee_name %>
         </div>
+
+        <div class="panel-body">
+          <span class="entry_title">Employee Email:</span>
+          <%= @employee.employee_email %>
+        </div>
+
+        <div class="panel-body">
+          <span class="entry_title">Years with Company:</span>
+          <%= @employee.try(:years_with_company) %>
+        </div>
+
+        <div class="panel-body">
+          <span class="entry_title">Manager/Lead:</span>
+          <%= @employee.try(:manager).try(:employee_name) %>
+        </div>
+
+        <div class="panel-body">
+          <span class="entry_title">Position:</span>
+          <%= @employee.try(:title).try(:title_name) %>
+        </div>
+
+        <div class="panel-body">
+          <span class="entry_title">Department:</span>
+          <%= @employee.try(:group).try(:department).try(:department_name) %>
+        </div>
+
+        <div class="panel-body">
+          <span class="entry_title">Group:</span>
+          <%= @employee.try(:group).try(:group_name) %>
+        </div>
+
+        <div class="panel-body">
+          <span class="entry_title">Location:</span>
+          <%= @employee.try(:location).try(:location_name) %>
+        </div>
+
+        <div class="row panel-body">
+
+          <div class="col-md-1">
+            <span class="entry_title">Current Skills:</span>
+          </div>
           
-        <div class="col-xs-3">
-          <% @employee.skills.each do |skill| %>
-            <ul>
-              <li><%= skill.skill_name %></li>
-            </ul>
-          <% end %>
-        </div>
+          <div class="col-md-3">
+            <% @employee.skills.each do |skill| %>
+              <ul>
+                <li><%= skill.skill_name %></li>
+              </ul>
+            <% end %>
+          </div>
 
-        <div class="col-xs-1">
-          <span class="entry_title">Desired Skills:</span>
-        </div>
+          <div class="col-md-1">
+            <span class="entry_title">Desired Skills:</span>
+          </div>
         
-        <div class="col-xs-3">
-          <% @employee.goals.each do |skill| %>
-            <ul>
-              <li><%= skill.skill_name %></li>
-            </ul>
-          <% end %>
+          <div class="col-md-3">
+            <% @employee.goals.each do |skill| %>
+              <ul>
+                <li><%= skill.skill_name %></li>
+              </ul>
+            <% end %>
+          </div>
         </div>
-
       </div>
+  </div>
+
+
 
 
 
