@@ -17,6 +17,7 @@ gem 'bootstrap-sass' , '~>3.2.0.0'
 # sets the active class for link to current page
 gem 'nav_lynx', '~> 1.1.1'
 
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks

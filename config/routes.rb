@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'employees/:employee_id/project_requests' => 'project_requests#index', as: :my_project_requests
   get 'employees/:employee_id/project_requests/:project_request_id/assignments/new' => 'assignments#new', as: :new_assignment
   post 'employees/:employee_id/project_requests/:project_request_id/assignments' => 'assignments#create', as: :assignments
-  get 'home' => 'static_pages#home'
+  get 'home' => 'sessions#new'
   # might just have signup on the home page instead
   get 'signup'  => 'employees#new'
   
@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'static_pages#home'
+  root 'sessions#new'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
