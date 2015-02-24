@@ -10,17 +10,16 @@ class ResponsesController < ApplicationController
   
   def create
     @response = current_employee.responses.build(response_params)
-    respond_to do |format|
       if @response.save
-        format.html { redirect_to project_requests_path, notice: 'Response was sent. Thank you for your interest.' }
+        redirect_to project_requests_path, notice: 'Response was sent. Thank you for your interest.'
       else
-        format.html { render :new }
+        flash[:danger] = "You have already applied to this request. Thanks again for your interest!"
+        redirect_to project_requests_path
       end
-    end
   end
 
   def response_params
-    params.require(:response).permit(:project_request_id,:employee_id)
+    params.require(:response).permit(:project_request_id,:employee_id, :note)
   end
   
 end

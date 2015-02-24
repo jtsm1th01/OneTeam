@@ -1,11 +1,11 @@
 <%= form_for [@project_request, @response] do |f| %>
   <div class="field">
-    <%= f.label :project_request_id %><br>
-    <%= f.number_field :project_request_id %>
+    <%= f.number_field :project_request_id, hidden: true %>
+    <%= f.number_field :employee_id, hidden: true %>
   </div>
   <div class="field">
-    <%= f.label :employee_id %><br>
-    <%= f.number_field :employee_id %>
+    <%= f.label :note, 'Message to Project Lead:' %><br>
+    <%= f.text_area :note %>
   </div>
   <div class="actions">
     <%= f.submit %>

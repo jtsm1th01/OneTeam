@@ -1,5 +1,9 @@
 <% provide(:page_title, "Project Requests") %>
 
+<% flash.each do |name, msg| %>
+  <%= content_tag :div, msg, class: 'alert alert-danger' %>
+<% end %>
+
 <ul class="nav nav-tabs">
   <li role="presentation"><%= nav_link_to 'All Requests', project_requests_path, {}, {:wrapper => 'li', :selected_class => 'active'} %></li>
   <li role="presentation"><%= link_to 'My Profile', employee_path(current_employee)%></li>
@@ -36,13 +40,13 @@
     </div>
 
     <div class="panel-body"><span class="entry_title">
-      Request Start Date:</span>
+      Task Start Date:</span>
       <%= project_request.start_date %>
       <%= in_progress(project_request) %>
     </div>
 
     <div class="panel-body"><span class="entry_title">
-      Request End Date:</span>
+      Task End Date:</span>
       <%= project_request.end_date %>
     </div>
 
@@ -70,6 +74,14 @@
         </div>
       </div>
     </div>
+    
+    <% if project_request.respondents && project_request.respondents.include?(current_employee) %>
+      <div class='btn btn-success'><%= "Application submitted. Thanks for your interest!" %></div>
+    <% else %>
+      <div>
+        <%= link_to 'Respond', new_project_request_response_path(project_request), class: 'btn btn-info' %>
+      </div>
+    <% end %>
 
     <% if params.include?(:employee_id) %>
       <%= link_to 'Edit', edit_project_request_path(project_request), {class: "btn btn-info"} %>
