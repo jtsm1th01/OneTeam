@@ -27,9 +27,11 @@ class ProjectRequestsController < ApplicationController
     @project_request = ProjectRequest.new(project_request_params)
     params[:project_request][:skill_ids] ||=[]
     if @project_request.save
-      redirect_to my_project_requests_path(current_employee), notice: 'Project request was successfully created.'
+      flash.now[:success] = 'Project request created.'
+      redirect_to my_project_requests_path(current_employee)
     else
-      redirect_to new_project_request_path(@project_request), notice: 'Please fill out entire form.'
+      flash[:alert] = {:key => 'alert alert-danger', :msg => 'Please fill out entire form.'}
+      redirect_to new_project_request_path(@project_request)
     end
   end
 

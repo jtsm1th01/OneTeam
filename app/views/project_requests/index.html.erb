@@ -1,17 +1,5 @@
 <% provide(:page_title, "Project Requests") %>
 
-<% flash.each do |name, msg| %>
-  <%= content_tag :div, msg, class: 'alert alert-danger' %>
-<% end %>
-
-<ul class="nav nav-tabs">
-  <li role="presentation"><%= nav_link_to 'All Requests', project_requests_path, {}, {:wrapper => 'li', :selected_class => 'active'} %></li>
-  <li role="presentation"><%= link_to 'My Profile', employee_path(current_employee)%></li>
-  <li role="presentation"><%= nav_link_to 'My Requests', my_project_requests_path(current_employee), {}, {:wrapper => 'li', :selected_class => 'active'} %></li>
-</ul>
-
-<p id="notice"><%= notice %></p>
-
 <div class="row">
   <div class="col-md-12">
     <% if params.include?(:employee_id) %>
@@ -75,23 +63,16 @@
       </div>
     </div>
     
-    <% if project_request.respondents && project_request.respondents.include?(current_employee) %>
-      <div class='btn btn-success'><%= "Application submitted. Thanks for your interest!" %></div>
-    <% else %>
+    <% if project_request.respondents.include?(current_employee) %>
+      <div class='btn btn-success' disabled='disabled'><%= "Application Submitted" %></div>
+    <% elsif project_request.employee != current_employee %>
       <div>
-        <%= link_to 'Respond', new_project_request_response_path(project_request), class: 'btn btn-info' %>
+        <%= link_to 'Submit Application', new_project_request_response_path(project_request), class: 'btn btn-success' %>
       </div>
     <% end %>
 
     <% if params.include?(:employee_id) %>
-      <%= link_to 'Edit', edit_project_request_path(project_request), {class: "btn btn-info"} %>
-      <%= link_to 'Destroy', project_request, class: "btn btn-success", method: :delete, data: { confirm: 'Are you sure?' } %>
   
-      <div class="panel-body"><span class="entry_title">
-        Request is Closed:</span>
-        <%= project_request.filled %>
-      </div>
-
       <div class="panel-body"><span class="entry_title">
         Respondents:</span>
       </div>
@@ -107,18 +88,27 @@
           </div>
           <div class="col-md-1">
             <div class="panel-body">
-              <%= link_to 'Profile', employee_path(respondent), {class: "btn btn-info"} %>
+              <%= link_to 'Profile', employee_path(respondent), class: "btn btn-info" %>
             </div>
           </div>
           <div class="col-md-1">
             <div class="panel-body">
-              <%= link_to 'Assign', new_assignment_path(project_request_id: project_request, respondent_id: respondent), {class: "btn btn-success"} %>
+              <%= link_to 'Assign', new_assignment_path(project_request_id: project_request, respondent_id: respondent), class: "btn btn-success" %>
             </div>
           </div>
         
         </div>
         
-      <% end %>   
+      <% end %> 
+    
+      <div class="panel-body"><span class="entry_title">
+          Request is Closed:</span>
+          <%= project_request.filled %>
+        </div>
+    
+      <%= link_to 'Edit', edit_project_request_path(project_request), class: "btn btn-warning" %>
+      <%= link_to 'Destroy', project_request, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+    
     <% end %>  
 
   </div>

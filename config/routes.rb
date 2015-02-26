@@ -4,20 +4,19 @@ Rails.application.routes.draw do
   get 'employees/:employee_id/project_requests/:project_request_id/assignments/new' => 'assignments#new', as: :new_assignment
   post 'employees/:employee_id/project_requests/:project_request_id/assignments' => 'assignments#create', as: :assignments
   get 'home' => 'sessions#new'
-  # might just have signup on the home page instead
+  
   get 'signup'  => 'employees#new'
   
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
-
+  
   resources :groups, :employees, :projects, :departments, :locations, :skills, :titles
   
   resources :project_requests do
     resources :responses
   end
   
- 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -3,7 +3,7 @@
 
   <div class="form-group">
     <%= f.label :employee_name, 'Employee Name' %><br>
-    <%= f.text_field :employee_name, class: 'form-control', :placeholder => 'Enter your name...' %>
+    <%= f.text_field :employee_name, :placeholder => 'Enter your name...', class: 'form-control' %>
   </div>
   <div class="form-group">
     <%= f.label :employee_email, 'Email' %><br>
@@ -11,11 +11,11 @@
   </div>
   <div class="form-group">
     <%= f.label :password, 'Password' %>
-    <%= f.password_field :password, class: 'form-control', :placeholder => 'Enter new password if desired...' %>
+    <%= f.password_field :password, :placeholder => 'Enter new password if desired...', class: 'form-control' %>
   </div>
   <div class="form-group">
     <%= f.label :password_confirmation, "Confirmation" %>
-    <%= f.password_field :password_confirmation, class: 'form-control', :placeholder => 'Re-enter your new password...' %>
+    <%= f.password_field :password_confirmation, :placeholder => 'Re-enter your new password...', class: 'form-control' %>
   </div>
   <div class="form-group">
     <%= f.label :years_with_company, 'Years with Company' %><br>

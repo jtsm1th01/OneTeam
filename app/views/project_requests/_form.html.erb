@@ -1,17 +1,5 @@
 
   <%= form_for @project_request do |f| %>
-    
-    <% if @project_request.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@project_request.errors.count, "error") %>
-          prohibited this project_request from being saved</h2>
-        <ul>
-          <% @project_request.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
 
     <div class="field">
       <%= f.hidden_field(:employee_id)%>

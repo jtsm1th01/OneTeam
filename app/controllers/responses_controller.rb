@@ -13,8 +13,7 @@ class ResponsesController < ApplicationController
       if @response.save
         redirect_to project_requests_path, notice: 'Response was sent. Thank you for your interest.'
       else
-        flash[:danger] = "You have already applied to this request. Thanks again for your interest!"
-        redirect_to project_requests_path
+        redirect_to project_requests_path, alert: 'You have already applied.'
       end
   end
 

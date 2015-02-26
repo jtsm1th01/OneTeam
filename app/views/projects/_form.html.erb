@@ -1,18 +1,7 @@
 <%= form_for(@project) do |f| %>
-  <% if @project.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
-
-      <ul>
-      <% @project.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
 
   <div class="field">
-    <%= f.label :project_name %><br>
+    <%= f.label :project_name, 'Project Name' %><br>
     <%= f.text_field :project_name %>
   </div>
   <div class="field">
@@ -20,14 +9,15 @@
     <%= f.collection_select(:employee_id, @employees, :id, :employee_name, {prompt: 'Select...'}) %>
   </div>
   <div class="field">
-    <%= f.label :project_start %><br>
+    <%= f.label :project_start, 'Project Start Date' %><br>
     <%= f.date_select :project_start %>
   </div>
   <div class="field">
-    <%= f.label :project_end %><br>
+    <%= f.label :project_end, 'Project End Date' %><br>
     <%= f.date_select :project_end %>
   </div>
   <div class="actions">
     <%= f.submit %>
   </div>
+
 <% end %>

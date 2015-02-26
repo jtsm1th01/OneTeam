@@ -1,13 +1,17 @@
 <%= form_for [@project_request, @response] do |f| %>
-  <div class="field">
-    <%= f.number_field :project_request_id, hidden: true %>
-    <%= f.number_field :employee_id, hidden: true %>
-  </div>
-  <div class="field">
-    <%= f.label :note, 'Message to Project Lead:' %><br>
-    <%= f.text_area :note %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+<div>
+  <%= f.number_field :project_request_id, hidden: true %>
+  <%= f.number_field :employee_id, hidden: true %>
+</div>
+
+<div class="field">
+  <%= f.label :note, 'Message to Project Lead:' %><br>
+  <%= f.text_area :note %>
+</div>
+
+<div class="field">
+  <%=f.submit ("Apply"), {:class => "btn btn-success btn-submit"} %>
+</div>
+
 <% end %>

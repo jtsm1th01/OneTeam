@@ -133,7 +133,15 @@ field {
 }
 
 .btn {
+  margin-bottom: 13px;
+}
+
+.btn:not(.btn-submit) {
   margin-left: 13px;
+}
+
+.alert {
+  margin-top: 13px;
 }
 
 
