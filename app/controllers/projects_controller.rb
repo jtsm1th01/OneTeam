@@ -5,10 +5,6 @@ class ProjectsController < ApplicationController
     @employees = Employee.all
   end
 
-  def show
-    @project = Project.find(params[:id])
-  end
-
   def new
     @project = Project.new
     @employees = Employee.all
@@ -22,32 +18,26 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
 
-    respond_to do |format|
-      if @project.save
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
-      else
-        format.html { render :new }
-      end
+    if @project.save
+      redirect_to projects_url, notice: 'Project was successfully created.'
+    else
+      redirect_to projects_url, alert: 'Please use unique Project Name.'
     end
   end
 
   def update
     @project = Project.find(params[:id])
-    respond_to do |format|
       if @project.update(project_params)
-        format.html { redirect_to @project, notice: 'Project was successfully updated.' }
+        redirect_to projects_url, notice: 'Project was successfully updated.' 
       else
-        format.html { render :edit }
+        redirect_to projects_url, alert: 'Project could not be updated.'
       end
-    end
   end
 
   def destroy
     @project = Project.find(params[:id])
     @project.destroy
-    respond_to do |format|
-      format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
-    end
+    redirect_to projects_url, notice: 'Project was successfully destroyed.'
   end
 
   private

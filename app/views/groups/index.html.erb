@@ -1,3 +1,5 @@
+<% provide(:page_title, "Groups") %>
+
 <div class="row">
   <div class="col-md-12">
     <h1 class="text-left"><u>OneTeam Groups</u></h1>
@@ -24,8 +26,8 @@
     </div>
 
     <div class="panel-body">
-      <%= link_to 'Edit', edit_group_path(group) %></td>
-    <%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <%= link_to 'Edit', edit_group_path(group) %>
+      <%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %>
     </div>
 
   </div>

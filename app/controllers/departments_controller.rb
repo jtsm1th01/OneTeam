@@ -5,10 +5,6 @@ class DepartmentsController < ApplicationController
     @departments = Department.all
   end
 
-  def show
-    @department = Department.find(params[:id])
-  end
-
   def new
     @department = Department.new
   end
@@ -20,7 +16,7 @@ class DepartmentsController < ApplicationController
   def create
     @department = Department.new(department_params)
     if @department.save
-      redirect_to @department, notice: 'Department was successfully created.' 
+      redirect_to departments_url, notice: 'Department was successfully created.' 
     else
       render :new 
     end
@@ -29,7 +25,7 @@ class DepartmentsController < ApplicationController
   def update
     @department = Department.find(params[:id])
       if @department.update(department_params)
-        redirect_to @department, notice: 'Department was successfully updated.' 
+        redirect_to departments_url, notice: 'Department was successfully updated.' 
       else
         render :edit
       end

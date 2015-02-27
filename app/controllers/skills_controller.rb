@@ -4,10 +4,6 @@ class SkillsController < ApplicationController
     @skills = Skill.all
   end
 
-  def show
-    @skill = Skill.find(params[:id])
-  end
-
   def new
     @skill = Skill.new
   end
@@ -18,33 +14,26 @@ class SkillsController < ApplicationController
 
   def create
     @skill = Skill.new(skill_params)
-
-    respond_to do |format|
       if @skill.save
-        format.html { redirect_to @skill, notice: 'Skill was successfully created.' }
+        redirect_to skills_url, notice: 'Skill was successfully created.'
       else
-        format.html { render :new }
+        render :new
       end
-    end
   end
 
   def update
     @skill = Skill.find(params[:id])
-    respond_to do |format|
       if @skill.update(skill_params)
-        format.html { redirect_to @skill, notice: 'Skill was successfully updated.' }
+        redirect_to skills_url, notice: 'Skill was successfully updated.' 
       else
-        format.html { render :edit }
+        render :edit 
       end
-    end
   end
 
   def destroy
     @skill = Skill.find(params[:id])
     @skill.destroy
-    respond_to do |format|
-      format.html { redirect_to skills_url, notice: 'Skill was successfully destroyed.' }
-    end
+    redirect_to skills_url, notice: 'Skill was successfully destroyed.'
   end
 
   private
