@@ -1,12 +1,12 @@
 <%= form_for(@group) do |f| %>
 
   <div class="field">
-    <%= f.label :group_name %><br>
+    <%= f.label :group_name, 'Group Name' %><br>
     <%= f.text_field :group_name %>
   </div>
   <div class="field">
     <%= f.label :department_id %><br>
-    <%= f.collection_select(:department_id, @departments, :id, :department_name ) %>
+    <%= f.collection_select(:department_id, @departments, :id, :department_name, prompt: 'Please select...') %>
   </div>
   <div class="actions">
     <%= f.submit %>

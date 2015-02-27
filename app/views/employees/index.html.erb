@@ -5,50 +5,54 @@
   </div>
 </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Years with Company</th>
-      <th>Manager/Lead</th>
-      <th>Position</th>
-      <th>Department</th>
-      <th>Group</th>
-      <th>Location</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @employees.each do |employee| %>
-      <tr>
-        <td><%= employee.employee_name %></td>
-        <td><%= employee.employee_email %></td>
-        <td><%= employee.try(:years_with_company) %></td>
-        <td><%= employee.try(:manager).try(:employee_name) %></td>
-        <td><%= employee.try(:title).try(:title_name) %></td>
-        <td><%= employee.try(:group).try(:department).try(:department_name) %></td>
-        <td><%= employee.try(:group).try(:group_name) %></td>
-        <td><%= employee.try(:location).try(:location_name) %></td>
-        <td><%= link_to 'Full Profile', employee_path(employee) %></td>
-        
-        <% if current_employee == employee %>
-          <td><%= link_to 'Edit', edit_employee_path(employee) %></td>
-        <% end %>
-        
-        <% if current_employee.admin? && !current_employee?(employee) %>
-          <td><%= link_to "Delete", employee, method: :delete,
-                                            data: { confirm: "You sure?" } %></td>
-        <% end %>
-        
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
 <% if current_employee.admin? %>
   <%= link_to 'New Employee', new_employee_path %>
 <% end %>
+
+<% @employees.each do |employee| %>
+
+  <div class="panel panel-info">
+
+    <div class="panel-heading"><span class="entry_title">
+      Name:</span>
+      <%= employee.employee_name %>
+    </div>
+
+    <div class="panel-body"><span class="entry_title">
+      Email:</span>
+      <%= employee.employee_email %>
+    </div>
+
+    <div class="panel-body"><span class="entry_title">
+      Position:</span>
+      <%= employee.try(:title).try(:title_name) %>
+    </div>
+
+    <div class="panel-body"><span class="entry_title">
+      Location:</span>
+      <%= employee.try(:location).try(:location_name) %>
+    </div>
+    
+    <div class="panel-body">
+        <%= link_to 'Full Profile', employee_path(employee) %>
+    </div>
+    
+    <% if current_employee == employee %>
+      <div class="panel-body">
+        <%= link_to 'Edit', edit_employee_path(employee) %>
+      </div>
+    <% end %>
+      
+    <% if current_employee.admin? && !current_employee?(employee) %>
+      <div class="panel-body">
+        <%= link_to "Delete", employee, method: :delete,
+        data: { confirm: "You sure?" } %>
+      </div>
+    <% end %>
+    
+  </div>    
+
+<% end %>
+
+
+

@@ -9,6 +9,7 @@ class ProjectRequest < ActiveRecord::Base
   has_many :responses
   has_many :respondents, through: :responses, :source => :employee
   has_many :assignments
+  has_many :developers, through: :assignments, :source => :employee
   accepts_nested_attributes_for :responses
   
   scope :current, -> { where('end_date>?', Date.today-1) }

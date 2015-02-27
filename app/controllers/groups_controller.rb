@@ -4,12 +4,9 @@ class GroupsController < ApplicationController
     @groups = Group.all
   end
 
-  def show
-    @group = Group.find(params[:id])
-  end
-
   def new
     @group = Group.new
+    @departments = Department.all
   end
 
   def edit
@@ -19,10 +16,12 @@ class GroupsController < ApplicationController
 
   def create
     @group = Group.new(group_params)
+    @departments = Department.all
     if @group.save
-      redirect_to @group, notice: 'Group was successfully created.' 
+      redirect_to groups_url, notice: 'Group was successfully created.' 
     else
-      render :new 
+      flash[:alert]= 'Please complete form.'
+      render :new
     end
   end
 

@@ -13,7 +13,7 @@ class AssignmentsController < ApplicationController
     if @assignment.save
       redirect_to my_project_requests_path, notice: 'Assignment was successfully created.'
     else
-      redirect_to my_project_requests_path, notice: 'There was a problem with the assignment.'
+      redirect_to my_project_requests_path, alert: 'There was a problem with the assignment.'
     end
   end
 

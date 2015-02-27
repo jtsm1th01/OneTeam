@@ -33,7 +33,7 @@ class EmployeesController < ApplicationController
     @employee = Employee.new(employee_params)
     if @employee.save
       log_in @employee
-      redirect_to edit_employee_url(@employee), notice: 'Employee has been successfully created.'
+      redirect_to edit_employee_url(@employee), notice: 'Employee has been successfully created. Please complete your profile.'
     else
       render new_employee_path(@employee) 
     end
