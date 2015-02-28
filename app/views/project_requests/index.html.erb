@@ -18,9 +18,10 @@
   </div>
 <% end %>
 
-<% @project_requests.each do |project_request| %>
 
+<% @project_requests.each do |project_request| %>
   <div class="panel panel-info">
+
     <div class="panel-heading"><span class="entry_title">
       Project:</span>
       <%= project_request.project.project_name %>
@@ -52,87 +53,77 @@
         <div class="col-md-1">
           <span class="entry_title">Required Skills:</span>
         </div>
-        <div class="col-md-11">
-          <% project_request.skills.each do |skill| %>
-            <ul>
-              <li><%= skill.skill_name %></li>
-            </ul>
-          <% end %>
-        </div>
+      <div class="col-md-11">
+        <% project_request.skills.each do |skill| %>
+          <ul>
+            <li><%= skill.skill_name %></li>
+          </ul>
+        <% end %>
       </div>
     </div>
-    
-    <% if project_request.respondents.include?(current_employee) %>
-      <div class='btn btn-success' disabled='disabled'><%= "Application Submitted" %></div>
-    <% elsif project_request.employee != current_employee %>
-      <div>
-        <%= link_to 'Submit Application', new_project_request_response_path(project_request), class: 'btn btn-success' %>
-      </div>
-    <% end %>
-
-    <% if params.include?(:employee_id) %>
   
-      <div class="panel-body"><span class="entry_title">
-        Respondents:</span>
+  </div>
+    
+  <% if project_request.respondents.include?(current_employee) %>
+    <div class='btn btn-success' disabled='disabled'><%= "Application Submitted" %></div>
+  <% elsif project_request.employee != current_employee %>
+    <div>
+      <%= link_to 'Submit Application', new_project_request_response_path(project_request), class: 'btn btn-success' %>
+    </div>
+  <% end %>
+
+  <% if params.include?(:employee_id) %>
+  
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-2"><span class="entry_title">Respondents:</span></div>
       </div>
    
-      <% project_request.respondents.each do |respondent| %>
-    
-        <div class="row">
-          
-          <div class="col-md-2">
-            <div class="panel-body">
-              <%= respondent.employee_name %>
-            </div>
-          </div>
-          <div class="col-md-1">
-            <div class="panel-body">
-              <%= link_to 'Profile', employee_path(respondent), class: "btn btn-info" %>
-            </div>
-          </div>
-          
-          <% if project_request.developers.include?(respondent) %>
-            <div class="col-md-1">
-              <div class="panel-body">
-                <div class='btn btn-default' disabled='disabled'><%= "Assigned" %></div>
-              </div>
-            </div>
-          <% else %>
-            <div class="col-md-1">
-              <div class="panel-body">
-                <%= link_to 'Assign', new_assignment_path(project_request_id: project_request, respondent_id: respondent), class: "btn btn-success" %>
-              </div>
-            </div>
-          <% end %>
-          
+      <div class="row">
+        <% project_request.respondents.each do |respondent| %>
+            
+        <div class="col-md-2 col-md-offset-2">
+          <%= respondent.employee_name %>
         </div>
+        <div class="col-md-1">
+          <%= link_to 'Profile', employee_path(respondent), class: "btn btn-info btn-submit" %>
+        </div>
+
+        <% if project_request.developers.include?(respondent) %>
+        <div class="col-md-1">
+          <a href="#" class="btn btn-default btn-submit disabled">Assigned</a>
+        </div>
+        <div class="col-md-5 panel-info"><strong>Assignment Note: </strong><%= assignment_note(project_request, respondent) %>
+        </div>
+
+        <% else %>
+        <div class="col-md-1">
+          <%= link_to 'Assign', new_assignment_path(project_request_id: project_request, respondent_id: respondent), class: "btn btn-success btn-submit" %>
+        </div>
+        <% end %>
+
+        <% end %> 
+      </div>  
         
-      <% end %> 
-    
-      <div class="panel-body"><span class="entry_title">
-        
+      <div class="panel-footer">
         <% if project_request.filled? %>
           <%= form_for project_request do |f| %>
             <%= f.hidden_field :filled, value: false %>
             <%= f.submit 'Request Closed (Click to Reopen)', :class => 'btn btn-submit btn-danger' %>
           <% end %>
-        
+
         <% else %>
           <%= form_for project_request do |f| %>
             <%= f.hidden_field :filled, value: true %>
             <%= f.submit 'Request Open (Click to Close)', :class => 'btn btn-submit btn-success' %>
           <% end %>
-    
+        <% end %>
+
+        <%= link_to 'Edit Request', edit_project_request_path(project_request), class: "btn btn-warning btn-submit" %>
+        <%= link_to 'Destroy Request', project_request, class: "btn btn-danger btn-submit", method: :delete, data: { confirm: 'Are you sure?' } %>
+      </div>
+ 
+    </div>      
     <% end %>
-        
-    </div>
-
-    
-        <%= link_to 'Edit Request', edit_project_request_path(project_request), class: "btn btn-warning" %>
-        <%= link_to 'Destroy Request', project_request, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
-    
+</div>    
 <% end %>  
-
-  </div>
-<% end %>
-

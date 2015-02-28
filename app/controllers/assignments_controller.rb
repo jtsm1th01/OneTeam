@@ -27,7 +27,7 @@ class AssignmentsController < ApplicationController
 
   def destroy
     @assignment.destroy
-    redirect_to assignments_url, notice: 'Assignment was successfully destroyed.'
+    redirect_to project_requests, notice: 'Employee has been unassigned.'
   end
 
   private
@@ -35,6 +35,6 @@ class AssignmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def assignment_params
-      params.require(:assignment).permit(:employee_id, :project_request_id)
+      params.require(:assignment).permit(:employee_id, :project_request_id, :note)
     end
 end
