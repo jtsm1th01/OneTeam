@@ -79,8 +79,8 @@
         <div class="col-md-2"><span class="entry_title">Respondents:</span></div>
       </div>
    
-      <div class="row">
         <% project_request.respondents.each do |respondent| %>
+        <div class="row">
             
         <div class="col-md-2 col-md-offset-2">
           <%= respondent.employee_name %>
@@ -91,7 +91,7 @@
 
         <% if project_request.developers.include?(respondent) %>
         <div class="col-md-1">
-          <a href="#" class="btn btn-default btn-submit disabled">Assigned</a>
+          <%= button_to 'Unassign', unassign_path(current_assignment(project_request, respondent)), :method => :delete, class: "btn btn-danger btn-submit" %>
         </div>
         <div class="col-md-5 panel-info"><strong>Assignment Note: </strong><%= assignment_note(project_request, respondent) %>
         </div>
@@ -102,8 +102,9 @@
         </div>
         <% end %>
 
+        </div> 
         <% end %> 
-      </div>  
+       
         
       <div class="panel-footer">
         <% if project_request.filled? %>

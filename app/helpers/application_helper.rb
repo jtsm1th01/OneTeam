@@ -9,5 +9,10 @@ module ApplicationHelper
       "#{base_title} - #{page_title}"
     end
   end
+  
+  def current_assignment(project_request, respondent)
+    assignment=Assignment.where(:project_request => project_request, :employee => respondent)
+    current_assignment=assignment.first
+  end
 
 end

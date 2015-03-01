@@ -4,9 +4,6 @@ class AssignmentsController < ApplicationController
     @assignment = Assignment.new(employee_id: params[:respondent_id], project_request_id: params[:project_request_id])
   end
 
-  def edit
-  end
-
   def create
     @assignment = Assignment.new(assignment_params)
 
@@ -26,8 +23,8 @@ class AssignmentsController < ApplicationController
   end
 
   def destroy
-    @assignment.destroy
-    redirect_to project_requests, notice: 'Employee has been unassigned.'
+    Assignment.destroy(params[:assignment_id])
+    redirect_to :back, notice: 'Employee has been unassigned.'
   end
 
   private

@@ -3,6 +3,10 @@ Rails.application.routes.draw do
   get 'employees/:employee_id/project_requests' => 'project_requests#index', as: :my_project_requests
   get 'employees/:employee_id/project_requests/:project_request_id/assignments/new' => 'assignments#new', as: :new_assignment
   post 'employees/:employee_id/project_requests/:project_request_id/assignments' => 'assignments#create', as: :assignments 
+  
+  delete 'assignment/:assignment_id' => 'assignments#destroy', as: :unassign
+  
+  
   get 'home' => 'sessions#new'
   
   get 'signup'  => 'employees#new'

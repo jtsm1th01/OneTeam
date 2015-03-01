@@ -12,5 +12,4 @@ module ProjectRequestsHelper
     assignment1.note
   end
     
-    
 end
