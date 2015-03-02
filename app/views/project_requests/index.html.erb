@@ -100,6 +100,8 @@
         <div class="col-md-1">
           <%= link_to 'Assign', new_assignment_path(project_request_id: project_request, respondent_id: respondent), class: "btn btn-success btn-submit" %>
         </div>
+          <div class="col-md-5 panel-info"><strong>Application Note: </strong><%= response_note(project_request, respondent) %>
+        </div>
         <% end %>
 
         </div> 

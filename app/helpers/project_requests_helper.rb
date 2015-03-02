@@ -11,5 +11,11 @@ module ProjectRequestsHelper
     assignment1=assignment.first
     assignment1.note
   end
-    
+  
+  def response_note(project_request, respondent)
+    response=Response.where(:project_request => project_request, :employee => respondent)
+    response1=response.first
+    response1.note
+  end
+  
 end
