@@ -22,28 +22,23 @@
       <%= f.date_select :end_date %>
     </div>
 
-    <div class="row">
- 
-      <div class="col-md-1">
-        <p>Skills:</p>
+    <div class="row form-group skills-list">
+      <h5 class="col-md-12"><strong>Skills</strong></h5>  
+      <% @skills.each do |skill| %>
+      <div class="col-md-4">
+        <%= skill.skill_name %>
+        <%= check_box_tag "project_request[skill_ids][]", skill.id, @project_request.skill_ids.include?(skill.id) %><br>
       </div>
-      
-      <div class="col-md-11">
-        <div class="form-group">
-          <% @skills.each do |skill| %>
-            <%= skill.skill_name %>
-            <%= check_box_tag "project_request[skill_ids][]", skill.id, @project_request.skill_ids.include?(skill.id) %><br>
-          <% end %>
-        </div>
-      </div>
+      <% end %>
     </div>
+        
     <div class="form-group">
       <%= f.label :filled, "Check if Closed to New Applicants:" %>
       <%= f.check_box :filled %>
     </div>
     <div>
-      <%= f.submit ("Submit"), {:class => "btn btn-info btn-submit"} %>
-      <%= link_to 'Cancel', my_project_requests_path(current_employee), :class => 'btn btn-danger' %>
+      <%= f.submit ("Submit"), {:class => "btn btn-primary btn-submit"} %>
+      <%= link_to 'Cancel', my_project_requests_path(current_employee), :class => 'btn btn-warning btn-submit' %>
     </div>
 
   <% end %>

@@ -9,13 +9,13 @@ module ProjectRequestsHelper
   def assignment_note(project_request, respondent)
     assignment=Assignment.where(:project_request => project_request, :employee => respondent)
     assignment1=assignment.first
-    assignment1.note
+    assignment1.try(:note)
   end
   
   def response_note(project_request, respondent)
     response=Response.where(:project_request => project_request, :employee => respondent)
     response1=response.first
-    response1.note
+    response1.try(:note)
   end
   
 end

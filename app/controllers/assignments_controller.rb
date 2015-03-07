@@ -1,12 +1,7 @@
 class AssignmentsController < ApplicationController
 
-  def new
-    @assignment = Assignment.new(employee_id: params[:respondent_id], project_request_id: params[:project_request_id])
-  end
-
   def create
-    @assignment = Assignment.new(assignment_params)
-
+    @assignment=Assignment.new(employee_id: params[:respondent_id], project_request_id: params[:project_request_id])
     if @assignment.save
       redirect_to my_project_requests_path, notice: 'Assignment was successfully created.'
     else
@@ -15,8 +10,9 @@ class AssignmentsController < ApplicationController
   end
 
   def update
+    @assignment = Assignment.find(params[:assignment_id])
     if @assignment.update(assignment_params)
-      redirect_to @assignment, notice: 'Assignment was successfully updated.'
+      redirect_to my_project_requests_url(current_employee), notice: 'Assignment note updated.'
     else
       render :edit
     end
@@ -32,6 +28,6 @@ class AssignmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def assignment_params
-      params.require(:assignment).permit(:employee_id, :project_request_id, :note)
+      params.require(:assignment).permit(:employee_id, :project_request_id)
     end
 end

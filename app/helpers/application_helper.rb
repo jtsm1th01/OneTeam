@@ -14,5 +14,10 @@ module ApplicationHelper
     assignment=Assignment.where(:project_request => project_request, :employee => respondent)
     current_assignment=assignment.first
   end
+  
+  def current_response(project_request, respondent)
+    response=Response.where(:project_request => project_request, :employee => respondent)
+    current_response=response.first
+  end
 
 end

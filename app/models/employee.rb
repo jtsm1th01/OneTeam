@@ -20,7 +20,7 @@ class Employee < ActiveRecord::Base
   has_secure_password
   validates :password, length: { minimum: 6 }, allow_blank: true
   validates :employee_name, presence: true
-  validates :employee_email, presence: true
+  validates :employee_email, presence: true, uniqueness: true
   
   # Returns the hash digest of the given string.
   def Employee.digest(string)

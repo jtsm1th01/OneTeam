@@ -1,11 +1,17 @@
 Rails.application.routes.draw do
 
   get 'employees/:employee_id/project_requests' => 'project_requests#index', as: :my_project_requests
-  get 'employees/:employee_id/project_requests/:project_request_id/assignments/new' => 'assignments#new', as: :new_assignment
-  post 'employees/:employee_id/project_requests/:project_request_id/assignments' => 'assignments#create', as: :assignments 
   
+  get 'employees/:employee_id/project_requests/:project_request_id/assignments/new' => 'assignments#new', as: :new_assignment
+  post 'employees/:employee_id/project_requests/:project_request_id/assignments/new' => 'assignments#create', as: :create_assignment
+  get 'assignments/:assignment_id/edit' => 'assignments#edit', as: :edit_assignment
+  patch 'assignments/:assignment_id' => 'assignments#update', as: :assignment
   delete 'assignment/:assignment_id' => 'assignments#destroy', as: :unassign
   
+  get 'project_request/:project_request_id/responses/:response_id/comment/new' => 'responses#new_comment', as: :new_comment
+  patch 'project_request/:project_request_id/responses/:response_id/comment/new' => 'responses#create_comment', as: :add_comment
+  get 'project_request/:project_request_id/responses/:response_id/comment/edit' => 'responses#edit_comment', as: :edit_comment
+  patch 'project_request/:project_request_id/responses/:response_id/comment/edit' => 'responses#update_comment', as: :update_comment
   
   get 'home' => 'sessions#new'
   
