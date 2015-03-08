@@ -53,6 +53,8 @@
         <div class="col-md-12">
           <span class="entry_title">Required Skills:</span>
         </div>
+      </div>
+      <div class="row skill-group">
       <% project_request.skills.each do |skill| %>
         <div class="col-md-3">
           <ul>
@@ -60,21 +62,27 @@
           </ul>
         </div>
       <% end %>
-      
+      </div>
     </div>
       
     <% if project_request.developers.include?(current_employee) %>
       <div class="alert alert-success message">You have been assigned to this project!
       </div>
     <% elsif project_request.respondents.include?(current_employee) %>
-      <div class="alert alert-warning message">Application Submitted. Thanks for your interest!
+      <div class="row">
+        <div class="col-sm-2 alert alert-warning message-perm" >Application Submitted
+        </div>
+        <div class="col-sm-6 app-note"><strong>Application Note: </strong><%= response_note(project_request, current_employee) %>
+        </div>
+        <div>
+        <%= link_to "Edit Note", edit_project_request_response_path(project_request_id: project_request, response_id: current_response(project_request, current_employee)), class: "btn btn-warning app-note" %>
+      </div>
       </div>
     <% elsif project_request.employee != current_employee %>
       <div><%= link_to 'Submit Application', new_project_request_response_path(project_request), class: 'btn btn-primary btn-submit' %>
       </div>
     <% end %>
-      
-    </div>
+
     
   
 
