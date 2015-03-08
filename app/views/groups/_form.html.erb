@@ -9,7 +9,7 @@
     <%= f.collection_select(:department_id, @departments, :id, :department_name, prompt: 'Please select...') %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: 'btn btn-primary btn-submit' %>
   </div>
 
 <% end %>

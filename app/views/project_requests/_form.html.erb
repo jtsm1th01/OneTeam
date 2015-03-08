@@ -36,8 +36,9 @@
       <%= f.label :filled, "Check if Closed to New Applicants:" %>
       <%= f.check_box :filled %>
     </div>
-    <div>
-      <%= f.submit ("Submit"), {:class => "btn btn-primary btn-submit"} %>
+
+   <div>
+      <%= f.submit class: "btn btn-primary btn-submit" %>
       <%= link_to 'Cancel', my_project_requests_path(current_employee), :class => 'btn btn-warning btn-submit' %>
     </div>
 

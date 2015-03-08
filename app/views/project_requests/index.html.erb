@@ -93,7 +93,7 @@
           <%= respondent.employee_name %>
         </div>
         <div class="col-sm-2">
-          <%= link_to 'View Profile', employee_path(respondent), class: "btn btn-primary btn-submit" %>
+          <%= link_to 'View Profile', employee_path(respondent), class: "btn btn-info btn-submit" %>
         </div>
         <div class="col-sm-6 panel-info"><strong>Application Note: </strong><%= response_note(project_request, respondent) %>
         </div>
@@ -106,7 +106,7 @@
           </div>
         <% else %>
           <div class="col-sm-2 col-sm-offset-2">
-            <%= button_to 'Assign', new_assignment_path(project_request_id: project_request, respondent_id: respondent), class: "btn btn-success btn-submit" %>
+            <%= button_to 'Assign', new_assignment_path(project_request_id: project_request, respondent_id: respondent), class: "btn btn-primary btn-submit" %>
           </div>
         <% end %>
         <div class="col-sm-6 panel-info"><strong>Comment: </strong><%= current_response(project_request, respondent).comment %>
@@ -134,7 +134,7 @@
         <% else %>
           <%= form_for project_request do |f| %>
             <%= f.hidden_field :filled, value: true %>
-            <%= f.submit 'Close Request', :class => 'btn btn-submit btn-success' %>
+            <%= f.submit 'Close Request', :class => 'btn btn-submit btn-primary' %>
           <% end %>
         <% end %>
 

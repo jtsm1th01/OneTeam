@@ -3,7 +3,7 @@ class AssignmentsController < ApplicationController
   def create
     @assignment=Assignment.new(employee_id: params[:respondent_id], project_request_id: params[:project_request_id])
     if @assignment.save
-      redirect_to my_project_requests_path, notice: 'Assignment was successfully created.'
+      redirect_to my_project_requests_path, notice: 'Employee has been assigned.'
     else
       redirect_to my_project_requests_path, alert: 'There was a problem with the assignment.'
     end

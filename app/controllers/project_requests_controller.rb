@@ -39,7 +39,7 @@ class ProjectRequestsController < ApplicationController
     @project_request = ProjectRequest.find(params[:id])
     params[:project_request][:skill_ids] ||=[]
     if @project_request.update(project_request_params)
-      redirect_to project_requests_url, notice: 'Project request was successfully updated.'
+      redirect_to my_project_requests_url(current_employee), notice: 'Project request was successfully updated.'
     else
       flash[:params] = project_request_params
       redirect_to edit_project_request_url(@project_request), alert: 'Please complete entire form.'
