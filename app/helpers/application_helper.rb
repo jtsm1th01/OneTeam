@@ -11,13 +11,12 @@ module ApplicationHelper
   end
   
   def current_assignment(project_request, respondent)
-    assignment=Assignment.where(:project_request => project_request, :employee => respondent)
-    current_assignment=assignment.first
+    assignment=Assignment.find_by(:project_request => project_request, :employee => respondent)
   end
   
   def current_response(project_request, respondent)
-    response=Response.where(:project_request => project_request, :employee => respondent)
-    current_response=response.first
+    response=Response.find_by(:project_request => project_request, :employee => respondent)
+    
   end
 
 end

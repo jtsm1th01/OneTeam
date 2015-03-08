@@ -7,15 +7,11 @@ module ProjectRequestsHelper
   end
   
   def assignment_note(project_request, respondent)
-    assignment=Assignment.where(:project_request => project_request, :employee => respondent)
-    assignment1=assignment.first
-    assignment1.try(:note)
+    assignment=Assignment.find_by(:project_request => project_request, :employee => respondent).note
   end
   
   def response_note(project_request, respondent)
-    response=Response.where(:project_request => project_request, :employee => respondent)
-    response1=response.first
-    response1.try(:note)
+    response_note=Response.find_by(:project_request => project_request, :employee => respondent).note
   end
   
 end
