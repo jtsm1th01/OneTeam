@@ -25,10 +25,10 @@
     <div class="row form-group skills-list">
       <h5 class="col-md-12"><strong>Skills</strong></h5>  
       <% @skills.each do |skill| %>
-      <div class="col-md-4">
-        <%= skill.skill_name %>
-        <%= check_box_tag "project_request[skill_ids][]", skill.id, @project_request.skill_ids.include?(skill.id) %><br>
-      </div>
+        <div class="col-md-4">
+          <%= skill.skill_name %>
+          <%= check_box_tag "project_request[skill_ids][]", skill.id, @project_request.skill_ids.include?(skill.id) %><br>
+        </div>
       <% end %>
     </div>
         
