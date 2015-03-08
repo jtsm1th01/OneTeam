@@ -1,6 +1,10 @@
-<h1>Editing Project Request</h1>
+<% provide(:page_title, "Edit Request") %>
+
+<div class="row">
+  <div class="col-md-12">
+    <h1 class="text-left"><u>Edit <%= @project_request.project.project_name %> Request</u></h1>
+  </div>
+</div>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @project_request %> |
-<%= link_to 'Back', project_requests_path %>

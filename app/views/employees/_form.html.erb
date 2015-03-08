@@ -1,58 +1,64 @@
-<%= form_for(@employee) do |f| %>
-  <%= render 'shared/error_messages' %>
+  <%= form_for @employee, html: {class: "form"} do |f| %>
+    <%= render 'shared/error_messages' %>
 
-  <div class="field">
-    <%= f.label :employee_name, 'Employee Name:' %><br>
-    <%= f.text_field :employee_name, class: 'form-control', :placeholder => 'Enter your name...' %>
+  <div class="form-group">
+    <%= f.label :employee_name, 'Name' %><br>
+    <%= f.text_field :employee_name, :placeholder => 'Enter your name...', class: 'form-control' %>
   </div>
-  <div class="field">
-    <%= f.label :employee_email, 'Email:' %><br>
+  <div class="form-group">
+    <%= f.label :employee_email, 'Email' %><br>
     <%= f.text_field :employee_email, class: 'form-control' %>
   </div>
-  <div class="field">
-    <%= f.label :password %>
-    <%= f.password_field :password, class: 'form-control', :placeholder => 'Enter new password...' %>
+  <div class="form-group">
+    <%= f.label :password, 'Password' %>
+    <%= f.password_field :password, :placeholder => 'Enter new password if desired...', :class =>'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :password_confirmation, "Confirmation" %>
-    <%= f.password_field :password_confirmation, class: 'form-control', :placeholder => 'Re-enter your new password...' %>
+    <%= f.password_field :password_confirmation, :placeholder => 'Re-enter your new password...', class: 'form-control' %>
   </div>
-  <div class="field">
-    <%= f.label :years_with_company, 'Years with Company:' %><br>
+  <div class="form-group">
+    <%= f.label :years_with_company, 'Years with Company' %><br>
     <%= f.number_field :years_with_company, class: 'form-control' %>
   </div>
-   <div class="field">
-     <%= f.label :manager_id, 'Manager/Lead:' %><br>
-     <%= f.collection_select(:manager_id, @employees, :id, :employee_name, {prompt: 'Select Manager'}) %>
+   <div class="form-group">
+     <%= f.label :manager_id, 'Manager/Lead' %><br>
+     <%= f.collection_select(:manager_id, @employees, :id, :employee_name, {prompt: 'Select Manager'}, {class: "form-control"}) %>
   </div>
-  <div class="field">
-    <%= f.label :title_id, 'Title:' %><br>
-    <%= f.collection_select(:title_id, @titles, :id, :title_name, {prompt: 'Select Title'} ) %>
+  <div class="form-group">
+    <%= f.label :title_id, 'Title' %><br>
+    <%= f.collection_select(:title_id, @titles, :id, :title_name, {prompt: 'Select Title'}, {class: "form-control"}) %>
   </div>
-  <div class="field">
-    <%= f.label :group_id, 'Group:' %><br>
-    <%= f.collection_select(:group_id, @groups, :id, :group_name, {prompt: 'Select Group'}) %>
+  <div class="form-group">
+    <%= f.label :group_id, 'Group' %><br>
+    <%= f.collection_select(:group_id, @groups, :id, :group_name, {prompt: 'Select Group'}, {class: "form-control"}) %>
   </div>
-  <div class="field">
-    <%= f.label :location_id, 'Location:'%><br>
-    <%= f.collection_select(:location_id, @locations, :id, :location_name, {prompt: 'Select Location'}) %>
+  <div class="form-group">
+    <%= f.label :location_id, 'Location' %><br>
+    <%= f.collection_select(:location_id, @locations, :id, :location_name, {prompt: 'Select Location'}, {class: "form-control"}) %>
   </div>
 
-  <p>Current Skills:</p>
-  <div class="field">
+  <div class="row form-group skills-list">
+    <h5 class="col-md-12"><strong>Current Skills</strong></h5>
     <% @skills.each do |skill| %>
-    <%= skill.skill_name %>
-    <%= check_box_tag "employee[skill_ids][]", skill.id, @employee.skill_ids.include?(skill.id) %><br>
+      <div class="col-md-4">
+        <%= skill.skill_name %>
+        <%= check_box_tag "employee[skill_ids][]", skill.id, @employee.skill_ids.include?(skill.id) %><br>
+      </div>
     <% end %>
   </div>
-  <p>Desired Skills:</p>
-  <div class="field">
+  <div class="row form-group skills-list">
+    <h5 class="col-md-12"><strong>Desired Skills</strong></h5>
     <% @skills.each do |skill| %>
-    <%= skill.skill_name %>
-    <%= check_box_tag "employee[goal_ids][]", skill.id, @employee.goal_ids.include?(skill.id) %><br>
+      <div class="col-md-4">
+        <%= skill.skill_name %>
+        <%= check_box_tag "employee[goal_ids][]", skill.id, @employee.goal_ids.include?(skill.id) %><br>
+      </div>
     <% end %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="field">
+    <%= f.submit 'Update Profile', :class => 'btn btn-primary btn-submit' %>
+    <%= link_to 'Cancel', employee_path, :class => 'btn btn-danger btn-submit' %>
   </div>
+  
 <% end %>

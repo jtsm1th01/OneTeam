@@ -1,25 +1,30 @@
-<% provide(:title, "Dept") %><h1>OneTeam Departments</h1>
+<% provide(:page_title, "Dept") %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Department Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="row">
+  <div class="col-md-12">
+    <h1 class="text-left"><u>OneTeam Departments</u></h1>
+  </div>
+</div>
 
-  <tbody>
-    <% @departments.each do |department| %>
-      <tr>
-        <td><%= department.department_name %></td>
-        <td><%= link_to 'Show', department %></td>
-        <td><%= link_to 'Edit', edit_department_path(department) %></td>
-        <td><%= link_to 'Destroy', department, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="row">
+    <div class="col-md-12 lead"><u>
+      <%= link_to 'New Department', new_department_path %></u>
+    </div>
+</div>
 
-<br>
+<% @departments.each do |department| %>
 
-<%= link_to 'New Department', new_department_path %>
+<div class="panel panel-info">
+    <div class="panel-heading"><span class="entry_title">
+      Department Name:</span>
+      <%= department.department_name %>
+    </div>
+
+    <div class="panel-body">
+      <%= link_to 'Edit', edit_department_path(department) %>
+      <%= link_to 'Destroy', department, method: :delete, data: { confirm: 'Are you sure?' } %>
+    </div>
+
+  </div>
+
+<% end %>

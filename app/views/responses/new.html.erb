@@ -1,4 +1,21 @@
-<h1>New Response</h1>
+<h1><%= @project_request.project.project_name %> Application Submission</h1>
+<h2>Ready to join the team? Tell us a little about your interest in the project.</h2>
 
-<%= render 'form' %>
+<%= form_for [@project_request, @response] do |f| %>
 
+<div>
+  <%= f.number_field :project_request_id, hidden: true %>
+  <%= f.number_field :employee_id, hidden: true %>
+</div>
+
+<div class="field">
+  <%= f.label :note, 'Message to Project Lead:' %><br>
+  <%= f.text_area :note %>
+</div>
+
+<div class="field">
+  <%=f.submit ( f.object.new_record? ? "Submit Application" : "Update Note"), class: "btn btn-primary btn-submit" %>
+  <%= link_to "Cancel", :back, class: 'btn btn-danger btn-submit' %>
+</div>
+
+<% end %>

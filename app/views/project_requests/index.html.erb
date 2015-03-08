@@ -1,30 +1,158 @@
-<p id="notice"><%= notice %></p>
+<% provide(:page_title, "Project Requests") %>
 
-<h1>OneTeam Project Requests</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Project</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @project_requests.each do |project_request| %>
-      <tr>
-        <td><%= project_request.project.project_name %></td>
-        <td><%= project_request.description %></td>
-        <td><%= link_to 'Respond', new_project_request_response_path(project_request) %>
-        <td><%= link_to 'Show', project_request %></td>
-        <td><%= link_to 'Edit', edit_project_request_path(project_request) %></td>
-        <td><%= link_to 'Destroy', project_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<div class="row">
+  <div class="col-md-12">
+    <% if params.include?(:employee_id) %>
+    <h1 class="text-left"><u>My Project Requests</u></h1>
+    <% else %>
+    <h1 class="text-left"><u>All Requests</u></h1>
     <% end %>
-  </tbody>
-</table>
+  </div>
+</div>
 
-<br>
+<% if params.include?(:employee_id) %>
+  <div class="row">
+    <div class="col-md-12 lead"><u>
+      <%= link_to 'New Project Request', new_project_request_path %></u>
+    </div>
+  </div>
+<% end %>
 
-<%= link_to 'New Project Request', new_project_request_path %>
+
+<% @project_requests.each do |project_request| %>
+  <div class="panel panel-info">
+
+    <div class="panel-heading"><span class="entry_title">
+      Project:</span>
+      <%= project_request.project.project_name %>
+    </div>
+
+    <div class="panel-body"><span class="entry_title">
+      Task Start Date:</span>
+      <%= project_request.start_date %>
+      <%= in_progress(project_request) %>
+    </div>
+
+    <div class="panel-body"><span class="entry_title">
+      Task End Date:</span>
+      <%= project_request.end_date %>
+    </div>
+
+    <div class="panel-body"><span class="entry_title">
+      Project Lead:</span>
+      <%= project_request.project.lead.employee_name %>
+    </div>
+
+    <div class="panel-body"><span class="entry_title">
+      Description:</span>
+      <%= project_request.description %>
+    </div>
+
+    <div class="panel-body">
+      <div class="row skill-group">
+        <div class="col-md-12">
+          <span class="entry_title">Required Skills:</span>
+        </div>
+      </div>
+      <div class="row skill-group">
+      <% project_request.skills.each do |skill| %>
+        <div class="col-md-3">
+          <ul>
+            <li><%= skill.skill_name %></li>
+          </ul>
+        </div>
+      <% end %>
+      </div>
+    </div>
+      
+    <% if project_request.developers.include?(current_employee) %>
+      <div class="alert alert-success message">You have been assigned to this project!
+      </div>
+    <% elsif project_request.respondents.include?(current_employee) %>
+      <div class="row">
+        <div class="col-sm-2 alert alert-warning message-perm" >Application Submitted
+        </div>
+        <div class="col-sm-6 app-note"><strong>Application Note: </strong><%= response_note(project_request, current_employee) %>
+        </div>
+        <div>
+        <%= link_to "Edit Note", edit_project_request_response_path(project_request_id: project_request, response_id: current_response(project_request, current_employee)), class: "btn btn-warning app-note" %>
+      </div>
+      </div>
+    <% elsif project_request.employee != current_employee %>
+      <div><%= link_to 'Submit Application', new_project_request_response_path(project_request), class: 'btn btn-primary btn-submit' %>
+      </div>
+    <% end %>
+
+    
+  
+
+  <% if params.include?(:employee_id) %>
+  
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-12"><span class="entry_title">Respondents:</span>
+        </div>
+      </div>
+   
+      <% project_request.respondents.each do |respondent| %>
+      
+      <div class="row">
+        <div class="col-sm-2">
+          <%= respondent.employee_name %>
+        </div>
+        <div class="col-sm-2">
+          <%= link_to 'View Profile', employee_path(respondent), class: "btn btn-info btn-submit" %>
+        </div>
+        <div class="col-sm-6 panel-info"><strong>Application Note: </strong><%= response_note(project_request, respondent) %>
+        </div>
+      </div>
+        
+      <div class="row">
+        <% if project_request.developers.include?(respondent) %>
+          <div class="col-sm-2 col-sm-offset-2">
+            <%= button_to 'Unassign', unassign_path(current_assignment(project_request, respondent)), :method => :delete, class: "btn btn-danger btn-submit" %>
+          </div>
+        <% else %>
+          <div class="col-sm-2 col-sm-offset-2">
+            <%= button_to 'Assign', new_assignment_path(project_request_id: project_request, respondent_id: respondent), class: "btn btn-primary btn-submit" %>
+          </div>
+        <% end %>
+        <div class="col-sm-6 panel-info"><strong>Comment: </strong><%= current_response(project_request, respondent).comment %>
+          </div>
+        <% if current_response(project_request, respondent).attribute_present?(:comment) %>
+            <div class="col-sm-2">
+              <%= link_to "Edit Comment", edit_comment_path(project_request_id: project_request, response_id: current_response(project_request, respondent)), class: "btn btn-warning" %>
+            </div>
+          <% else %>
+            <div class="col-sm-2">
+              <%= link_to "Add Comment", new_comment_path(project_request_id: project_request, response_id: current_response(project_request, respondent)), class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        
+      </div>
+      
+      <% end %> 
+
+      <div class="panel-footer">
+        <% if project_request.filled? %>
+          <%= form_for project_request do |f| %>
+            <%= f.hidden_field :filled, value: false %>
+            <%= f.submit 'Reopen Request', :class => 'btn btn-submit btn-danger' %>
+          <% end %>
+        <% else %>
+          <%= form_for project_request do |f| %>
+            <%= f.hidden_field :filled, value: true %>
+            <%= f.submit 'Close Request', :class => 'btn btn-submit btn-primary' %>
+          <% end %>
+        <% end %>
+
+        <%= link_to 'Edit Request', edit_project_request_path(project_request), class: "btn btn-warning btn-submit" %>
+        <%= link_to 'Delete Request', project_request, class: "btn btn-danger btn-submit", method: :delete, data: { confirm: 'Are you sure?' } %>
+      </div>
+ 
+    </div>      
+    
+    <% end %>
+
+  </div>    
+<% end %>  

@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   def new
+    @employee = Employee.new
   end
   
   def create
@@ -7,10 +8,9 @@ class SessionsController < ApplicationController
     if employee && employee.authenticate(params[:session][:password])
       log_in employee
       params[:session][:remember_me] == '1' ? remember(employee) : forget(employee)
-      redirect_back_or employee
+      redirect_back_or project_requests_path
     else
-      flash.now[:danger] = 'Invalid email/password combination'
-      render 'new'
+      redirect_to login_path, alert: "Invalid email/password combination."
     end
   end
 
