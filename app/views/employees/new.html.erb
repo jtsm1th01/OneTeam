@@ -4,11 +4,11 @@
   <%= render 'shared/error_messages' %>
 
   <div class="field">
-    <%= f.label :employee_name, 'Employee Name:' %><br>
+    <%= f.label :employee_name, 'Employee Name' %><br>
     <%= f.text_field :employee_name, class: 'form-control', :placeholder => 'Enter your name...' %>
   </div>
   <div class="field">
-    <%= f.label :employee_email, 'Email:' %><br>
+    <%= f.label :employee_email, 'Email' %><br>
     <%= f.text_field :employee_email, class: 'form-control', :placeholder => 'Enter your email...' %>
   </div>
   <div class="field">
@@ -20,8 +20,6 @@
     <%= f.password_field :password_confirmation, class: 'form-control', :placeholder => 'Re-enter your password...' %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Create Account', class: 'btn btn-primary btn-submit' %>
   </div>
 <% end %>
-
-<%= link_to 'Back', employees_path %>

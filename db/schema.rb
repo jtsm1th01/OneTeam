@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150108075924) do
+ActiveRecord::Schema.define(version: 20150306231824) do
+
+  create_table "assignments", force: true do |t|
+    t.integer  "employee_id"
+    t.integer  "project_request_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "current_skills", force: true do |t|
     t.integer  "employee_id"
@@ -44,6 +51,8 @@ ActiveRecord::Schema.define(version: 20150108075924) do
     t.integer  "group_id"
     t.integer  "location_id"
     t.string   "password_digest"
+    t.string   "remember_digest"
+    t.boolean  "admin"
   end
 
   create_table "groups", force: true do |t|
@@ -64,11 +73,10 @@ ActiveRecord::Schema.define(version: 20150108075924) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "description"
-  end
-
-  create_table "project_requests_skills", id: false, force: true do |t|
-    t.integer "project_request_id", null: false
-    t.integer "skill_id",           null: false
+    t.integer  "employee_id"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.boolean  "filled",      default: false
   end
 
   create_table "projects", force: true do |t|
@@ -78,6 +86,20 @@ ActiveRecord::Schema.define(version: 20150108075924) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "employee_id"
+  end
+
+  create_table "required_skills", force: true do |t|
+    t.integer "project_request_id"
+    t.integer "skill_id"
+  end
+
+  create_table "responses", force: true do |t|
+    t.integer  "employee_id"
+    t.integer  "project_request_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "note"
+    t.text     "comment"
   end
 
   create_table "skills", force: true do |t|

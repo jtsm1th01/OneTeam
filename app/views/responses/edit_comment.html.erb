@@ -1,0 +1,17 @@
+<% provide(:page_title, "Edit Comment")%>
+
+<h1 class="text-left"><u>Edit Comment:</u></h1>
+
+<%= form_for [@response], url: edit_comment_path do |f| %>
+
+<div class="field">
+  <%= f.label :comment, 'Comment about Respondent:' %><br>
+  <%= f.text_area :comment %>
+</div>
+
+<div class="field">
+  <%=f.submit "Update Comment", class: "btn btn-primary btn-submit" %>
+  <%= link_to "Cancel", :back, class: 'btn btn-danger btn-submit' %>
+</div>
+
+<% end %>

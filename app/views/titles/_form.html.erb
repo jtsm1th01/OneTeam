@@ -1,21 +1,11 @@
 <%= form_for(@title) do |f| %>
-  <% if @title.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@title.errors.count, "error") %> prohibited this title from being saved:</h2>
-
-      <ul>
-      <% @title.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
 
   <div class="field">
-    <%= f.label :title_name %><br>
+    <%= f.label :title_name, 'Title Name' %><br>
     <%= f.text_field :title_name %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: 'btn btn-primary btn-submit' %>
   </div>
+
 <% end %>

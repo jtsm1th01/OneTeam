@@ -1,0 +1,17 @@
+<% provide(:page_title, "Add Comment")%>
+
+<h1 class="text-left"><u>Add Comment:</u></h1>
+
+<%= form_for [@response], url: new_comment_path do |f| %>
+
+<div class="field">
+  <%= f.label :comment, 'Comment about Respondent:' %><br>
+  <%= f.text_area :comment %>
+</div>
+
+<div class="field">
+  <%=f.submit "Add Comment", class: "btn btn-primary btn-submit" %>
+  <%= link_to "Cancel", :back, class: 'btn btn-danger btn-submit' %>
+</div>
+
+<% end %>
