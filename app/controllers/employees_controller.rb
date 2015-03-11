@@ -1,7 +1,10 @@
 class EmployeesController < ApplicationController
+<<<<<<< HEAD
   before_action :logged_in_employee, only: [:index, :edit, :update]
   before_action :correct_employee,   only: [:edit, :update]
   before_action :admin_employee,     only: :destroy
+=======
+>>>>>>> Task4_Login
 
   def index
     @employees = Employee.all
@@ -58,6 +61,7 @@ class EmployeesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+<<<<<<< HEAD
     
     # Before filters
   
@@ -81,6 +85,9 @@ class EmployeesController < ApplicationController
       redirect_to(root_url) unless current_employee.admin?
     end
   
+=======
+
+>>>>>>> Task4_Login
     # Never trust parameters from the scary internet, only allow the white list through.
     def employee_params
       params.require(:employee).permit(:employee_name, :employee_email, :years_with_company, :location_id, :group_id, :title_id, :manager_id, :password, :password_confirmation, :skill_ids => [], :goal_ids => [])
