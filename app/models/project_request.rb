@@ -18,13 +18,13 @@ class ProjectRequest < ActiveRecord::Base
   
   # returns a count of how many skills the developer has that the request asks for
   def required_skill_percent_match(current_employee)
-    match_count = ((self.skills)&(current_employee.skills)).count
+    match_count = (self.skills & current_employee.skills).count
     percentage_float = (match_count/(self.skills.count.nonzero? || 1).to_f) * 100
   end
   
   # returns a count of how many skills the developer is interested in that the request asks for
   def interested_skill_percent_match(current_employee)
-    match_count = ((self.skills)&(current_employee.goals)).count
+    match_count = (self.skills & current_employee.goals).count
     percentage_float = (match_count/(self.skills.count.nonzero? || 1).to_f) * 100
   end
  
