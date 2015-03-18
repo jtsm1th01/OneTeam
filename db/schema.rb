@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150306231824) do
+ActiveRecord::Schema.define(version: 20150318201302) do
 
   create_table "assignments", force: true do |t|
     t.integer  "employee_id"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20150306231824) do
     t.integer  "skill_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "skill_level"
   end
 
   create_table "departments", force: true do |t|
