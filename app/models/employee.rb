@@ -23,6 +23,7 @@ class Employee < ActiveRecord::Base
   validates :employee_email, presence: true, uniqueness: true
   
   accepts_nested_attributes_for :current_skills, :allow_destroy => true, reject_if: lambda {|attributes| attributes['skill_id'].blank?}
+  accepts_nested_attributes_for :desired_skills, :allow_destroy => true, reject_if: lambda {|attributes| attributes['skill_id'].blank?}
   
   # Returns the hash digest of the given string.
   def Employee.digest(string)

@@ -38,25 +38,46 @@
     <%= f.collection_select(:location_id, @locations, :id, :location_name, {prompt: 'Select Location'}, {class: "form-control"}) %>
   </div>
 
-  <div class="row form-group skills-list">
-    <h5 class="col-md-12"><strong>Current Skills</strong></h5>
-      <div class="col-md-4">
-        <%= f.fields_for :current_skills do |skills_fields| %>
-        <%= skills_fields.collection_select(:skill_id, @skills, :id, :skill_name, {prompt: 'Select Skill'}, {class: "form-control"}) %>
-        <%= skills_fields.number_field :skill_level %>
-        <% end %>
+  <div class="row form-group">
+    <h5 class="col-md-4"><strong>Current Skills</strong></h5>
+    <h5 class="col-md-4 col-md-offset-2"><strong>Skill Level</strong></h5>
+  </div>
+  <%= f.fields_for :current_skills do |skills_fields| %>
+  <div class="row">
+    <div class="col-md-3">
+      <%= skills_fields.collection_select(:skill_id, @skills, :id, :skill_name, {prompt: 'Select Skill'}, {class: "form-control"}) %>
+    </div>
+    <div class="col-md-1">
+      <%= skills_fields.radio_button("skill_level", "1") %>
+      <%= skills_fields.label :skill_level, '1', :value => '1' %>
+    </div>
+    <div class="col-md-1">
+      <%= skills_fields.radio_button("skill_level", "2") %>
+      <%= skills_fields.label :skill_level, '2', :value => '2' %>
+    </div>
+    <div class="col-md-1">
+      <%= skills_fields.radio_button("skill_level", "3") %>
+      <%= skills_fields.label :skill_level, '3', :value => '3' %>
+    </div>
+    <div class="col-md-1">
+      <%= skills_fields.radio_button("skill_level", "4") %>
+      <%= skills_fields.label :skill_level, '4', :value => '4' %>
     </div>
   </div>
-  <div class="row form-group skills-list">
-    <h5 class="col-md-12"><strong>Desired Skills</strong></h5>
-    <% @skills.each do |skill| %>
-      <div class="col-md-4">
-        <%= skill.skill_name %>
-        <%= check_box_tag "employee[goal_ids][]", skill.id, @employee.goal_ids.include?(skill.id) %><br>
-      </div>
-    <% end %>
+  <% end %>
+  
+  <div class="row form-group">
+    <h5 class="col-md-4"><strong>Desired Skills</strong></h5>
   </div>
-  <div class="field">
+  <%= f.fields_for :desired_skills do |desired_skill_fields| %>
+    <div class="row">
+      <div class="col-md-3">
+        <%= desired_skill_fields.collection_select(:skill_id, @skills, :id, :skill_name, {prompt: 'Select Skill'}, {class: "form-control"}) %>
+      </div>
+    </div>
+  <% end %>
+  
+<div class="field">
     <%= f.submit 'Update Profile', :class => 'btn btn-primary btn-submit' %>
     <%= link_to 'Cancel', employee_path, :class => 'btn btn-danger btn-submit' %>
   </div>
