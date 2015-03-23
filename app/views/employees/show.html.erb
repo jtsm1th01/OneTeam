@@ -63,34 +63,37 @@
         </div>
 
         <div class="row panel-body">
-
-          <div class="col-md-1">
+          <div class="col-md-3">
             <span class="entry_title">Current Skills:</span>
           </div>
-          
-          <div class="col-md-3">
-            <% @employee.current_skills.each do |current_skill| %>
-              <ul>
-                <li><%= current_skill.skill.skill_name %>
-                  <%=current_skill.skill_level%></li>
-            
-              </ul>
-            <% end %>
+          <div class="col-md-9">
+            <span class="entry_title">Level (1-beg 2-int 3-adv 4-expert):</span>
           </div>
+        </div>
+        <% @employee.current_skills.each do |current_skill| %>
+        <div class="row panel-body">
+          <div class="col-md-3">
+            <%= current_skill.skill.skill_name %>
+          </div>
+          <div class="col-md-2">
+            <%= current_skill.skill_level %>
+          </div>
+        </div>
+        <% end %>
+        
 
-          <div class="col-md-1">
+        <div class="row panel-body">
+          <div class="col-md-3">
             <span class="entry_title">Desired Skills:</span>
           </div>
-        
-          <div class="col-md-3">
-            <% @employee.goals.each do |skill| %>
-              <ul>
-                <li><%= skill.skill_name %></li>
-              </ul>
-            <% end %>
-          </div>
-        
         </div>
+        <% @employee.desired_skills.each do |desired_skill| %>
+        <div class="row panel-body">
+          <div class="col-md-12">
+            <%= desired_skill.skill.skill_name %>
+          </div>  
+        </div>
+        <% end %>
         
         <div class="row panel-body">
 
