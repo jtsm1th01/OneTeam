@@ -27,6 +27,7 @@ class EmployeesController < ApplicationController
     @groups = Group.all
     @locations = Location.all
     @skills = Skill.all
+    @employee.current_skills.build
   end
 
   def create
@@ -41,8 +42,8 @@ class EmployeesController < ApplicationController
 
   def update
     @employee = Employee.find(params[:id])
-    params[:employee][:skill_ids] ||=[]
     params[:employee][:goal_ids] ||=[]
+    raise exception
     if @employee.update_attributes(employee_params)
       redirect_to @employee, notice: 'Employee was successfully updated.' 
     else
@@ -83,6 +84,6 @@ class EmployeesController < ApplicationController
   
     # Never trust parameters from the scary internet, only allow the white list through.
     def employee_params
-      params.require(:employee).permit(:employee_name, :employee_email, :years_with_company, :location_id, :group_id, :title_id, :manager_id, :password, :password_confirmation, :skill_ids => [], :goal_ids => [])
+      params.require(:employee).permit(:employee_name, :employee_email, :years_with_company, :location_id, :group_id, :title_id, :manager_id, :password, :password_confirmation, current_skills_attributes: [:id, :skill_id, :skill_level], :goal_ids => [])
     end
 end

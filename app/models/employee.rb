@@ -22,6 +22,8 @@ class Employee < ActiveRecord::Base
   validates :employee_name, presence: true
   validates :employee_email, presence: true, uniqueness: true
   
+  accepts_nested_attributes_for :current_skills, :allow_destroy => true, reject_if: lambda {|attributes| attributes['skill_id'].blank?}
+  
   # Returns the hash digest of the given string.
   def Employee.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :

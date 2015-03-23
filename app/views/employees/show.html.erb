@@ -69,9 +69,11 @@
           </div>
           
           <div class="col-md-3">
-            <% @employee.skills.each do |skill| %>
+            <% @employee.current_skills.each do |current_skill| %>
               <ul>
-                <li><%= skill.skill_name %></li>
+                <li><%= current_skill.skill.skill_name %>
+                  <%=current_skill.skill_level%></li>
+            
               </ul>
             <% end %>
           </div>
