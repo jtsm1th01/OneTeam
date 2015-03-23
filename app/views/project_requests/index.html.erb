@@ -63,8 +63,7 @@
       <% end %>
       
       <% if project_request.employee != current_employee %>
-      <span class="entry_title">Skill Match: <%= number_to_percentage(project_request.required_skill_percent_match(current_employee), precision: 0) %>
-        / Goal Match: <%= number_to_percentage(project_request.interested_skill_percent_match(current_employee), precision: 0) %></span>
+      <span class="entry_title">Skill Match: <%= number_to_percentage(project_request.required_skill_relevance(current_employee), precision: 0) %> / Goal Match: <%= number_to_percentage(project_request.interested_skill_percent_match(current_employee), precision: 0) %></span>
       <% end %>
     </div>
       

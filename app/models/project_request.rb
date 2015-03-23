@@ -15,17 +15,26 @@ class ProjectRequest < ActiveRecord::Base
   scope :current, -> { where('end_date>?', Date.today-1) }
   scope :open, -> { where('filled=?', false) }
   scope :started, -> { where('start_date<?', Date.today+1) }
-  
-  # returns a count of how many skills the developer has that the request asks for
-  def required_skill_percent_match(current_employee)
-    match_count = (self.skills & current_employee.skills).count
-    percentage_float = (match_count/(self.skills.count.nonzero? || 1).to_f) * 100
-  end
-  
+   
   # returns a count of how many skills the developer is interested in that the request asks for
   def interested_skill_percent_match(current_employee)
     match_count = (self.skills & current_employee.goals).count
     percentage_float = (match_count/(self.skills.count.nonzero? || 1).to_f) * 100
   end
- 
+  
+  # returns relevance based on matched skill levels divided by best possible match
+  def required_skill_relevance(current_employee)
+    skill_match = (self.skills & current_employee.skills)
+    skill_levels = Array.new
+    skill_match.each do |matched_skill|
+      current_employee.current_skills.each do |current_skill|
+        if current_skill.skill == matched_skill
+          skill_levels.push(current_skill.skill_level)
+        end
+      end
+    end
+    total_max_level_count = (self.skills.count)*4
+    relevance_percentage = (skill_levels.sum/(total_max_level_count.nonzero? || 1).to_f) * 100
+  end
+      
 end
