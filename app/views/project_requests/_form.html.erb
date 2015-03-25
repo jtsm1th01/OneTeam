@@ -1,5 +1,7 @@
 
   <%= form_for @project_request do |f| %>
+  <%= render 'shared/project_request_messages' %>
+
 
     <div class="field">
       <%= f.hidden_field(:employee_id)%>
@@ -22,15 +24,21 @@
       <%= f.date_select :end_date %>
     </div>
 
-    <div class="row form-group skills-list">
-      <h5 class="col-md-12"><strong>Skills</strong></h5>  
-      <% @skills.each do |skill| %>
-        <div class="col-md-4">
-          <%= skill.skill_name %>
-          <%= check_box_tag "project_request[skill_ids][]", skill.id, @project_request.skill_ids.include?(skill.id) %><br>
-        </div>
-      <% end %>
+    <div class="row form-group">
+      <h5 class="col-md-4"><strong>Required Skills</strong></h5>
     </div>
+    <%= f.fields_for :required_skills do |required_skill_fields| %>
+    <div class="row">
+      <div class="col-md-3">
+        <%= required_skill_fields.collection_select(:skill_id, @skills, :id, :skill_name, {prompt: 'Select Skill'}, {class: "form-control"}) %>
+      </div>
+      <div class="col-md-1">
+        <%= required_skill_fields.check_box :_destroy %>Delete Skill
+      </div>
+    </div>
+  <% end %>
+
+  <%= f.submit 'Add Required Skill', :name => 'add_skill', :class => 'btn btn-primary btn-submit' %>
         
     <div class="form-group">
       <%= f.label :filled, "Check if Closed to New Applicants:" %>

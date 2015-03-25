@@ -11,6 +11,7 @@ class ProjectRequest < ActiveRecord::Base
   has_many :assignments
   has_many :developers, through: :assignments, :source => :employee
   accepts_nested_attributes_for :responses
+  accepts_nested_attributes_for :required_skills, :allow_destroy => true, reject_if: lambda {|attributes| attributes['skill_id'].blank?}
   
   scope :current, -> { where('end_date>?', Date.today-1) }
   scope :open, -> { where('filled=?', false) }
@@ -24,9 +25,9 @@ class ProjectRequest < ActiveRecord::Base
   
   # returns relevance based on matched skill levels divided by best possible match
   def required_skill_relevance(current_employee)
-    skill_match = (self.skills & current_employee.skills)
+    matched_skills = (self.skills & current_employee.skills)
     skill_levels = Array.new
-    skill_match.each do |matched_skill|
+    matched_skills.each do |matched_skill|
       current_employee.current_skills.each do |current_skill|
         if current_skill.skill == matched_skill
           skill_levels.push(current_skill.skill_level)
@@ -34,7 +35,7 @@ class ProjectRequest < ActiveRecord::Base
       end
     end
     total_max_level_count = (self.skills.count)*4
-    relevance_percentage = (skill_levels.sum/(total_max_level_count.nonzero? || 1).to_f) * 100
+    relevance_percentage = skill_levels.sum/((total_max_level_count.nonzero? || 1).to_f) * 100
   end
       
 end

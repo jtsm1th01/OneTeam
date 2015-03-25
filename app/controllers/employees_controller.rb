@@ -57,6 +57,8 @@ class EmployeesController < ApplicationController
       if @employee.update_attributes(employee_params)
         redirect_to @employee, notice: 'Employee was successfully updated.' 
       else
+        @employee.current_skills.build
+        @employee.desired_skills.build
         render :edit
       end
     end
