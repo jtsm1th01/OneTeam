@@ -1,5 +1,5 @@
-  <%= form_for @employee, html: {class: "form"} do |f| %>
-    <%= render 'shared/error_messages' %>
+<%= form_for @employee, html: {class: "form"} do |f| %>
+  <%= render 'shared/error_messages' %>
 
   <div class="form-group">
     <%= f.label :employee_name, 'Name' %><br>
@@ -21,9 +21,9 @@
     <%= f.label :years_with_company, 'Years with Company' %><br>
     <%= f.number_field :years_with_company, class: 'form-control' %>
   </div>
-   <div class="form-group">
-     <%= f.label :manager_id, 'Manager/Lead' %><br>
-     <%= f.collection_select(:manager_id, @employees, :id, :employee_name, {prompt: 'Select Manager'}, {class: "form-control"}) %>
+  <div class="form-group">
+    <%= f.label :manager_id, 'Manager/Lead' %><br>
+    <%= f.collection_select(:manager_id, @employees, :id, :employee_name, {prompt: 'Select Manager'}, {class: "form-control"}) %>
   </div>
   <div class="form-group">
     <%= f.label :title_id, 'Title' %><br>
@@ -68,6 +68,8 @@
     </div>
   </div>
   <% end %>
+
+  <%= f.submit 'Add Current Skill', :name => 'add_skill', :class => 'btn btn-primary btn-submit' %>
   
   <div class="row form-group">
     <h5 class="col-md-4"><strong>Desired Skills</strong></h5>
@@ -79,9 +81,11 @@
       </div>
       <div class="col-md-1">
         <%= desired_skill_fields.check_box :_destroy %>Delete Skill
-    </div>
+      </div>
     </div>
   <% end %>
+
+  <%= f.submit 'Add Desired Skill', :name => 'add_skill', :class => 'btn btn-primary btn-submit' %>
   
 <div class="field">
     <%= f.submit 'Update Profile', :class => 'btn btn-primary btn-submit' %>

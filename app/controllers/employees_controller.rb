@@ -29,7 +29,6 @@ class EmployeesController < ApplicationController
     @skills = Skill.all
     @employee.current_skills.build
     @employee.desired_skills.build
-    
   end
 
   def create
@@ -43,11 +42,23 @@ class EmployeesController < ApplicationController
   end
 
   def update
-    @employee = Employee.find(params[:id])
-    if @employee.update_attributes(employee_params)
-      redirect_to @employee, notice: 'Employee was successfully updated.' 
+    @employees = Employee.all
+    @titles = Title.all
+    @groups = Group.all
+    @locations = Location.all
+    @skills = Skill.all
+    
+    if params[:add_skill]
+      @employee.attributes = employee_params
+      @employee.current_skills.build
+      @employee.desired_skills.build
+      render 'edit'
     else
-      redirect_to edit_employee_url(@employee), notice: 'Please complete all fields.'
+      if @employee.update_attributes(employee_params)
+        redirect_to @employee, notice: 'Employee was successfully updated.' 
+      else
+        render :edit
+      end
     end
   end
 
