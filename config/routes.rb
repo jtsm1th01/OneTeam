@@ -15,6 +15,11 @@ Rails.application.routes.draw do
   get 'project_request/:project_request_id/responses/:response_id/comment/edit' => 'responses#edit_comment', as: :edit_comment
   patch 'project_request/:project_request_id/responses/:response_id/comment/edit' => 'responses#update_comment', as: :update_comment
   
+  get 'assignments/:assignment_id/reviews/new' => 'assignments#new_review', as: :new_review
+  get 'assignments/:assignment_id/reviews/edit' => 'assignments#edit_review', as: :edit_review
+  
+  
+  
   get 'home' => 'sessions#new'
   
   get 'signup'  => 'employees#new'
@@ -23,7 +28,7 @@ Rails.application.routes.draw do
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
   
-  resources :groups, :employees, :projects, :departments, :locations, :skills, :titles
+  resources :groups, :employees, :projects, :departments, :locations, :skills, :titles, :reviews
   
   resources :project_requests do
     resources :responses
