@@ -1,5 +1,6 @@
 class Review < ActiveRecord::Base
+  has_many :skill_reviews
   belongs_to :assignment
-  has_one :employee, :through => :assignment
-  has_one :project_request, :through => :assignment
+  
+  accepts_nested_attributes_for :skill_reviews
 end
