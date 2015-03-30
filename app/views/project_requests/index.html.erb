@@ -135,15 +135,19 @@
           <% end %>
         </div>
         
-          <% if project_request.developers.include?(respondent) %>
-            <div class="row">
-              <div class="col-sm-2 col-sm-offset-2">
-                <%= link_to 'Review', new_assignment_review_path(current_assignment(project_request, respondent)), class: "btn btn-primary btn-submit" %>
-              </div>
-              <div class="col-sm-2">Skill: </div>
-              <div class="col-sm-2">Experience (Days): </div>
-              <div class="col-sm-2">Lvl Assess: </div>
+        <% if project_request.developers.include?(respondent) %>
+          <div class="row">
+            <div class="col-sm-2 col-sm-offset-2">
+              <% if Review.exists?(:assignment => current_assignment(project_request, respondent)) %>
+              <%= "Review submitted." %>
+              <% else %>
+              <%= link_to "Review", new_assignment_review_path(current_assignment(project_request, respondent)), class: "btn btn-primary btn-submit" %>
+              <% end %>
             </div>
+            <div class="col-sm-2">Skill: </div>
+            <div class="col-sm-2">Experience (Days): </div>
+            <div class="col-sm-2">Level Assessment: </div>
+          </div>
             
             <% current_assignment(project_request, respondent).skill_reviews.each do |skill_review| %>
             <div class="row">
