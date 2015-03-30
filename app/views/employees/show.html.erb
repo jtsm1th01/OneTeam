@@ -96,11 +96,9 @@
         <% end %>
         
         <div class="row panel-body">
-
           <div class="col-md-2">
             <span class="entry_title">Project Assignments:</span>
           </div>
-          
           <div class="col-md-3">
             <% @employee.assignments.each do |assignment| %>
               <ul>
@@ -108,7 +106,62 @@
               </ul>
             <% end %>
           </div>
-          
+        </div>
+        
+        <div class="panel panel-info">
+          <div class="row panel-body">
+          <div class="col-md-2">
+            <span class="entry_title">OneTeam History:</span>
+          </div>
+          <div class="col-md-2">
+            <span class="entry_title">Project:</span>
+          </div>
+          <div class="col-md-2">
+            <span class="entry_title">Skill:</span>
+          </div>
+          <div class="col-md-2">
+            <span class="entry_title">Experience Gained (Days):</span>
+          </div>
+          <div class="col-md-2">
+            <span class="entry_title">Skill Level Assessment:</span>
+          </div>
+        </div>
+        <div class="row panel-body">
+          <div class="col-md-2 col-md-offset-2">Overall</div>
+        </div>
+        
+        <% @experience_totals.each do |skill, experience| %>
+        <div class="row">
+          <div class="col-md-2 col-md-offset-4">
+            <%= skill %>
+          </div>
+          <div class="col-md-2 col-md">
+            <%= experience %>
+          </div>
+        </div>
+          <% end %>
+        
+        <% @employee.assignments.each do |assignment| %>
+        
+        <div class="row panel-body">
+          <div class="col-md-2 col-md-offset-2">
+            <%= assignment.project_request.project.project_name %>
+          </div>
+        </div>
+          <% assignment.review.skill_reviews.each do |skill_review| %>
+            <div class="row">
+              <div class="col-md-2 col-md-offset-4">
+                <%= skill_review.skill.skill_name %>
+              </div>
+              <div class="col-md-2">
+                <%= skill_review.experience %>
+              </div>
+              <div class="col-md-2">
+                <%= skill_review.skill_level %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
         </div>
       
     </div>
@@ -116,6 +169,7 @@
   </div>
     
     <%= link_to "Back", :back, class: 'btn btn-danger' %>
+    
     
 
     

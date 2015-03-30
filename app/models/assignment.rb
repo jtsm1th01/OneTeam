@@ -4,6 +4,7 @@ class Assignment < ActiveRecord::Base
   has_one :review
   has_many :skill_reviews, :through => :review
   
-  validates :employee, uniqueness: true
+  validates :employee, uniqueness: { scope: :project_request_id }
+  
 
 end
