@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   patch 'assignments/:assignment_id' => 'assignments#update', as: :assignment
   delete 'assignment/:assignment_id' => 'assignments#destroy', as: :unassign
   
+  get 'assignment/:assignment_id/reviews/new' => 'reviews#new', as: :new_assignment_review
+  
   get 'project_request/:project_request_id/responses/:response_id/edit' => 'responses#edit', as: :edit_project_request_response
   patch 'project_request/:project_request_id/responses/:response_id/edit' => 'responses#update', as: :update_project_request_response
   get 'project_request/:project_request_id/responses/:response_id/comment/new' => 'responses#new_comment', as: :new_comment

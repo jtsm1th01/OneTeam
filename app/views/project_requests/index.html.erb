@@ -134,6 +134,13 @@
           <% end %>
         
       </div>
+      <% if project_request.developers.include?(respondent) %>
+      <div class="row">
+          <div class="col-sm-2 col-sm-offset-2">
+            <%= link_to 'Review', new_assignment_review_path(current_assignment(project_request, respondent)), class: "btn btn-primary btn-submit" %>
+          </div>
+        </div>
+      <% end %>
       
       <% end %> 
 
