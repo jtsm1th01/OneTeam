@@ -10,6 +10,7 @@ class EmployeesController < ApplicationController
   def show
     @employee = Employee.find(params[:id])
     @experience_totals = experience_totals(@employee)
+    @skill_level_averages = skill_level_averages(@employee)
   end
 
   def new
@@ -70,7 +71,7 @@ class EmployeesController < ApplicationController
     @employee.destroy
     redirect_to employees_url, notice: 'Employee was successfully destroyed.' 
   end
-
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     
@@ -94,6 +95,19 @@ class EmployeesController < ApplicationController
       end
       return experience_totals
     end
+  
+    def skill_level_averages(employee)
+      skill_reviews = Hash.new(0)
+      employee.skill_reviews.each do |skill_review|
+        if skill_reviews.has_key?(skill_review.skill.skill_name)
+          skill_reviews[skill_review.skill.skill_name] << skill_review.skill_level
+        else
+          skill_reviews[skill_review.skill.skill_name] = [skill_review.skill_level]
+        end
+      end
+      skill_level_averages = skill_reviews.map { |skill,skill_level| [skill, (skill_level.sum.to_f / skill_level.count).round] }
+      end
+
   
     # Confirms the correct employee.
     def correct_employee

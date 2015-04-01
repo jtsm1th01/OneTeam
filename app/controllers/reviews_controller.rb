@@ -21,7 +21,7 @@ class ReviewsController < ApplicationController
   def create
     @review = Review.new(review_params)
     if @review.save
-      redirect_to @review, notice: 'Review was successfully created.'
+      redirect_to my_project_requests_path(current_employee), notice: 'Review was successfully created.'
     else
       render :new
     end

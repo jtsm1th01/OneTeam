@@ -140,7 +140,18 @@
           </div>
         </div>
           <% end %>
-        
+          
+          <% @skill_level_averages.each do |skill, skill_level_avg| %>
+          <div class="row">
+          <div class="col-md-2 col-md-offset-4">
+            <%= skill %>
+          </div>
+          <div class="col-md-2 col-md">
+            <%= skill_level_avg %>
+          </div>
+        </div>
+          <% end %>
+          
         <% @employee.assignments.each do |assignment| %>
         
         <div class="row panel-body">

@@ -2,7 +2,7 @@ class Employee < ActiveRecord::Base
   attr_accessor :remember_token
   
   belongs_to :location
-  belongs_to :department #perhaps not needed?
+  belongs_to :department
   belongs_to :title
   belongs_to :group
   has_many :subordinates, :class_name => "Employee",
@@ -13,8 +13,8 @@ class Employee < ActiveRecord::Base
   has_many :desired_skills 
   has_many :skills, :through => :current_skills
   has_many :goals, :through => :desired_skills, :source => :skill
-  has_many :responses #perhaps not needed; same as applications?
-  has_many :applications, through: :responses, :source => :project_request #not yet needed (not used)
+  has_many :responses
+  has_many :applications, through: :responses, :source => :project_request
   has_many :project_requests
   has_many :assignments
   has_many :reviews, through: :assignments
