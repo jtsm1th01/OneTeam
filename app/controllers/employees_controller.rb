@@ -89,7 +89,7 @@ class EmployeesController < ApplicationController
     def experience_totals(employee)
     experience_totals = Hash.new(0)
       employee.assignments.each do |assignment|
-        assignment.review.skill_reviews.each do |skill_review|
+        assignment.review.try(:skill_reviews).try(:each) do |skill_review|
           experience_totals[skill_review.skill.skill_name] += skill_review.experience
         end
       end

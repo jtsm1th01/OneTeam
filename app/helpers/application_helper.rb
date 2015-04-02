@@ -16,7 +16,10 @@ module ApplicationHelper
   
   def current_response(project_request, respondent)
     response=Response.find_by(:project_request => project_request, :employee => respondent)
-    
   end
-
+    
+  def current_review(assignment)
+    review=Review.find_by(:assignment => assignment)
+  end
+  
 end

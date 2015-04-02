@@ -6,6 +6,12 @@ class ReviewsController < ApplicationController
     @review.skill_reviews.build
     @employee = Employee.find(@assignment.employee_id)
   end
+  
+  def edit
+    @review = Review.find(params[:review_id])
+    @assignment = Assignment.find(params[:assignment_id])
+    @employee = Employee.find(@assignment.employee_id)
+  end
 
   def create
     @review = Review.new(review_params)
@@ -13,6 +19,15 @@ class ReviewsController < ApplicationController
       redirect_to my_project_requests_path(current_employee), notice: 'Review was successfully created.'
     else
       render :new
+    end
+  end
+  
+  def update
+    @review = Review.find(params[:id])
+    if @review.update_attributes(review_params)
+      redirect_to my_project_requests_path(current_employee), notice: 'Review was successfully updated.'
+    else
+      render :edit
     end
   end
 

@@ -1,15 +1,6 @@
 
   <%= form_for @review do |f| %>
-  <% if @review.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
-      <ul>
-      <% @review.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render 'shared/review_messages' %>
 
   <%= f.hidden_field :assignment_id, :value => @assignment.id %>
 
@@ -28,18 +19,22 @@
         <div class="col-md-2">
           <%= skill_review.label :experience, "Experience Gained:" %>
         </div>
-        <div class="col-md-1">
-          <%= skill_review.number_field :experience, class: "form-control" %>
+        <div class="col-md-2">
+          <%= skill_review.number_field :experience, {class: "form-control", placeholder: "Enter # of Days", in: 0...1000} %>
         </div>
         <div class="col-md-1">Days</div>
       </div>
 
       <div class="row">
         <div class="col-md-12">
-          <%= skill_review.label :skill_level, "Skill Assessment: (If new review, default is employee-supplied level.) 1-Beg 2-Int 3-Adv 4-Expert" %>
+          <%= skill_review.label :skill_level, "Skill Assessment: (1-Beg 2-Int 3-Adv 4-Expert)" %>
         </div>
       </div>
       <div class="row form-group form-radio">
+        <div class="radio-inline">
+        <%= skill_review.radio_button("skill_level", "", {checked: true}) %>
+        <%= skill_review.label :skill_level, 'N/A' %>
+        </div>
         <div class="radio-inline">
         <%= skill_review.radio_button("skill_level", "1") %>
         <%= skill_review.label :skill_level, '1' %>

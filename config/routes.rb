@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   delete 'assignment/:assignment_id' => 'assignments#destroy', as: :unassign
   
   get 'assignment/:assignment_id/reviews/new' => 'reviews#new', as: :new_assignment_review
+  post 'assignment/:assignment_id/reviews/new' => 'reviews#create', as: :create_assignment_review
+  get 'assignment/:assignment_id/review/:review_id/edit' => 'reviews#edit', as: :edit_assignment_review
+  patch 'assignment/:assignment_id/review/:review_id/edit' => 'reviews#update', as: :update_assignment_review
   
   get 'project_request/:project_request_id/responses/:response_id/edit' => 'responses#edit', as: :edit_project_request_response
   patch 'project_request/:project_request_id/responses/:response_id/edit' => 'responses#update', as: :update_project_request_response

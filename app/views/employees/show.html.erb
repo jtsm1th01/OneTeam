@@ -107,73 +107,80 @@
             <% end %>
           </div>
         </div>
-        
-        <div class="panel panel-info">
-          <div class="row panel-body">
-          <div class="col-md-2">
-            <span class="entry_title">OneTeam History:</span>
-          </div>
-          <div class="col-md-2">
-            <span class="entry_title">Project:</span>
-          </div>
-          <div class="col-md-2">
-            <span class="entry_title">Skill:</span>
-          </div>
-          <div class="col-md-2">
-            <span class="entry_title">Experience Gained (Days):</span>
-          </div>
-          <div class="col-md-2">
-            <span class="entry_title">Skill Level Assessment:</span>
-          </div>
-        </div>
+         
         <div class="row panel-body">
-          <div class="col-md-2 col-md-offset-2">Overall</div>
-        </div>
-        
-        <% @experience_totals.each do |skill, experience| %>
-        <div class="row">
-          <div class="col-md-2 col-md-offset-4">
-            <%= skill %>
-          </div>
-          <div class="col-md-2 col-md">
-            <%= experience %>
+          <div class="col-md-3">
+            <span class="entry_title"><u>OneTeam History:</u></span>
           </div>
         </div>
-          <% end %>
           
-          <% @skill_level_averages.each do |skill, skill_level_avg| %>
-          <div class="row">
-          <div class="col-md-2 col-md-offset-4">
-            <%= skill %>
-          </div>
-          <div class="col-md-2 col-md">
-            <%= skill_level_avg %>
-          </div>
-        </div>
-          <% end %>
-          
-        <% @employee.assignments.each do |assignment| %>
-        
         <div class="row panel-body">
-          <div class="col-md-2 col-md-offset-2">
-            <%= assignment.project_request.project.project_name %>
-          </div>
-        </div>
-          <% assignment.review.skill_reviews.each do |skill_review| %>
-            <div class="row">
-              <div class="col-md-2 col-md-offset-4">
-                <%= skill_review.skill.skill_name %>
-              </div>
-              <div class="col-md-2">
-                <%= skill_review.experience %>
-              </div>
-              <div class="col-md-2">
-                <%= skill_review.skill_level %>
-              </div>
+          <div class="col-md-2">Overall Experience Gained (Days):</div>
+          <div class="col-md-4">
+            <% @experience_totals.each do |skill, experience| %>
+            <div class="col-md-6">
+              <%= skill %>
             </div>
-          <% end %>
-        <% end %>
+            <div class="col-md-6">
+              <%= experience %>
+            </div>
+            <div class="clearfix visible-md-block"></div>
+            <% end %>
+          </div>
         </div>
+            
+          <div class="row panel-body">
+            <div class="col-md-2">Skill Review Avgs:</div>
+            <div class="col-md-4">
+              <% @skill_level_averages.each do |skill, skill_level_avg| %>
+              <div class="col-md-6">
+                <%= skill %>
+              </div>
+              <div class="col-md-6">
+                <%= skill_level_avg %>
+              </div>
+              <div class="clearfix visible-md-block"></div>
+              <% end %>
+            </div>
+          </div>
+              
+          <div class="row panel-body">
+            <div class="col-md-2">
+            <span class="entry_title">Project:</span>
+            </div>
+            <div class="col-md-2">
+              <span class="entry_title">Skill:</span>
+            </div>
+            <div class="col-md-2">
+              <span class="entry_title">Experience (Days):</span>
+            </div>
+            <div class="col-md-2">
+              <span class="entry_title">Skill Level:</span>
+            </div>
+          </div>
+      
+          <div class="row panel-body">
+          <% @employee.assignments.each do |assignment| %>
+            <div class="col-md-2">
+              <%= assignment.project_request.project.project_name %>
+            </div>
+            <div class="col-md-10">
+              <% assignment.review.try(:skill_reviews).try(:each) do |skill_review| %>
+              <div class="row">
+                <div class="col-md-3">
+                  <%= skill_review.skill.skill_name %>
+                </div>
+                <div class="col-md-2">
+                  <%= skill_review.experience %>
+                </div>
+                <div class="col-md-2">
+                  <%= skill_review.skill_level %>
+                </div>
+              </div>
+              <% end %>
+            </div>
+          </div>   
+          <% end %>
       
     </div>
  
