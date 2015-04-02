@@ -29,8 +29,6 @@ class EmployeesController < ApplicationController
     @groups = Group.all
     @locations = Location.all
     @skills = Skill.all
-    @employee.current_skills.build
-    @employee.desired_skills.build
   end
 
   def create
@@ -50,9 +48,12 @@ class EmployeesController < ApplicationController
     @locations = Location.all
     @skills = Skill.all
     
-    if params[:add_skill]
+    if params[:add_current_skill]
       @employee.attributes = employee_params
       @employee.current_skills.build
+      render 'edit'
+    elsif params[:add_desired_skill]
+      @employee.attributes = employee_params
       @employee.desired_skills.build
       render 'edit'
     else
