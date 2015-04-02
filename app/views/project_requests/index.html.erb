@@ -63,7 +63,7 @@
       <% end %>
       
       <% if project_request.employee != current_employee %>
-      <span class="entry_title">Skill Match: <%= number_to_percentage(project_request.required_skill_relevance(current_employee), precision: 0) %> / Goal Match: <%= number_to_percentage(project_request.interested_skill_percent_match(current_employee), precision: 0) %></span>
+      <span class="entry_title">Skill Relevance: <%= number_to_percentage(project_request.required_skill_relevance(current_employee), precision: 0) %> / Goal Match: <%= number_to_percentage(project_request.interested_skill_percent_match(current_employee), precision: 0) %></span>
       <% end %>
     </div>
       
@@ -103,7 +103,7 @@
         <div class="row ">
           <div class="col-sm-2">
             <%= respondent.employee_name %><br>
-            <span class="entry_title">Skill Match: <%= number_to_percentage(project_request.required_skill_relevance(respondent), precision: 0) %><br>
+            <span class="entry_title">Skill Relevance: <%= number_to_percentage(project_request.required_skill_relevance(respondent), precision: 0) %><br>
             Goal Match: <%= number_to_percentage(project_request.interested_skill_percent_match(respondent), precision: 0) %></span>
           </div>
           <div class="col-sm-2">
