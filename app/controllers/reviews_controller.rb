@@ -3,8 +3,10 @@ class ReviewsController < ApplicationController
   def new
     @review = Review.new
     @assignment = Assignment.find(params[:assignment_id])
-    @review.skill_reviews.build
     @employee = Employee.find(@assignment.employee_id)
+    @assignment.project_request.required_skills.each do |required_skill|
+      @review.skill_reviews.build(skill_id: required_skill.skill_id)
+    end
   end
   
   def edit
@@ -27,6 +29,8 @@ class ReviewsController < ApplicationController
     if @review.update_attributes(review_params)
       redirect_to my_project_requests_path(current_employee), notice: 'Review was successfully updated.'
     else
+      @assignment = Assignment.find(params[:review][:assignment_id])
+      @employee = Employee.find(@assignment.employee_id)
       render :edit
     end
   end

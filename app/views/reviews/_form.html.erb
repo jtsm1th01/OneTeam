@@ -4,15 +4,13 @@
 
   <%= f.hidden_field :assignment_id, :value => @assignment.id %>
 
-  <% @assignment.project_request.required_skills.each do |required_skill| %>
-  
-    <div class="panel">
+  <div class="panel">
       <%= f.fields_for :skill_reviews do |skill_review| %>
       <div class="row">
         <div class="col-md-12">
           <%= label_tag "Skill: " %>
-          <%= required_skill.skill.skill_name %>
-          <%= skill_review.hidden_field :skill_id, :value => required_skill.skill.id %>
+          <%= skill_review.object.skill.skill_name %>
+          <%= skill_review.hidden_field :skill_id, :value => skill_review.object.skill.id %>
         </div>
       </div>
       <div class="row">
@@ -20,7 +18,7 @@
           <%= skill_review.label :experience, "Experience Gained:" %>
         </div>
         <div class="col-md-2">
-          <%= skill_review.number_field :experience, {class: "form-control", placeholder: "Enter # of Days", in: 0...1000} %>
+          <%= skill_review.number_field :experience, {class: "form-control", value: 0} %>
         </div>
         <div class="col-md-1">Days</div>
       </div>
@@ -32,7 +30,7 @@
       </div>
       <div class="row form-group form-radio">
         <div class="radio-inline">
-        <%= skill_review.radio_button("skill_level", "", {checked: true}) %>
+        <%= skill_review.radio_button("skill_level", "0", {checked: true}) %>
         <%= skill_review.label :skill_level, 'N/A' %>
         </div>
         <div class="radio-inline">
@@ -54,7 +52,6 @@
       </div>
     <% end %>
 </div>
-  <% end %>
     
     <div class="actions">
       <%= f.submit "Submit Review", class: "btn btn-primary btn-submit" %>
