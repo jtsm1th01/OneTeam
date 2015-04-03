@@ -18,7 +18,7 @@
           <%= skill_review.label :experience, "Experience Gained:" %>
         </div>
         <div class="col-md-2">
-          <%= skill_review.number_field :experience, {class: "form-control", value: 0} %>
+          <%= skill_review.number_field :experience, {class: "form-control", value: 0, min: 0} %>
         </div>
         <div class="col-md-1">Days</div>
       </div>

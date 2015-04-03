@@ -22,7 +22,6 @@ class ProjectRequestsController < ApplicationController
    @groups = Group.all
    @projects = Project.all
    @skills = Skill.all
-   @project_request.required_skills.build
   end
 
   def create
