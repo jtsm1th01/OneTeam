@@ -48,25 +48,29 @@
       <%= skills_fields.collection_select(:skill_id, @skills, :id, :skill_name, {prompt: 'Select Skill'}, {class: "form-control"}) %>
     </div>
     <div class="row form-group form-radio">
-      <div class="radio-inline">
-      <%= skills_fields.radio_button("skill_level", "1") %>
-      <%= skills_fields.label :skill_level, '1', :value => '1' %>
+      <div class="col-lg-4">
+        <div class="radio-inline">
+        <%= skills_fields.radio_button("skill_level", "1") %>
+        <%= skills_fields.label :skill_level, '1', :value => '1' %>
+        </div>
+        <div class="radio-inline">
+          <%= skills_fields.radio_button("skill_level", "2") %>
+          <%= skills_fields.label :skill_level, '2', :value => '2' %>
+        </div>
+        <div class="radio-inline">
+          <%= skills_fields.radio_button("skill_level", "3") %>
+          <%= skills_fields.label :skill_level, '3', :value => '3' %>
+        </div>
+        <div class="radio-inline">
+          <%= skills_fields.radio_button("skill_level", "4") %>
+          <%= skills_fields.label :skill_level, '4', :value => '4' %>
+        </div>
       </div>
-      <div class="radio-inline">
-        <%= skills_fields.radio_button("skill_level", "2") %>
-        <%= skills_fields.label :skill_level, '2', :value => '2' %>
-      </div>
-      <div class="radio-inline">
-        <%= skills_fields.radio_button("skill_level", "3") %>
-        <%= skills_fields.label :skill_level, '3', :value => '3' %>
-      </div>
-      <div class="radio-inline">
-        <%= skills_fields.radio_button("skill_level", "4") %>
-        <%= skills_fields.label :skill_level, '4', :value => '4' %>
-      </div>
-      <div class="checkbox-inline">
+      <% if skills_fields.object.persisted? %>
+        <div class="checkbox-inline">
         <%= skills_fields.check_box :_destroy %>Delete Skill
-      </div>
+        </div>
+      <% end %>
     </div>
   </div>
   <% end %>
@@ -81,9 +85,11 @@
       <div class="col-md-3">
         <%= desired_skill_fields.collection_select(:skill_id, @skills, :id, :skill_name, {prompt: 'Select Skill'}, {class: "form-control"}) %>
       </div>
-      <div class="checkbox-inline">
-        <%= desired_skill_fields.check_box :_destroy %>Delete Skill
-      </div>
+      <% if desired_skill_fields.object.persisted? %>
+        <div class="checkbox-inline">
+          <%= desired_skill_fields.check_box :_destroy %>Delete Skill
+        </div>
+      <% end %>
     </div>
   <% end %>
 

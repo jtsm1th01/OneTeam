@@ -84,7 +84,7 @@ p {
 
 /* forms */
 
-input:not(.btn-submit), textarea, select, .uneditable-input {
+input:not(.btn-submit):not([type="radio"]):not([type="checkbox"]), textarea, select, .uneditable-input {
   border: 1px solid #bbb;
   width: 100%;
   margin-bottom: 15px;
