@@ -1,7 +1,7 @@
 class ProjectRequest < ActiveRecord::Base
   validates :description, presence: true
   validates :project_id, presence: true
-  validates_numericality_of :end_date, greater_than_or_equal_to: :start_date, message: "must be equal to or later than Start Date"
+  validate :end_date_must_be_after_start_date
   
   has_many :skills, :through => :required_skills
   has_many :required_skills, :dependent => :destroy
@@ -37,6 +37,12 @@ class ProjectRequest < ActiveRecord::Base
     end
     total_max_level_count = (self.skills.count)*4
     relevance_percentage = skill_levels.sum/((total_max_level_count.nonzero? || 1).to_f) * 100
+  end
+  
+  def end_date_must_be_after_start_date
+    if end_date.present? && end_date < start_date
+      errors.add(:end_date, "must be equal to or later than start date.")
+    end
   end
       
 end
