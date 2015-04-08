@@ -1,6 +1,7 @@
 class ProjectRequest < ActiveRecord::Base
   validates :description, presence: true
   validates :project_id, presence: true
+  validates_numericality_of :end_date, greater_than_or_equal_to: :start_date, message: "must be equal to or later than Start Date"
   
   has_many :skills, :through => :required_skills
   has_many :required_skills, :dependent => :destroy
