@@ -17,6 +17,8 @@ class ReviewsController < ApplicationController
 
   def create
     @review = Review.new(review_params)
+    @assignment = @review.assignment
+    @employee = Employee.find(@assignment.employee_id)
     if @review.save
       redirect_to my_project_requests_path(current_employee), notice: 'Review was successfully created.'
     else

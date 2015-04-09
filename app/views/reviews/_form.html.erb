@@ -4,7 +4,7 @@
 
   <%= f.hidden_field :assignment_id, :value => @assignment.id %>
 
-  <div class="h4">Employee's self-assessed skill level will appear as the default value. Experience days will default to the maximum, which is the length of the project. Please adjust as necessary.</div>
+  <div class="h4">Employee's self-assessed skill level will appear as the default assessment value. Experience days will default to the length of the project. If skill was not used, skill level should be N/A and experience set to 0. Please adjust as necessary.</div>
 
   <div class="panel">
       <%= f.fields_for :skill_reviews do |skill_review| %>

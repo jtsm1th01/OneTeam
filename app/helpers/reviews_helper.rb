@@ -10,7 +10,7 @@ module ReviewsHelper
   end
   
   def project_duration(project_request)
-    (project_request.end_date - project_request.start_date).to_i
+    (project_request.end_date - project_request.start_date).to_i + 1
   end
   
 end
