@@ -4,7 +4,7 @@
 
   <%= f.hidden_field :assignment_id, :value => @assignment.id %>
 
-  <div class="h4">Employee's self-assessed skill level will appear as the default assessment value. Experience days will default to the length of the project. If skill was not used, skill level should be N/A and experience set to 0. Please adjust as necessary.</div>
+  <div class="h4">If new review, default assessment level will be employee's self-assessed level and experience days will default to the length of the project. If skill was not used, skill level should be N/A and experience set to 0. Please adjust as necessary.</div>
 
   <div class="panel">
       <%= f.fields_for :skill_reviews do |skill_review| %>
@@ -20,7 +20,7 @@
           <%= skill_review.label :experience, "Experience Gained:" %>
         </div>
         <div class="col-md-2">
-          <%= skill_review.number_field :experience, {class: "form-control", value: project_duration(@assignment.project_request), min: 0, max: project_duration(@assignment.project_request)} %>
+          <%= skill_review.number_field :experience, {class: "form-control", value: default_experience_value(@assignment.project_request, skill_review.object.skill.id), min: 0, max: project_duration(@assignment.project_request)} %>
         </div>
         <div class="col-md-1">Days</div>
       </div>
@@ -32,23 +32,23 @@
       </div>
       <div class="row form-group form-radio">
         <div class="radio-inline">
-          <%= skill_review.radio_button("skill_level", "0", {checked: (default_radio_value(@employee, skill_review.object.skill.id, 0))}) %>
+          <%= skill_review.radio_button("skill_level", "0", {checked: (default_skill_value(@employee, skill_review.object.skill.id, 0))}) %>
         <%= skill_review.label :skill_level, 'N/A' %>
         </div>
         <div class="radio-inline">
-        <%= skill_review.radio_button("skill_level", "1", {checked: (default_radio_value(@employee, skill_review.object.skill.id, 1))}) %>
+        <%= skill_review.radio_button("skill_level", "1", {checked: (default_skill_value(@employee, skill_review.object.skill.id, 1))}) %>
         <%= skill_review.label :skill_level, '1' %>
         </div>
         <div class="radio-inline">
-        <%= skill_review.radio_button("skill_level", "2", {checked: (default_radio_value(@employee, skill_review.object.skill.id, 2))}) %>
+        <%= skill_review.radio_button("skill_level", "2", {checked: (default_skill_value(@employee, skill_review.object.skill.id, 2))}) %>
         <%= skill_review.label :skill_level, '2' %>
         </div>
         <div class="radio-inline">
-        <%= skill_review.radio_button("skill_level", "3", {checked: (default_radio_value(@employee, skill_review.object.skill.id, 3))}) %>
+        <%= skill_review.radio_button("skill_level", "3", {checked: (default_skill_value(@employee, skill_review.object.skill.id, 3))}) %>
         <%= skill_review.label :skill_level, '3' %>
         </div>
         <div class="radio-inline">
-        <%= skill_review.radio_button("skill_level", "4", {checked: (default_radio_value(@employee, skill_review.object.skill.id, 4))}) %>
+        <%= skill_review.radio_button("skill_level", "4", {checked: (default_skill_value(@employee, skill_review.object.skill.id, 4))}) %>
         <%= skill_review.label :skill_level, '4' %>
         </div>
       </div>
