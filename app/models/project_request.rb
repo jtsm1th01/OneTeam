@@ -2,6 +2,7 @@ class ProjectRequest < ActiveRecord::Base
   validates :description, presence: true
   validates :project_id, presence: true
   validate :end_date_must_be_after_start_date
+  validate :uniqueness_of_required_skills
   
   has_many :skills, :through => :required_skills
   has_many :required_skills, :dependent => :destroy
@@ -42,6 +43,17 @@ class ProjectRequest < ActiveRecord::Base
   def end_date_must_be_after_start_date
     if end_date.present? && end_date < start_date
       errors.add(:end_date, "must be equal to or later than start date.")
+    end
+  end
+  
+  def uniqueness_of_required_skills
+    hash = {}
+    required_skills.each do |required_skill|
+      if hash[required_skill.skill_id]
+        errors.add(:"required_skill", "is a duplicate.") if errors[:"required_skill.skill_id"].blank?
+        required_skill.errors.add(:skill_id, "has already been taken")
+      end
+      hash[required_skill.skill_id] = true
     end
   end
       

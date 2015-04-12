@@ -66,11 +66,9 @@
           <%= skills_fields.label :skill_level, '4', :value => '4' %>
         </div>
       </div>
-      <% if skills_fields.object.persisted? %>
-        <div class="checkbox-inline">
+      <div class="checkbox-inline">
         <%= skills_fields.check_box :_destroy %>Delete Skill
-        </div>
-      <% end %>
+      </div>
     </div>
   </div>
   <% end %>
@@ -85,11 +83,9 @@
       <div class="col-md-3">
         <%= desired_skill_fields.collection_select(:skill_id, @skills, :id, :skill_name, {prompt: 'Select Skill'}, {class: "form-control"}) %>
       </div>
-      <% if desired_skill_fields.object.persisted? %>
-        <div class="checkbox-inline">
-          <%= desired_skill_fields.check_box :_destroy %>Delete Skill
-        </div>
-      <% end %>
+      <div class="checkbox-inline">
+        <%= desired_skill_fields.check_box :_destroy %>Delete Skill
+      </div>
     </div>
   <% end %>
 
