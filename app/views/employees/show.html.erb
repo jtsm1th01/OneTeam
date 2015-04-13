@@ -139,6 +139,7 @@
         </div>
       </div>
 
+      <% if @employee == current_employee %>
       <div class="row panel-body">
         <div class="col-md-3">
           <span class="entry_title">Skill:</span>
@@ -173,6 +174,37 @@
           <% end %>
         </div>
       </div>
+      
+      <% else %>
+      <div class="row panel-body">
+        <div class="col-md-3">
+          <span class="entry_title">Skill:</span>
+        </div>
+        <div class="col-md-3">
+          <div class="col-md-12">
+            <span class="entry_title">Total Exp Gained (Days):</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row panel-body">
+        <div class="col-md-3 nested-col">
+          <% @skill_level_averages.each do |skill, skill_level_avg| %>
+          <div class="col-md-12">
+            <%= skill %>
+          </div>
+          <% end %>
+        </div>
+
+        <div class="col-md-3">
+          <% @experience_totals.each do |skill, experience| %>
+          <div class="col-md-12">
+            <%= experience %>
+          </div>
+          <% end %>
+        </div>
+      </div>
+      <% end %>
 
       <div class="row panel-body">
         <div class="col-md-12 nested-col">
@@ -184,9 +216,11 @@
               <div class="col-md-4">
                 <span class="entry_title">Skill:</span>
               </div>
+              <% if @employee == current_employee %>
               <div class="col-md-2">
                 <span class="entry_title">Assessed Level:</span>
               </div>
+              <% end %>
               <div class="col-md-2">
                 <span class="entry_title">Experience (Days):</span>
               </div>
@@ -207,9 +241,11 @@
               <div class="col-md-4">
                 <%= skill_review.skill.skill_name %>
               </div>
+              <% if @employee == current_employee %>
               <div class="col-md-2">
                 <%= skill_review.skill_level %>
               </div>
+              <% end %>
               <div class="col-md-2">
                 <%= skill_review.experience %>
               </div>
