@@ -61,7 +61,7 @@ class Employee < ActiveRecord::Base
     hash = {}
     current_skills.each do |current_skill|
       if hash[current_skill.skill_id]
-        errors.add(:"current_skill", "is a duplicate.") if errors[:"current_skill.skill_id"].blank?
+        errors.add(:current_skill, "is a duplicate.") if errors[:"current_skill.skill_id"].blank?
         current_skill.errors.add(:skill_id, "has already been taken")
       end
       hash[current_skill.skill_id] = true
@@ -72,7 +72,7 @@ class Employee < ActiveRecord::Base
     hash = {}
     desired_skills.each do |desired_skill|
       if hash[desired_skill.skill_id]
-        errors.add(:"desired_skill", "is a duplicate.") if errors[:"desired_skill.skill_id"].blank?
+        errors.add(:desired_skill, "is a duplicate.") if errors[:"desired_skill.skill_id"].blank?
         desired_skill.errors.add(:skill_id, "has already been taken")
       end
       hash[desired_skill.skill_id] = true
