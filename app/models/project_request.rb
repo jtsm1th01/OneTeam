@@ -15,5 +15,15 @@ class ProjectRequest < ActiveRecord::Base
   scope :current, -> { where('end_date>?', Date.today-1) }
   scope :open, -> { where('filled=?', false) }
   scope :started, -> { where('start_date<?', Date.today+1) }
+  
+  # returns a count of how many skills the developer has that the request asks for
+  def qualified_count(current_employee)
+    ((self.skills)&(current_employee.skills)).count
+  end
+  
+  # returns a count of how many skills the developer is interested in that the request asks for
+  def interest_count(current_employee)
+    ((self.skills)&(current_employee.goals)).count
+  end
  
 end

@@ -25,6 +25,8 @@
     <div class="panel-heading"><span class="entry_title">
       Project:</span>
       <%= project_request.project.project_name %>
+      <span class="pull-right">Skill Match: <%= project_request.qualified_count(current_employee) %>
+        Goal Match: <%= project_request.interest_count(current_employee) %></span>
     </div>
 
     <div class="panel-body"><span class="entry_title">
