@@ -17,13 +17,15 @@ class ProjectRequest < ActiveRecord::Base
   scope :started, -> { where('start_date<?', Date.today+1) }
   
   # returns a count of how many skills the developer has that the request asks for
-  def qualified_count(current_employee)
-    ((self.skills)&(current_employee.skills)).count
+  def required_skill_percent_match(current_employee)
+    match_count = (self.skills & current_employee.skills).count
+    percentage_float = (match_count/(self.skills.count.nonzero? || 1).to_f) * 100
   end
   
   # returns a count of how many skills the developer is interested in that the request asks for
-  def interest_count(current_employee)
-    ((self.skills)&(current_employee.goals)).count
+  def interested_skill_percent_match(current_employee)
+    match_count = (self.skills & current_employee.goals).count
+    percentage_float = (match_count/(self.skills.count.nonzero? || 1).to_f) * 100
   end
  
 end

@@ -25,8 +25,6 @@
     <div class="panel-heading"><span class="entry_title">
       Project:</span>
       <%= project_request.project.project_name %>
-      <span class="pull-right">Skill Match: <%= project_request.qualified_count(current_employee) %>
-        Goal Match: <%= project_request.interest_count(current_employee) %></span>
     </div>
 
     <div class="panel-body"><span class="entry_title">
@@ -56,15 +54,18 @@
           <span class="entry_title">Required Skills:</span>
         </div>
       </div>
-      <div class="row skill-group">
       <% project_request.skills.each do |skill| %>
-        <div class="col-md-3">
+      <div class="row skill-group">
           <ul>
             <li><%= skill.skill_name %></li>
           </ul>
-        </div>
-      <% end %>
       </div>
+      <% end %>
+      
+      <% if project_request.employee != current_employee %>
+      <span class="entry_title">Skill Match: <%= number_to_percentage(project_request.required_skill_percent_match(current_employee), precision: 0) %>
+        / Goal Match: <%= number_to_percentage(project_request.interested_skill_percent_match(current_employee), precision: 0) %></span>
+      <% end %>
     </div>
       
     <% if project_request.developers.include?(current_employee) %>
@@ -100,7 +101,9 @@
       
       <div class="row">
         <div class="col-sm-2">
-          <%= respondent.employee_name %>
+          <%= respondent.employee_name %><br>
+          <span class="entry_title">Skill Match: <%= number_to_percentage(project_request.required_skill_percent_match(respondent), precision: 0) %><br>
+            Goal Match: <%= number_to_percentage(project_request.interested_skill_percent_match(respondent), precision: 0) %></span>
         </div>
         <div class="col-sm-2">
           <%= link_to 'View Profile', employee_path(respondent), class: "btn btn-info btn-submit" %>
