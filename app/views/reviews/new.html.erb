@@ -1,0 +1,7 @@
+<% provide(:page_title, "New Review")%>
+
+<h1 class="text-left"><u><%= @employee.employee_name %> Skill Review</u></h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Back', my_project_requests_path(current_employee) %>
