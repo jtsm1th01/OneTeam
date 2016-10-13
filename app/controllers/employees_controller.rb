@@ -9,6 +9,8 @@ class EmployeesController < ApplicationController
 
   def show
     @employee = Employee.find(params[:id])
+    @experience_totals = experience_totals(@employee)
+    @skill_level_averages = skill_level_averages(@employee)
   end
 
   def new
@@ -40,13 +42,28 @@ class EmployeesController < ApplicationController
   end
 
   def update
-    @employee = Employee.find(params[:id])
-    params[:employee][:skill_ids] ||=[]
-    params[:employee][:goal_ids] ||=[]
-    if @employee.update_attributes(employee_params)
-      redirect_to @employee, notice: 'Employee was successfully updated.' 
+    @employees = Employee.all
+    @titles = Title.all
+    @groups = Group.all
+    @locations = Location.all
+    @skills = Skill.all
+    
+    if params[:add_current_skill]
+      @employee.attributes = employee_params
+      @employee.current_skills.build
+      render 'edit'
+    elsif params[:add_desired_skill]
+      @employee.attributes = employee_params
+      @employee.desired_skills.build
+      render 'edit'
     else
-      redirect_to edit_employee_url(@employee), notice: 'Please complete all fields.'
+      if @employee.update_attributes(employee_params)
+        redirect_to @employee, notice: 'Employee was successfully updated.' 
+      else
+        @employee.current_skills.build
+        @employee.desired_skills.build
+        render :edit
+      end
     end
   end
 
@@ -55,7 +72,7 @@ class EmployeesController < ApplicationController
     @employee.destroy
     redirect_to employees_url, notice: 'Employee was successfully destroyed.' 
   end
-
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     
@@ -70,6 +87,29 @@ class EmployeesController < ApplicationController
       end
     end
   
+    def experience_totals(employee)
+    experience_totals = Hash.new(0)
+      employee.assignments.each do |assignment|
+        assignment.review.try(:skill_reviews).try(:each) do |skill_review|
+          experience_totals[skill_review.skill.skill_name] += skill_review.experience
+        end
+      end
+      return experience_totals
+    end
+  
+    def skill_level_averages(employee)
+      skill_reviews = Hash.new(0)
+      employee.skill_reviews.each do |skill_review|
+        if skill_reviews.has_key?(skill_review.skill.skill_name)
+          skill_reviews[skill_review.skill.skill_name] << skill_review.skill_level
+        else
+          skill_reviews[skill_review.skill.skill_name] = [skill_review.skill_level]
+        end
+      end
+      skill_level_averages = skill_reviews.map { |skill,skill_level| [skill, (skill_level.sum.to_f / skill_level.count).round] }
+      end
+
+  
     # Confirms the correct employee.
     def correct_employee
       @employee = Employee.find(params[:id])
@@ -83,6 +123,6 @@ class EmployeesController < ApplicationController
   
     # Never trust parameters from the scary internet, only allow the white list through.
     def employee_params
-      params.require(:employee).permit(:employee_name, :employee_email, :years_with_company, :location_id, :group_id, :title_id, :manager_id, :password, :password_confirmation, :skill_ids => [], :goal_ids => [])
+      params.require(:employee).permit(:employee_name, :employee_email, :years_with_company, :location_id, :group_id, :title_id, :manager_id, :password, :password_confirmation, current_skills_attributes: [:id, :skill_id, :skill_level, :_destroy], desired_skills_attributes: [:id, :skill_id, :_destroy])
     end
 end

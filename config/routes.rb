@@ -8,6 +8,11 @@ Rails.application.routes.draw do
   patch 'assignments/:assignment_id' => 'assignments#update', as: :assignment
   delete 'assignment/:assignment_id' => 'assignments#destroy', as: :unassign
   
+  get 'assignment/:assignment_id/reviews/new' => 'reviews#new', as: :new_assignment_review
+  post 'assignment/:assignment_id/reviews/new' => 'reviews#create', as: :create_assignment_review
+  get 'assignment/:assignment_id/review/:review_id/edit' => 'reviews#edit', as: :edit_assignment_review
+  patch 'assignment/:assignment_id/review/:review_id/edit' => 'reviews#update', as: :update_assignment_review
+  
   get 'project_request/:project_request_id/responses/:response_id/edit' => 'responses#edit', as: :edit_project_request_response
   patch 'project_request/:project_request_id/responses/:response_id/edit' => 'responses#update', as: :update_project_request_response
   get 'project_request/:project_request_id/responses/:response_id/comment/new' => 'responses#new_comment', as: :new_comment
@@ -23,7 +28,7 @@ Rails.application.routes.draw do
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
   
-  resources :groups, :employees, :projects, :departments, :locations, :skills, :titles
+  resources :groups, :employees, :projects, :departments, :locations, :skills, :titles, :reviews
   
   resources :project_requests do
     resources :responses
