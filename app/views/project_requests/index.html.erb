@@ -3,9 +3,9 @@
 <div class="row">
   <div class="col-md-12">
     <% if params.include?(:employee_id) %>
-    <h1 class="text-left"><u>My Project Requests</u></h1>
+      <h1 class="text-left"><u>My Project Requests</u></h1>
     <% else %>
-    <h1 class="text-left"><u>All Requests</u></h1>
+      <h1 class="text-left"><u>All Requests</u></h1>
     <% end %>
   </div>
 </div>
@@ -63,8 +63,7 @@
       <% end %>
       
       <% if project_request.employee != current_employee %>
-      <span class="entry_title">Skill Match: <%= number_to_percentage(project_request.required_skill_percent_match(current_employee), precision: 0) %>
-        / Goal Match: <%= number_to_percentage(project_request.interested_skill_percent_match(current_employee), precision: 0) %></span>
+        <span class="entry_title">Skill Relevance: <%= number_to_percentage(project_request.required_skill_relevance(current_employee), precision: 0) %> / Goal Match: <%= number_to_percentage(project_request.interested_skill_percent_match(current_employee), precision: 0) %></span>
       <% end %>
     </div>
       
@@ -99,32 +98,36 @@
    
       <% project_request.respondents.each do |respondent| %>
       
-      <div class="row">
-        <div class="col-sm-2">
-          <%= respondent.employee_name %><br>
-          <span class="entry_title">Skill Match: <%= number_to_percentage(project_request.required_skill_percent_match(respondent), precision: 0) %><br>
-            Goal Match: <%= number_to_percentage(project_request.interested_skill_percent_match(respondent), precision: 0) %></span>
-        </div>
-        <div class="col-sm-2">
-          <%= link_to 'View Profile', employee_path(respondent), class: "btn btn-info btn-submit" %>
-        </div>
-        <div class="col-sm-6 panel-info"><strong>Application Note: </strong><%= response_note(project_request, respondent) %>
-        </div>
-      </div>
+      <div class="panel">
         
-      <div class="row">
-        <% if project_request.developers.include?(respondent) %>
-          <div class="col-sm-2 col-sm-offset-2">
-            <%= button_to 'Unassign', unassign_path(current_assignment(project_request, respondent)), :method => :delete, class: "btn btn-danger btn-submit" %>
+        <div class="row ">
+          <div class="col-sm-2">
+            <%= respondent.employee_name %><br>
+            <span class="entry_title">Skill Relevance: <%= number_to_percentage(project_request.required_skill_relevance(respondent), precision: 0) %><br>
+            Goal Match: <%= number_to_percentage(project_request.interested_skill_percent_match(respondent), precision: 0) %></span>
           </div>
-        <% else %>
-          <div class="col-sm-2 col-sm-offset-2">
-            <%= button_to 'Assign', new_assignment_path(project_request_id: project_request, respondent_id: respondent), class: "btn btn-primary btn-submit" %>
+          <div class="col-sm-2">
+            <%= link_to 'View Profile', employee_path(respondent), class: "btn btn-info btn-submit" %>
           </div>
-        <% end %>
-        <div class="col-sm-6 panel-info"><strong>Comment: </strong><%= current_response(project_request, respondent).comment %>
+          <div class="col-sm-6 panel-info"><strong>Application Note: </strong><%= response_note(project_request, respondent) %>
           </div>
-        <% if current_response(project_request, respondent).attribute_present?(:comment) %>
+        </div>
+        <div class="row">
+          <% if project_request.developers.include?(respondent) && !Review.exists?(:assignment => current_assignment(project_request, respondent)) %>
+            <div class="col-sm-2 col-sm-offset-2">
+              <%= button_to 'Unassign', unassign_path(current_assignment(project_request, respondent)), :method => :delete, class: "btn btn-danger btn-submit" %>
+            </div>
+          <% elsif !project_request.developers.include?(respondent) %>
+            <div class="col-sm-2 col-sm-offset-2">
+              <%= button_to 'Assign', new_assignment_path(project_request_id: project_request, respondent_id: respondent), class: "btn btn-primary btn-submit" %>
+            </div>
+          <% else %> 
+            <div class="col-sm-2 col-sm-offset-2">
+            </div>
+          <% end %>
+            <div class="col-sm-6 panel-info"><strong>Comment: </strong><%= current_response(project_request, respondent).comment %>
+            </div>
+          <% if current_response(project_request, respondent).attribute_present?(:comment) %>
             <div class="col-sm-2">
               <%= link_to "Edit Comment", edit_comment_path(project_request_id: project_request, response_id: current_response(project_request, respondent)), class: "btn btn-warning" %>
             </div>
@@ -133,10 +136,42 @@
               <%= link_to "Add Comment", new_comment_path(project_request_id: project_request, response_id: current_response(project_request, respondent)), class: "btn btn-primary" %>
             </div>
           <% end %>
+        </div>
+        
+        <% if project_request.developers.include?(respondent) %>
+          <div class="row">
+            <div class="col-sm-2 col-sm-offset-2">
+              <% if Review.exists?(:assignment => current_assignment(project_request, respondent)) %>
+                <%= link_to "Edit Review", edit_assignment_review_path(current_assignment(project_request, respondent), current_review(current_assignment(project_request, respondent))), class: "btn btn-warning btn-submit" %>
+              <% else %>
+                <%= link_to "Review", new_assignment_review_path(current_assignment(project_request, respondent)), class: "btn btn-primary btn-submit" %>
+              <% end %>
+            </div>
+            <div class="col-sm-2">Skill: </div>
+            <div class="col-sm-2">Experience (Days): </div>
+            <div class="col-sm-2">Level Assessment: </div>
+          </div>
+            
+            <% current_assignment(project_request, respondent).skill_reviews.each do |skill_review| %>
+            <div class="row">
+              <div class="col-sm-2 col-sm-offset-4">
+                <%= skill_review.skill.skill_name %>
+              </div>
+              <div class="col-sm-2">
+                <%= skill_review.experience %>
+              </div>
+              <div class="col-sm-2">
+                <%= skill_review.skill_level %>
+              </div>
+            </div>
+            <% end %>   
+          
+        <% end %>
         
       </div>
       
-      <% end %> 
+      <% end %>
+     
 
       <div class="panel-footer">
         <% if project_request.filled? %>

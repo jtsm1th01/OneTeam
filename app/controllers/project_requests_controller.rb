@@ -10,9 +10,10 @@ class ProjectRequestsController < ApplicationController
   end
 
   def new
+    @project_request = ProjectRequest.new
     @projects = Project.all
-    @project_request = ProjectRequest.new(flash[:params])
     @skills = Skill.all
+    @project_request.required_skills.build
   end
 
   def edit
@@ -25,24 +26,41 @@ class ProjectRequestsController < ApplicationController
 
   def create
     @project_request = current_employee.project_requests.new(project_request_params)
-    params[:project_request][:skill_ids] ||=[]
-    if @project_request.save
-      flash.now[:success] = 'Project request created.'
-      redirect_to my_project_requests_url(current_employee)
+    @projects = Project.all
+    @skills = Skill.all
+    
+    if params[:add_skill]
+      @project_request.required_skills.build
+      render 'new'
     else
-      flash[:params] = project_request_params
-      redirect_to new_project_request_url(@project_request), alert: 'Please complete entire form.'
+      if @project_request.save(project_request_params)
+        flash.now[:success] = 'Project request created.'
+        redirect_to my_project_requests_url(current_employee) 
+      else
+        @project_request.required_skills.build
+        render 'new'
+      end
     end
   end
 
   def update
     @project_request = ProjectRequest.find(params[:id])
-    params[:project_request][:skill_ids] ||=[]
-    if @project_request.update(project_request_params)
-      redirect_to my_project_requests_url(current_employee), notice: 'Project request was successfully updated.'
+    @employees = Employee.all
+    @groups = Group.all
+    @projects = Project.all
+    @skills = Skill.all
+    
+    if params[:add_skill]
+      @project_request.attributes = project_request_params
+      @project_request.required_skills.build
+      render 'edit'
     else
-      flash[:params] = project_request_params
-      redirect_to edit_project_request_url(@project_request), alert: 'Please complete entire form.'
+      if @project_request.update_attributes(project_request_params)
+        redirect_to my_project_requests_url(current_employee), notice: 'Project request was successfully updated.'
+      else
+        @project_request.required_skills.build
+        render :edit
+      end
     end
   end
 
@@ -66,6 +84,6 @@ class ProjectRequestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_request_params
-      params.require(:project_request).permit(:project_id, :description, :employee_id, :start_date, :end_date, :filled, :skill_ids => [])
+      params.require(:project_request).permit(:project_id, :description, :employee_id, :start_date, :end_date, :filled, required_skills_attributes: [:id, :skill_id, :_destroy])
     end
 end

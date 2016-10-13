@@ -1,5 +1,5 @@
-  <%= form_for @employee, html: {class: "form"} do |f| %>
-    <%= render 'shared/error_messages' %>
+<%= form_for @employee, html: {class: "form"} do |f| %>
+  <%= render 'shared/error_messages' %>
 
   <div class="form-group">
     <%= f.label :employee_name, 'Name' %><br>
@@ -21,9 +21,9 @@
     <%= f.label :years_with_company, 'Years with Company' %><br>
     <%= f.number_field :years_with_company, class: 'form-control' %>
   </div>
-   <div class="form-group">
-     <%= f.label :manager_id, 'Manager/Lead' %><br>
-     <%= f.collection_select(:manager_id, @employees, :id, :employee_name, {prompt: 'Select Manager'}, {class: "form-control"}) %>
+  <div class="form-group">
+    <%= f.label :manager_id, 'Manager/Lead' %><br>
+    <%= f.collection_select(:manager_id, @employees, :id, :employee_name, {prompt: 'Select Manager'}, {class: "form-control"}) %>
   </div>
   <div class="form-group">
     <%= f.label :title_id, 'Title' %><br>
@@ -38,24 +38,59 @@
     <%= f.collection_select(:location_id, @locations, :id, :location_name, {prompt: 'Select Location'}, {class: "form-control"}) %>
   </div>
 
-  <div class="row form-group skills-list">
-    <h5 class="col-md-12"><strong>Current Skills</strong></h5>
-    <% @skills.each do |skill| %>
-      <div class="col-md-4">
-        <%= skill.skill_name %>
-        <%= check_box_tag "employee[skill_ids][]", skill.id, @employee.skill_ids.include?(skill.id) %><br>
-      </div>
-    <% end %>
+  <div class="row form-group">
+    <h5 class="col-md-4"><strong>Current Skills</strong></h5>
+    <h5 class="col-md-4 col-md-offset-2"><strong>Skill Level</strong></h5>
   </div>
-  <div class="row form-group skills-list">
-    <h5 class="col-md-12"><strong>Desired Skills</strong></h5>
-    <% @skills.each do |skill| %>
-      <div class="col-md-4">
-        <%= skill.skill_name %>
-        <%= check_box_tag "employee[goal_ids][]", skill.id, @employee.goal_ids.include?(skill.id) %><br>
+  <%= f.fields_for :current_skills do |skills_fields| %>
+  <div class="row">
+    <div class="col-md-3">
+      <%= skills_fields.collection_select(:skill_id, @skills, :id, :skill_name, {prompt: 'Select Skill'}, {class: "form-control"}) %>
+    </div>
+    <div class="row form-group form-radio">
+      <div class="col-lg-4">
+        <div class="radio-inline">
+        <%= skills_fields.radio_button("skill_level", "1") %>
+        <%= skills_fields.label :skill_level, '1', :value => '1' %>
+        </div>
+        <div class="radio-inline">
+          <%= skills_fields.radio_button("skill_level", "2") %>
+          <%= skills_fields.label :skill_level, '2', :value => '2' %>
+        </div>
+        <div class="radio-inline">
+          <%= skills_fields.radio_button("skill_level", "3") %>
+          <%= skills_fields.label :skill_level, '3', :value => '3' %>
+        </div>
+        <div class="radio-inline">
+          <%= skills_fields.radio_button("skill_level", "4") %>
+          <%= skills_fields.label :skill_level, '4', :value => '4' %>
+        </div>
       </div>
-    <% end %>
+      <div class="checkbox-inline">
+        <%= skills_fields.check_box :_destroy %>Delete Skill
+      </div>
+    </div>
   </div>
+  <% end %>
+
+  <%= f.submit 'Add Current Skill', :name => 'add_current_skill', :class => 'btn btn-primary btn-submit' %>
+  
+  <div class="row form-group">
+    <h5 class="col-md-4"><strong>Desired Skills</strong></h5>
+  </div>
+  <%= f.fields_for :desired_skills do |desired_skill_fields| %>
+    <div class="row">
+      <div class="col-md-3">
+        <%= desired_skill_fields.collection_select(:skill_id, @skills, :id, :skill_name, {prompt: 'Select Skill'}, {class: "form-control"}) %>
+      </div>
+      <div class="checkbox-inline">
+        <%= desired_skill_fields.check_box :_destroy %>Delete Skill
+      </div>
+    </div>
+  <% end %>
+
+  <%= f.submit 'Add Desired Skill', :name => 'add_desired_skill', :class => 'btn btn-primary btn-submit' %>
+  
   <div class="field">
     <%= f.submit 'Update Profile', :class => 'btn btn-primary btn-submit' %>
     <%= link_to 'Cancel', employee_path, :class => 'btn btn-danger btn-submit' %>

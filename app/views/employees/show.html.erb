@@ -1,120 +1,268 @@
 
-  <div class="row">
-    <div class="col-md-12">
-      <h1 class="text-left"><u>Employee Profile</u></h1>
-    </div>
-  </div> 
-  
-  <div class="row">
-    <% if @employee == current_employee %>
-      <div class="col-md-12 lead"><u>
-        <%= link_to 'Edit Profile', edit_employee_path(@employee) %></u>
-      </div>
-    <% end %>
+<div class="row">
+  <div class="col-md-12">
+    <h1 class="text-left"><u><%= @employee.employee_name %> - Profile</u></h1>
   </div>
+</div> 
 
-  <div class="panel panel-info">
-    
-    <div class="row panel-body">
+<div class="row">
+  <% if @employee == current_employee %>
+  <div class="col-md-12 lead"><u>
+    <%= link_to 'Edit Profile', edit_employee_path(@employee) %></u>
+  </div>
+  <% end %>
+</div>
 
-      <div class="col-md-3 panel-body">
-        <img src="/assets/user.png" class="img-responsive" alt="user silhouette">
-      </div>
+<div class="panel panel-info">
 
-      <div class="col-md-9 panel-body">
-        <div class="panel-body">
+  <div class="row panel-body">
+
+    <div class="col-md-3 panel-body">
+      <img src="/assets/user.png" class="img-responsive" alt="user silhouette">
+    </div>
+
+    <div class="col-md-9 panel-body">
+      <div class="row panel-body">
+        <div class="col-md-2">
           <span class="entry_title">Name:</span>
+        </div>
+        <div class="col-md-3">
           <%= @employee.employee_name %>
         </div>
-
-        <div class="panel-body">
+        <div class="col-md-2">
           <span class="entry_title">Email:</span>
+        </div>
+        <div class="col-md-3">
           <%= @employee.employee_email %>
         </div>
+      </div>
 
-        <div class="panel-body">
-          <span class="entry_title">Years with Company:</span>
-          <%= @employee.try(:years_with_company) %>
-        </div>
-
-        <div class="panel-body">
-          <span class="entry_title">Manager/Lead:</span>
-          <%= @employee.try(:manager).try(:employee_name) %>
-        </div>
-
-        <div class="panel-body">
+      <div class="row panel-body">
+        <div class="col-md-2">
           <span class="entry_title">Position:</span>
+        </div>
+        <div class="col-md-3">
           <%= @employee.try(:title).try(:title_name) %>
         </div>
-
-        <div class="panel-body">
-          <span class="entry_title">Department:</span>
-          <%= @employee.try(:group).try(:department).try(:department_name) %>
-        </div>
-
-        <div class="panel-body">
-          <span class="entry_title">Group:</span>
-          <%= @employee.try(:group).try(:group_name) %>
-        </div>
-
-        <div class="panel-body">
+        <div class="col-md-2">
           <span class="entry_title">Location:</span>
+        </div>
+        <div class="col-md-3">
           <%= @employee.try(:location).try(:location_name) %>
         </div>
+      </div>
 
-        <div class="row panel-body">
-
-          <div class="col-md-1">
-            <span class="entry_title">Current Skills:</span>
-          </div>
-          
-          <div class="col-md-3">
-            <% @employee.skills.each do |skill| %>
-              <ul>
-                <li><%= skill.skill_name %></li>
-              </ul>
-            <% end %>
-          </div>
-
-          <div class="col-md-1">
-            <span class="entry_title">Desired Skills:</span>
-          </div>
-        
-          <div class="col-md-3">
-            <% @employee.goals.each do |skill| %>
-              <ul>
-                <li><%= skill.skill_name %></li>
-              </ul>
-            <% end %>
-          </div>
-        
+      <div class="row panel-body">
+        <div class="col-md-2">
+          <span class="entry_title">Department:</span>
         </div>
-        
-        <div class="row panel-body">
-
-          <div class="col-md-2">
-            <span class="entry_title">Project Assignments:</span>
-          </div>
-          
-          <div class="col-md-3">
-            <% @employee.assignments.each do |assignment| %>
-              <ul>
-                <li><%= assignment.project_request.project.project_name %></li>
-              </ul>
-            <% end %>
-          </div>
-          
+        <div class="col-md-3">
+          <%= @employee.try(:group).try(:department).try(:department_name) %>
         </div>
+        <div class="col-md-2">
+          <span class="entry_title">Group:</span>
+        </div>
+        <div class="col-md-3">
+          <%= @employee.try(:group).try(:group_name) %>
+        </div>
+      </div>
+
+      <div class="row panel-body">
+        <div class="col-md-2">
+          <span class="entry_title">Manager/Lead:</span>
+        </div>
+        <div class="col-md-3">
+          <%= @employee.try(:manager).try(:employee_name) %>
+        </div>
+        <div class="col-md-2">
+          <span class="entry_title">Years with Company:</span>
+        </div>
+        <div class="col-md-3">
+          <%= @employee.try(:years_with_company) %>
+        </div>
+      </div>
+
+      <div class="row panel-body">
+        <div class="col-md-3">
+          <span class="entry_title">Current Skills:</span>
+        </div>
+        <div class="col-md-9">
+          <span class="entry_title">Skill Level (1-beg 2-int 3-adv 4-expert):</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <% @employee.current_skills.each do |current_skill| %>
+          <div class="col-md-3">
+            <%= current_skill.skill.skill_name %>
+          </div>
+          <div class="col-md-9">
+            <%= current_skill.skill_level %>
+          </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="row panel-body">
+        <div class="col-md-3">
+          <span class="entry_title">Desired Skills:</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <% @employee.desired_skills.each do |desired_skill| %>
+          <div class="col-md-12">
+            <%= desired_skill.skill.skill_name %>
+          </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="row panel-body">
+        <div class="col-md-3">
+          <span class="entry_title">Project Assignments:</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <% @employee.assignments.each do |assignment| %>
+          <div class="col-md-12">
+            <%= assignment.project_request.project.project_name %>
+          </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="row panel-body">
+        <div class="col-md-12">
+          <span class="entry_title"><u>OneTeam Review History:</u></span>
+        </div>
+      </div>
+
+      <% if @employee == current_employee %>
+      <div class="row panel-body">
+        <div class="col-md-3">
+          <span class="entry_title">Skill:</span>
+        </div>
+        <div class="col-md-3">
+          <span class="entry_title">Avg Skill Assessment:</span>
+        </div>
+        <div class="col-md-3">
+          <div class="col-md-12">
+            <span class="entry_title">Total Exp Gained (Days):</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row panel-body">
+        <div class="col-md-6 nested-col">
+          <% @skill_level_averages.each do |skill, skill_level_avg| %>
+          <div class="col-md-6">
+            <%= skill %>
+          </div>
+          <div class="col-md-6">
+            <%= skill_level_avg %>
+          </div>
+          <% end %>
+        </div>
+
+        <div class="col-md-6">
+          <% @experience_totals.each do |skill, experience| %>
+          <div class="col-md-12">
+            <%= experience %>
+          </div>
+          <% end %>
+        </div>
+      </div>
       
-    </div>
- 
-  </div>
-    
-    <%= link_to "Back", :back, class: 'btn btn-danger' %>
-    
+      <% else %>
+      <div class="row panel-body">
+        <div class="col-md-3">
+          <span class="entry_title">Skill:</span>
+        </div>
+        <div class="col-md-3">
+          <div class="col-md-12">
+            <span class="entry_title">Total Exp Gained (Days):</span>
+          </div>
+        </div>
+      </div>
 
-    
-    
+      <div class="row panel-body">
+        <div class="col-md-3 nested-col">
+          <% @skill_level_averages.each do |skill, skill_level_avg| %>
+          <div class="col-md-12">
+            <%= skill %>
+          </div>
+          <% end %>
+        </div>
+
+        <div class="col-md-3">
+          <% @experience_totals.each do |skill, experience| %>
+          <div class="col-md-12">
+            <%= experience %>
+          </div>
+          <% end %>
+        </div>
+      </div>
+      <% end %>
+
+      <div class="row panel-body">
+        <div class="col-md-12 nested-col">
+          <div class="col-md-3">
+            <span class="entry_title">Project:</span>
+          </div>
+          <div class="col-md-9">
+            <div class="row">
+              <div class="col-md-4">
+                <span class="entry_title">Skill:</span>
+              </div>
+              <% if @employee == current_employee %>
+              <div class="col-md-2">
+                <span class="entry_title">Assessed Level:</span>
+              </div>
+              <% end %>
+              <div class="col-md-2">
+                <span class="entry_title">Experience (Days):</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row panel-body">
+        <div class="col-md-12 nested-col">
+          <% @employee.reviews.each do |review| %>
+          <div class="col-md-3">
+            <%= review.assignment.project_request.project.project_name %>
+          </div>
+          <div class="col-md-9">
+            <% review.skill_reviews.each do |skill_review| %>
+            <div class="row">
+              <div class="col-md-4">
+                <%= skill_review.skill.skill_name %>
+              </div>
+              <% if @employee == current_employee %>
+              <div class="col-md-2">
+                <%= skill_review.skill_level %>
+              </div>
+              <% end %>
+              <div class="col-md-2">
+                <%= skill_review.experience %>
+              </div>
+            </div>
+            <% end %>
+          </div>
+        </div>   
+        <% end %>
+      </div>
+    </div>
+
+    <%= link_to "Back", :back, class: 'btn btn-danger' %>
+
+
+
+
+
 
 
 
