@@ -17,11 +17,11 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
-
+    @employees = Employee.all
     if @project.save
       redirect_to projects_url, notice: 'Project was successfully created.'
     else
-      redirect_to projects_url, alert: 'Please use unique Project Name.'
+      render 'new'
     end
   end
 
