@@ -1,6 +1,6 @@
 <%= form_for(@location) do |f| %>
 
-  <%= render 'errors' %>
+  <%= render 'shared/error_messages', obj: @location %>
   
   <div class="field">
     <%= f.label :location_name, 'Location Name' %><br>
