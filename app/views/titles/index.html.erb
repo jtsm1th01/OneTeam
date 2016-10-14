@@ -7,9 +7,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md-12 lead"><u>
-      <%= link_to 'New Title', new_title_path %></u>
-    </div>
+  <%= link_to 'New Title', new_title_path, class:"btn btn-small btn-primary" %>
 </div>
 
 <% @titles.each do |title| %>
@@ -21,8 +19,9 @@
     </div>
 
     <div class="panel-body">
-      <%= link_to 'Edit', edit_title_path(title) %>
-      <%= link_to 'Destroy', title, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <%= link_to 'Edit Title', edit_title_path(title), class:"btn btn-xs btn-primary" %>
+      <%= link_to 'Delete Title', title, method: :delete,
+                data: { confirm: 'Are you sure?' }, class:"btn btn-xs btn-danger" %>
     </div>
 
   </div>

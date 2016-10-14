@@ -5,16 +5,14 @@
     <% if params.include?(:employee_id) %>
       <h1 class="text-left"><u>My Project Requests</u></h1>
     <% else %>
-      <h1 class="text-left"><u>All Requests</u></h1>
+      <h1 class="text-left"><u>All Project Requests</u></h1>
     <% end %>
   </div>
 </div>
 
 <% if params.include?(:employee_id) %>
   <div class="row">
-    <div class="col-md-12 lead"><u>
-      <%= link_to 'New Project Request', new_project_request_path %></u>
-    </div>
+    <%= link_to 'New Project Request', new_project_request_path, class:"btn btn-small btn-primary" %>
   </div>
 <% end %>
 
