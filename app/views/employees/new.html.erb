@@ -1,7 +1,10 @@
 <h1>Create Your OneTeam Account</h1>
 
  <%= form_for(@employee) do |f| %>
-  <%= render 'shared/error_messages' %>
+  
+  <div>
+    <%= render 'shared/error_messages', obj: @employee %>
+  </div>
 
   <div class="field">
     <%= f.label :employee_name, 'Employee Name' %><br>

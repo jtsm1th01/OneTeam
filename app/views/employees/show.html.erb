@@ -45,25 +45,19 @@
           <%= @employee.try(:title).try(:title_name) %>
         </div>
         <div class="col-md-2">
-          <span class="entry_title">Location:</span>
+          <span class="entry_title">Department:</span>
         </div>
         <div class="col-md-3">
-          <%= @employee.try(:location).try(:location_name) %>
+          <%= @employee.try(:department).try(:department_name) %>
         </div>
       </div>
 
       <div class="row panel-body">
         <div class="col-md-2">
-          <span class="entry_title">Department:</span>
+          <span class="entry_title">Location:</span>
         </div>
         <div class="col-md-3">
-          <%= @employee.try(:group).try(:department).try(:department_name) %>
-        </div>
-        <div class="col-md-2">
-          <span class="entry_title">Group:</span>
-        </div>
-        <div class="col-md-3">
-          <%= @employee.try(:group).try(:group_name) %>
+          <%= @employee.try(:location).try(:location_name) %>
         </div>
       </div>
 

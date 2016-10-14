@@ -1,5 +1,5 @@
 <%= form_for @employee, html: {class: "form"} do |f| %>
-  <%= render 'shared/error_messages' %>
+  <%= render 'shared/error_messages', obj: @employee %>
 
   <div class="form-group">
     <%= f.label :employee_name, 'Name' %><br>
@@ -30,8 +30,8 @@
     <%= f.collection_select(:title_id, @titles, :id, :title_name, {prompt: 'Select Title'}, {class: "form-control"}) %>
   </div>
   <div class="form-group">
-    <%= f.label :group_id, 'Group' %><br>
-    <%= f.collection_select(:group_id, @groups, :id, :group_name, {prompt: 'Select Group'}, {class: "form-control"}) %>
+    <%= f.label :department_id, 'Department' %><br>
+    <%= f.collection_select(:department_id, @departments, :id, :department_name, {prompt: 'Select Department'}, {class: "form-control"}) %>
   </div>
   <div class="form-group">
     <%= f.label :location_id, 'Location' %><br>
