@@ -1,5 +1,9 @@
 <%= form_for(@group) do |f| %>
 
+  <div>
+    <%= render 'shared/error_messages', obj: @group %>
+  </div>
+  
   <div class="field">
     <%= f.label :group_name, 'Group Name' %><br>
     <%= f.text_field :group_name %>

@@ -20,8 +20,7 @@ class GroupsController < ApplicationController
     if @group.save
       redirect_to groups_url, notice: 'Group was successfully created.' 
     else
-      flash[:alert]= 'Please complete form.'
-      render :new
+      render 'new'
     end
   end
 
@@ -30,7 +29,7 @@ class GroupsController < ApplicationController
     if @group.update(group_params)
       redirect_to groups_url, notice: 'Group was successfully updated.' 
     else
-      render :edit
+      render 'edit'
     end
   end
 
