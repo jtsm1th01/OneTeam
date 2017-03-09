@@ -4,6 +4,10 @@
   </div>
 </div>
 
+<div>
+  <%= render 'shared/error_messages', obj: @title %>
+</div>
+
 <%= render 'form' %>
 
 <%= link_to 'Back', titles_path, class: 'btn btn-danger btn-submit' %>
